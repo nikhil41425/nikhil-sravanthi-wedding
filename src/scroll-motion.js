@@ -5,7 +5,7 @@ export function initializeScrollMotion() {
   const treatments = {
     ".section-marker": "marker",
     ".section h2, .venue h3": "heading",
-    ".auspicious, .family-symbol, .venue-art, .closing-ornament, .closing-rule": "ornament",
+    ".auspicious, .family-symbol, .ceremony-art, .venue-art, .closing-ornament, .closing-rule": "ornament",
     ".family": "family",
     ".date-card": "card",
     ".countdown-block": "countdown",
@@ -42,7 +42,7 @@ export function initializeScrollMotion() {
     }
   });
 
-  const ornaments = document.querySelectorAll(".venue-art .mandap, .closing-ornament .lotus, .date-watermark");
+  const ornaments = document.querySelectorAll(".section-illustration, .date-watermark");
   ornaments.forEach(element => element.classList.add("scroll-ornament"));
   let queued = false;
   function updateOrnaments() {
