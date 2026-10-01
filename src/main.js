@@ -47,6 +47,7 @@ document.querySelector("#app").innerHTML = `
     </div>
   </section>
   <div id="wedding" hidden>
+  <div class="rose-petal-field" aria-hidden="true">${[6, 91, 23, 76, 12, 86, 38, 64, 4, 95, 29, 71].map((left, index) => `<span class="rose-petal" style="--rose-left:${left}%;--rose-delay:-${index * 2.3 + 1}s;--rose-duration:${14 + index % 5 * 1.7}s;--rose-drift:${index % 2 ? -26 : 26}px;--rose-size:${9 + index % 4 * 1.5}px;--rose-flutter:${3 + index % 3 * 0.8}s"><span></span></span>`).join("")}</div>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
   <main>
     <section class="hero" id="home" aria-labelledby="couple-name">
