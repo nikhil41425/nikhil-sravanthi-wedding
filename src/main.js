@@ -48,11 +48,6 @@ document.querySelector("#app").innerHTML = `
   </section>
   <div id="wedding" hidden>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
-  <header class="header">
-    <a class="monogram" href="#home" aria-label="Nikhil and Sravanthi home" lang="en" translate="no">N<span>&</span>S</a>
-    <span class="header-note">Our wedding</span>
-    <span class="header-date" lang="en">15.11.26</span>
-  </header>
   <main>
     <section class="hero" id="home" aria-labelledby="couple-name">
       <span class="hero-edition" lang="en">THE WEDDING OF</span>

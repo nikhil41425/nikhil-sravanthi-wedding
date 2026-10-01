@@ -8,6 +8,19 @@ export function initializeOpening() {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let openingTimer = null;
   let touchStart = null;
+  let consumedTouch = null;
+
+  document.addEventListener("pointerdown", () => { consumedTouch = null; }, { capture: true });
+  document.addEventListener("click", (event) => {
+    const touch = consumedTouch;
+    consumedTouch = null;
+    if (touch && event.detail > 0 && performance.now() - touch.time < 500 &&
+        Math.hypot(event.clientX - touch.x, event.clientY - touch.y) <= 16) {
+      // A synthesized click must not hit the navigation revealed under this tap.
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }, { capture: true });
 
   function revealInvitation() {
     opening.dataset.opened = "true";
@@ -60,6 +73,7 @@ export function initializeOpening() {
     const start = touchStart;
     touchStart = null;
     if (start?.id === event.pointerId && Math.hypot(event.clientX - start.x, event.clientY - start.y) <= 10) {
+      consumedTouch = { x: event.clientX, y: event.clientY, time: performance.now() };
       startOpening(event);
     }
   });

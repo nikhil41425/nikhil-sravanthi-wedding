@@ -9,8 +9,8 @@ async function openInvitation(page) {
 
 test("every invitation section uses the supplied background with readable ceremony text", async ({ page }) => {
   await openInvitation(page);
-  const sections = page.locator(".header, main > section, footer");
-  expect(await sections.count()).toBe(7);
+  const sections = page.locator("main > section, footer");
+  expect(await sections.count()).toBe(6);
   for (const section of await sections.all()) {
     expect(await section.evaluate(element => getComputedStyle(element).backgroundImage)).toContain("invitation-background");
   }

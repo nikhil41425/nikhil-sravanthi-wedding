@@ -38,7 +38,7 @@ test("edge-to-edge temple card plays its entrance animation and reveals the invi
   expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).not.toBe("hidden");
 });
 
-test("reduced motion disables all opening effects and supports keyboard entry", async ({ page }) => {
+test("reduced motion disables all opening effects and supports keyboard and touch entry", async ({ page, isMobile }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   for (const selector of [".temple-artwork", ".petal", ".lamp-glow", ".floor-shimmer"]) {
@@ -51,6 +51,14 @@ test("reduced motion disables all opening effects and supports keyboard entry", 
   await expect(page).toHaveURL(/\/$/);
   await expect(page.locator("#opening")).not.toHaveClass(/is-opening/);
   await expect(page.getByRole("heading", { level: 1 })).toBeFocused();
+  if (isMobile) {
+    await page.reload();
+    await page.getByRole("link", { name: "Tap to open" }).tap();
+    await expect(page.locator("#wedding")).toBeVisible();
+    await expect(page).toHaveURL(/\/$/);
+    expect(await page.evaluate(() => scrollY)).toBe(0);
+    expect((await page.locator("#home").boundingBox()).y).toBe(0);
+  }
 });
 
 test("scrolling cannot bypass tap entry and works normally after opening", async ({ page, isMobile }) => {

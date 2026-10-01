@@ -304,41 +304,6 @@ a:focus-visible {
   transform-origin: left;
   transform: scaleX(0);
 }
-.header {
-  height: calc(64px + env(safe-area-inset-top));
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: env(safe-area-inset-top) 26px 0;
-  gap: 12px;
-  background-image: linear-gradient(#fff2d8b3, #fff2d8b3), var(--invitation-background);
-  background-size: 100% auto;
-  background-position: center top;
-}
-.monogram {
-  font-family: var(--serif);
-  font-size: 31px;
-  letter-spacing: -1px;
-  white-space: nowrap;
-}
-.monogram span {
-  font-style: italic;
-  color: var(--copper);
-  font-size: 23px;
-  margin-inline: 3px;
-}
-.header-note {
-  font-size: 18px;
-  padding-top: 4px;
-  font-family: var(--serif);
-  font-weight: 500;
-  color: var(--plum);
-}
-.header-date {
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 1px;
-}
 .hero {
   position: relative;
   isolation: isolate;
@@ -1181,8 +1146,6 @@ body:has(.photo-dialog[open]) {
   }
 }
 @media (max-width: 360px) {
-  .header { padding-inline: 20px; }
-  .header-note { font-size: 16px; }
   .hero { padding-inline: 20px; }
   .hero-date { gap: 5px; font-size: 9px; }
   .photo-expand { right: 18px; }
