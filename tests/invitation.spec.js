@@ -62,6 +62,76 @@ test("navigation reaches the venue and directions use the supplied map", async (
   await expect(directions).toHaveAttribute("target", "_blank");
   await expect(directions).toHaveAttribute("rel", "noopener noreferrer");
   await expect(directions).toBeInViewport();
+  await expect(
+    page
+      .getByRole("navigation")
+      .getByRole("link", { name: "వేదిక", exact: true }),
+  ).toHaveAttribute("aria-current", "location");
+});
+
+test("full-photo viewer shows the original portrait and returns keyboard focus when dismissed", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const openPhoto = page.getByRole("button", { name: "View full photograph" });
+  await openPhoto.click();
+  const dialog = page.getByRole("dialog", {
+    name: "Nikhil and Sravanthi photograph",
+  });
+  await expect(dialog).toBeVisible();
+  const portrait = dialog.getByRole("img", {
+    name: "Nikhil and Sravanthi, full portrait",
+  });
+  await expect
+    .poll(() =>
+      portrait.evaluate(
+        (image) =>
+          image.complete &&
+          image.naturalWidth === 890 &&
+          image.naturalHeight === 1280,
+      ),
+    )
+    .toBe(true);
+  expect(
+    await portrait.evaluate((image) => getComputedStyle(image).objectFit),
+  ).toBe("contain");
+  expect(
+    await page.evaluate(() => getComputedStyle(document.body).overflow),
+  ).toBe("hidden");
+  await page.keyboard.press("Escape");
+  await expect(dialog).not.toBeVisible();
+  await expect(openPhoto).toBeFocused();
+  await openPhoto.click();
+  await page.getByRole("button", { name: "Close photograph" }).click();
+  await expect(dialog).not.toBeVisible();
+});
+
+test("reduced-motion preference keeps content visible without entrance animations", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  expect(
+    await page.evaluate(() =>
+      document.documentElement.classList.contains("motion-ready"),
+    ),
+  ).toBe(false);
+  expect(
+    await page
+      .locator(".hero-content")
+      .evaluate((element) => getComputedStyle(element).animationName),
+  ).toBe("none");
+  await page
+    .getByRole("navigation")
+    .getByRole("link", { name: "ఆహ్వానం", exact: true })
+    .click();
+  const invitation = page.getByRole("heading", {
+    name: "మీ రాక మాకు ఆనందం. మీ ఆశీస్సులు మాకు వరం.",
+  });
+  await expect(invitation).toBeInViewport();
+  expect(
+    await invitation.evaluate((element) => getComputedStyle(element).opacity),
+  ).toBe("1");
 });
 
 test("calendar download contains the ceremony time in India and complete venue", async ({

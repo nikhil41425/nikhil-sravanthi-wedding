@@ -15,7 +15,10 @@ export default defineConfig({
     launchOptions: { executablePath },
   },
   projects: [
-    { name: "mobile-on-large-screen", use: { viewport: { width: 1440, height: 1000 } } },
+    {
+      name: "mobile-on-large-screen",
+      use: { viewport: { width: 1440, height: 1000 } },
+    },
     {
       name: "mobile",
       use: {
