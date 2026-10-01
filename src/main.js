@@ -8,6 +8,7 @@ import couplePhoto from "./assets/nikhil-sravanthi.jpg";
 import templeArtwork from "./assets/temple-opening.webp";
 import { initializeOpening } from "./opening.js";
 import { initializeDockNavigation } from "./navigation.js";
+import { initializeScrollMotion } from "./scroll-motion.js";
 import "./style.css";
 
 const pin = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>`;
@@ -105,7 +106,7 @@ document.querySelector("#app").innerHTML = `
     </section>
 
     <section class="closing section" id="closing" aria-labelledby="closing-heading">
-      ${lotus}<p class="closing-kicker">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
+      <div class="closing-ornament">${lotus}</div><p class="closing-kicker">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
       <h2 id="closing-heading" data-reveal>With you beside us,<br />our forever begins.</h2>
       <div class="closing-names" lang="en" translate="no" data-reveal>Nikhil <span>&</span><br /><em>Sravanthi</em></div>
       <div class="closing-rule"><span></span>${heart}<span></span></div>
@@ -121,6 +122,7 @@ document.querySelector("#app").innerHTML = `
 
 initializeOpening();
 initializeDockNavigation();
+initializeScrollMotion();
 
 const heroMotionObserver = new IntersectionObserver(([entry]) => {
   entry.target.classList.toggle("is-visible", entry.isIntersecting);
@@ -148,23 +150,6 @@ photoDialog.addEventListener("click", (event) => {
 });
 
 if ("IntersectionObserver" in window) {
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    document.documentElement.classList.add("motion-ready");
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-    document
-      .querySelectorAll("[data-reveal]")
-      .forEach((element) => revealObserver.observe(element));
-  }
   const navigationObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {

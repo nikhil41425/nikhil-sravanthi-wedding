@@ -8,6 +8,8 @@ All invitation sections use the supplied banana-leaf and temple artwork, bundled
 
 The background treatment varies by section: softened leaves behind family details, a quiet cream wash behind the ceremony, and more temple scenery at the venue. Shared gold accents and illustration strokes tie the sections together. The navigation tucks away on deliberate downward scrolling and returns on upward scrolling, keyboard focus, or reaching the end of the page. Section-link jumps keep it visible. Hidden navigation is inert and excluded from assistive navigation, and reduced-motion settings remove the slide transition.
 
+Scroll reveals unfold each section once: headings fade upward, gold dividers extend, line illustrations draw in, family details and countdown numbers stagger, and the ceremony card and closing seal gently settle into place. Venue and closing ornaments drift by at most nine pixels with scrolling. Already revealed content stays visible when scrolling back. Keyboard focus reveals a control immediately, and changing the reduced-motion preference makes all content visible and removes the decorative movement. These effects use CSS and browser observers without an animation library.
+
 Wedding: **15 November 2026, Sunday, 9:57 AM IST**, at **CBS Convention, Hyderabad**.
 
 ## Development
