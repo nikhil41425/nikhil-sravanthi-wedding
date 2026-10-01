@@ -3,84 +3,83 @@ export function initializeOpening() {
   const enter = document.getElementById("enter-invitation");
   const wedding = document.getElementById("wedding");
   const dock = document.querySelector(".invitation-dock");
+  const skip = document.querySelector(".skip-link");
   const root = document.documentElement;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let opened = false;
   let openingTimer = null;
-  let visibilityQueued = false;
+  let touchStart = null;
 
-  function markOpened() {
-    opened = true;
+  function revealInvitation() {
     opening.dataset.opened = "true";
+    opening.hidden = true;
+    wedding.hidden = false;
+    wedding.inert = false;
+    skip.hidden = false;
+    dock.inert = false;
+    dock.setAttribute("aria-hidden", "false");
+    root.classList.remove("is-at-opening", "is-opening-locked");
     root.classList.add("invitation-entered");
-  }
-
-  function updateVisibility() {
-    const bounds = opening.getBoundingClientRect();
-    const atOpening = bounds.bottom > 80 && bounds.top < window.innerHeight;
-    root.classList.toggle("is-at-opening", atOpening);
-    dock.inert = atOpening;
-    dock.setAttribute("aria-hidden", String(atOpening));
-    if (!atOpening) markOpened();
-    visibilityQueued = false;
   }
 
   function enterInvitation() {
     if (openingTimer !== null) window.clearTimeout(openingTimer);
     openingTimer = null;
-    markOpened();
+    revealInvitation();
     opening.classList.remove("is-opening");
     enter.removeAttribute("aria-busy");
     enter.removeAttribute("aria-disabled");
-    const destination = wedding.getBoundingClientRect().top + window.scrollY;
-    // Respect a guest who swiped past the cover during the opening animation.
-    if (window.scrollY <= destination + 8) {
-      window.scrollTo({ top: destination, behavior: "instant" });
-    }
-    if (window.location.hash !== "#wedding") {
-      window.history.pushState(null, "", "#wedding");
-    }
-    updateVisibility();
+    window.scrollTo({ top: 0, behavior: "instant" });
+    window.history.pushState(null, "", "#wedding");
     const heading = document.getElementById("couple-name");
     heading.setAttribute("tabindex", "-1");
     heading.focus({ preventScroll: true });
   }
 
-  enter.addEventListener("click", (event) => {
+  function startOpening(event) {
     event.preventDefault();
     if (openingTimer !== null) return;
-    if (opened || reducedMotion.matches) {
+    if (reducedMotion.matches) {
       enterInvitation();
       return;
     }
     opening.classList.add("is-opening");
     enter.setAttribute("aria-busy", "true");
     enter.setAttribute("aria-disabled", "true");
-    openingTimer = window.setTimeout(enterInvitation, 800);
-  });
+    openingTimer = window.setTimeout(enterInvitation, 1200);
+  }
 
-  window.addEventListener("scroll", () => {
-    if (!visibilityQueued) {
-      visibilityQueued = true;
-      window.requestAnimationFrame(updateVisibility);
+  enter.addEventListener("click", startOpening);
+  // Handle a deliberate touch directly, including a tap immediately after a swipe.
+  enter.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "touch" || event.pointerType === "pen") {
+      touchStart = { id: event.pointerId, x: event.clientX, y: event.clientY };
     }
-  }, { passive: true });
-  window.addEventListener("resize", updateVisibility);
+  });
+  enter.addEventListener("pointerup", (event) => {
+    const start = touchStart;
+    touchStart = null;
+    if (start?.id === event.pointerId && Math.hypot(event.clientX - start.x, event.clientY - start.y) <= 10) {
+      startOpening(event);
+    }
+  });
+  enter.addEventListener("pointercancel", () => { touchStart = null; });
+
   reducedMotion.addEventListener("change", () => {
     if (reducedMotion.matches && openingTimer !== null) enterInvitation();
   });
 
-  updateVisibility();
   const directLinks = ["wedding", "home", "invitation", "muhurtham", "venue"];
   const destination = window.location.hash.slice(1);
   if (directLinks.includes(destination)) {
-    markOpened();
-    root.classList.remove("is-at-opening");
-    dock.inert = false;
-    dock.setAttribute("aria-hidden", "false");
+    revealInvitation();
     window.requestAnimationFrame(() => {
       document.getElementById(destination).scrollIntoView({ behavior: "instant" });
-      updateVisibility();
     });
+  } else {
+    root.classList.add("is-at-opening", "is-opening-locked");
+    wedding.inert = true;
+    skip.hidden = true;
+    dock.inert = true;
+    dock.setAttribute("aria-hidden", "true");
   }
 }

@@ -39,13 +39,13 @@ document.querySelector("#app").innerHTML = `
     </div>
     <div class="petal-field" aria-hidden="true">${[8, 92, 18, 81, 5, 95].map((left, index) => `<span class="petal" style="--petal-left:${left}%;--petal-delay:-${index * 2.7}s;--petal-duration:${12 + index * 1.3}s;--petal-drift:${index % 2 ? -18 : 22}px"></span>`).join("")}</div>
     <div class="opening-flash" aria-hidden="true"></div>
+    <div class="opening-ripple" aria-hidden="true"></div>
     <div class="opening-actions">
       <p class="opening-date">15 NOVEMBER 2026</p>
-      <a class="opening-button" id="enter-invitation" href="#wedding"><span>Open our invitation</span>${arrow}</a>
-      <p class="opening-hint">Tap to open <span>·</span> or swipe up <span class="swipe-arrow" aria-hidden="true">↑</span></p>
+      <a class="opening-button" id="enter-invitation" href="#wedding"><span>Tap to open</span>${arrow}</a>
     </div>
   </section>
-  <div id="wedding">
+  <div id="wedding" hidden>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
   <header class="header">
     <a class="monogram" href="#home" aria-label="Nikhil and Sravanthi home" lang="en" translate="no">N<span>&</span>S</a>

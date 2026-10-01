@@ -31,19 +31,37 @@ body {
 }
 .opening-card {
   position: relative;
-  height: 100svh;
+  height: 100dvh;
   min-height: 320px;
   overflow: hidden;
   isolation: isolate;
   background: linear-gradient(180deg, #057dbb 0%, #125589 45%, #1c2230 87%);
   color: #f8e2b9;
-  touch-action: pan-y;
+  touch-action: none;
+}
+html.is-opening-locked,
+.is-opening-locked body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+.is-opening-locked body {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+}
+.opening-card::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 27%;
+  background: linear-gradient(transparent, #141721b8 65%, #141721e8);
+  pointer-events: none;
 }
 .temple-scene {
   position: absolute;
   top: 0;
   left: 50%;
-  width: min(100%, calc((100svh - 132px) * 0.562799));
+  width: max(100%, calc(100dvh * 0.562799 + 1px));
   aspect-ratio: 941 / 1672;
   transform: translateX(-50%);
   container-type: inline-size;
@@ -138,9 +156,22 @@ body {
   background: radial-gradient(ellipse at 50% 78%, #fff3c9 0%, #ffd58380 28%, transparent 72%);
   opacity: 0;
 }
+.opening-ripple {
+  position: absolute;
+  top: 76%;
+  left: 50%;
+  width: 90px;
+  height: 90px;
+  border: 1px solid #ffe6a1;
+  border-radius: 50%;
+  box-shadow: 0 0 40px #ffde8b80, inset 0 0 30px #ffde8b50;
+  transform: translate(-50%, -50%) scale(.5);
+  opacity: 0;
+  pointer-events: none;
+}
 .opening-actions {
   position: absolute;
-  bottom: calc(16px + env(safe-area-inset-bottom));
+  bottom: calc(28px + env(safe-area-inset-bottom));
   left: 26px;
   right: 26px;
   text-align: center;
@@ -167,9 +198,6 @@ body {
 }
 .opening-button:hover { transform: translateY(-2px); background: #ffe9bb; }
 .opening-button svg { width: 20px; height: 20px; }
-.opening-hint { font-size: 10px; line-height: 1.4; margin: 13px 0 0; color: #e0cfb5; }
-.opening-hint > span { margin-inline: 5px; }
-.swipe-arrow { display: inline-block; }
 .is-at-opening .invitation-dock { opacity: 0; transform: translate(-50%, 20px); pointer-events: none; }
 .is-at-opening .reading-progress { opacity: 0; }
 .opening-card.is-opening .opening-actions { opacity: 0; transition: opacity .25s; }
@@ -180,12 +208,12 @@ body {
   .lamp-glow-right { animation-delay: -1.7s; }
   .door-glow { animation: lamp-flicker 5s ease-in-out infinite alternate paused; }
   .floor-shimmer { animation: floor-reflection 11s ease-in-out infinite paused; }
-  .swipe-arrow { animation: swipe-cue 2.4s ease-in-out infinite paused; }
   .is-at-opening .temple-artwork, .is-at-opening .petal,
   .is-at-opening .lamp-glow, .is-at-opening .door-glow,
-  .is-at-opening .floor-shimmer, .is-at-opening .swipe-arrow { animation-play-state: running; }
-  .opening-card.is-opening .temple-artwork { animation: temple-enter .8s cubic-bezier(.3, 0, .2, 1) both; }
-  .opening-card.is-opening .opening-flash { animation: entrance-glow .8s ease both; }
+  .is-at-opening .floor-shimmer { animation-play-state: running; }
+  .opening-card.is-opening .temple-artwork { animation: temple-enter 1.2s cubic-bezier(.3, 0, .2, 1) both; }
+  .opening-card.is-opening .opening-flash { animation: entrance-glow 1.2s ease both; }
+  .opening-card.is-opening .opening-ripple { animation: entrance-ripple 1.2s ease-out both; }
   @keyframes temple-breathe { from { transform: scale(1); } to { transform: scale(1.008); } }
   @keyframes petal-fall {
     0% { transform: translate3d(0, -20px, 0) rotate(0deg); opacity: 0; }
@@ -199,9 +227,17 @@ body {
     35%, 60% { opacity: .35; }
     80%, 100% { transform: translateX(340%) skewX(-20deg); opacity: 0; }
   }
-  @keyframes swipe-cue { 0%, 100% { transform: translateY(2px); } 50% { transform: translateY(-2px); } }
-  @keyframes temple-enter { from { transform: scale(1.005); opacity: 1; } to { transform: scale(1.15); opacity: .35; } }
-  @keyframes entrance-glow { 0% { opacity: 0; } 65%, 100% { opacity: .65; } }
+  @keyframes temple-enter {
+    0% { transform: scale(1.005); opacity: 1; }
+    30% { opacity: 1; }
+    100% { transform: scale(1.28); opacity: .15; }
+  }
+  @keyframes entrance-glow { 0% { opacity: 0; } 70%, 100% { opacity: .9; } }
+  @keyframes entrance-ripple {
+    0% { transform: translate(-50%, -50%) scale(.5); opacity: 0; }
+    20% { opacity: .8; }
+    100% { transform: translate(-50%, -50%) scale(9); opacity: 0; }
+  }
 }
 a {
   color: inherit;

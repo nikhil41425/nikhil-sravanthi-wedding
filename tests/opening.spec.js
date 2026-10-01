@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("temple card fills the landing screen and opens the invitation once", async ({ page }) => {
+test("edge-to-edge temple card plays its entrance animation and reveals the invitation", async ({ page }) => {
   await page.goto("/");
   const card = page.locator("#opening");
   const artwork = page.locator(".temple-image");
@@ -10,22 +10,30 @@ test("temple card fills the landing screen and opens the invitation once", async
   expect(cardBounds.y).toBe(0);
   expect(cardBounds.height).toBe(await page.evaluate(() => innerHeight));
   expect(cardBounds.width).toBeLessThanOrEqual(480);
+  const imageBounds = await artwork.boundingBox();
+  expect(imageBounds.x).toBeLessThanOrEqual(cardBounds.x);
+  expect(imageBounds.x + imageBounds.width).toBeGreaterThanOrEqual(cardBounds.x + cardBounds.width);
+  expect(imageBounds.y).toBeLessThanOrEqual(cardBounds.y);
+  expect(imageBounds.y + imageBounds.height).toBeGreaterThanOrEqual(cardBounds.y + cardBounds.height);
   await expect(page.locator("#opening-title")).toContainText("Nikhil");
   await expect(page.locator("#opening-title")).toContainText("Sravanthi");
   await expect(page.locator(".invitation-dock")).toHaveAttribute("aria-hidden", "true");
   expect(await page.locator(".invitation-dock").evaluate(nav => nav.inert)).toBe(true);
-  const enter = page.getByRole("link", { name: "Open our invitation" });
+  await expect(page.locator("#wedding")).toBeHidden();
+  expect(await page.locator("body").innerText()).not.toMatch(/swipe|scroll/i);
+  const enter = page.getByRole("link", { name: "Tap to open" });
   await enter.click();
   await expect(enter).toHaveAttribute("aria-busy", "true");
+  expect(await page.locator('.temple-artwork').evaluate(element => getComputedStyle(element).animationName)).toBe('temple-enter');
+  expect(await page.locator('.opening-ripple').evaluate(element => getComputedStyle(element).animationName)).toBe('entrance-ripple');
+  await expect(page.locator("#wedding")).toBeHidden();
   await expect(page).toHaveURL(/#wedding$/);
   await expect(card).toHaveAttribute("data-opened", "true");
   await expect(page.locator(".invitation-dock")).toHaveAttribute("aria-hidden", "false");
   await expect(page.getByRole("heading", { level: 1 })).toBeFocused();
-  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-  await expect(enter).toBeInViewport();
-  await enter.click();
-  await expect(card).not.toHaveClass(/is-opening/);
-  await expect(page.getByRole("heading", { level: 1 })).toBeFocused();
+  await expect(card).toBeHidden();
+  await expect(page.locator("#wedding")).toBeVisible();
+  expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).not.toBe("hidden");
 });
 
 test("reduced motion disables all opening effects and supports keyboard entry", async ({ page }) => {
@@ -34,7 +42,7 @@ test("reduced motion disables all opening effects and supports keyboard entry", 
   for (const selector of [".temple-artwork", ".petal", ".lamp-glow", ".floor-shimmer"]) {
     expect(await page.locator(selector).first().evaluate(element => getComputedStyle(element).animationName)).toBe("none");
   }
-  const enter = page.getByRole("link", { name: "Open our invitation" });
+  const enter = page.getByRole("link", { name: "Tap to open" });
   await enter.focus();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/#wedding$/);
@@ -42,11 +50,30 @@ test("reduced motion disables all opening effects and supports keyboard entry", 
   await expect(page.getByRole("heading", { level: 1 })).toBeFocused();
 });
 
-test("guests can scroll past the opening without tapping or being locked in", async ({ page }) => {
+test("scrolling cannot bypass tap entry and works normally after opening", async ({ page, isMobile }) => {
   await page.goto("/");
+  expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).toBe("hidden");
+  await page.mouse.wheel(0, 1150);
+  if (isMobile) {
+    const client = await page.context().newCDPSession(page);
+    const { width, height } = page.viewportSize();
+    await client.send("Input.dispatchTouchEvent", {type:"touchStart", touchPoints:[{x:width / 2, y:height * .8}]});
+    await client.send("Input.dispatchTouchEvent", {type:"touchMove", touchPoints:[{x:width / 2, y:height * .2}]});
+    await client.send("Input.dispatchTouchEvent", {type:"touchEnd", touchPoints:[]});
+  }
+  await page.keyboard.press("PageDown");
+  await page.evaluate(() => window.scrollTo({top: 1150, behavior: "instant"}));
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  await expect(page.locator("#opening")).toHaveAttribute("data-opened", "false");
+  await expect(page.locator("#wedding")).toBeHidden();
+  await expect(page.locator(".invitation-dock")).toHaveAttribute("aria-hidden", "true");
+  const enter = page.getByRole("link", {name:"Tap to open"});
+  if (isMobile) await enter.tap();
+  else await enter.click();
+  await expect(page).toHaveURL(/#wedding$/);
   expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).not.toBe("hidden");
   await page.mouse.wheel(0, 1150);
-  await expect(page.locator("#opening")).toHaveAttribute("data-opened", "true");
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(100);
   await expect(page.locator(".invitation-dock")).toHaveAttribute("aria-hidden", "false");
   expect(await page.locator(".invitation-dock").evaluate(nav => nav.inert)).toBe(false);
   await page.getByRole("navigation").getByRole("link", { name: "Venue", exact: true }).click();
@@ -60,5 +87,7 @@ test("a direct venue link bypasses the opening card", async ({ page }) => {
   await expect(page.locator(".invitation-dock")).toHaveAttribute("aria-hidden", "false");
   await expect(page.locator("#opening")).toHaveAttribute("data-opened", "true");
   await expect(page.locator("#opening")).not.toHaveClass(/is-opening/);
+  await expect(page.locator("#opening")).toBeHidden();
+  expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).not.toBe("hidden");
   expect(await page.locator("body").innerText()).not.toMatch(/[\u0C00-\u0C7F]/u);
 });
