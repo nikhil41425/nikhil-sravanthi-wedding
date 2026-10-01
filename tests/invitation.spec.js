@@ -8,7 +8,7 @@ test("invitation renders the approved details without page errors or horizontal 
   page.on("pageerror", (error) => errors.push(error.message));
   const failedRequests = [];
   page.on("requestfailed", (request) => failedRequests.push(request.url()));
-  await page.goto("/");
+  await page.goto("/#wedding");
   await page.evaluate(() => document.fonts.ready);
   await expect(page).toHaveTitle("Nikhil & Sravanthi | Wedding Invitation");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
@@ -50,7 +50,7 @@ test("invitation renders the approved details without page errors or horizontal 
 test("navigation reaches the venue and directions use the supplied map", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/#wedding");
   await page
     .getByRole("navigation")
     .getByRole("link", { name: "Venue", exact: true })
@@ -74,7 +74,7 @@ test("navigation reaches the venue and directions use the supplied map", async (
 test("full-photo viewer shows the original portrait and returns keyboard focus when dismissed", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/#wedding");
   const openPhoto = page.getByRole("button", { name: "View full photograph" });
   await openPhoto.click();
   const dialog = page.getByRole("dialog", {
@@ -112,7 +112,7 @@ test("reduced-motion preference keeps content visible without entrance animation
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
+  await page.goto("/#wedding");
   expect(
     await page.evaluate(() =>
       document.documentElement.classList.contains("motion-ready"),
@@ -139,7 +139,7 @@ test("reduced-motion preference keeps content visible without entrance animation
 test("calendar download contains the ceremony time in India and complete venue", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/#wedding");
   const pendingDownload = page.waitForEvent("download");
   await page.getByRole("button", { name: "Add to calendar" }).click();
   const download = await pendingDownload;
@@ -163,7 +163,7 @@ test("countdown follows the India ceremony time and remains valid after the wedd
   page,
 }) => {
   await page.clock.setFixedTime(new Date("2026-11-14T04:27:00Z"));
-  await page.goto("/");
+  await page.goto("/#wedding");
   await expect(page.locator("#days")).toHaveText("01");
   await expect(page.locator("#hours")).toHaveText("00");
   await expect(page.locator("#minutes")).toHaveText("00");

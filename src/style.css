@@ -29,6 +29,180 @@ body {
   box-shadow: 0 0 70px #34293218;
   container-type: inline-size;
 }
+.opening-card {
+  position: relative;
+  height: 100svh;
+  min-height: 320px;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(180deg, #057dbb 0%, #125589 45%, #1c2230 87%);
+  color: #f8e2b9;
+  touch-action: pan-y;
+}
+.temple-scene {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(100%, calc((100svh - 132px) * 0.562799));
+  aspect-ratio: 941 / 1672;
+  transform: translateX(-50%);
+  container-type: inline-size;
+}
+.temple-scene::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  height: 9%;
+  background: linear-gradient(transparent, #1c2230);
+  pointer-events: none;
+}
+.temple-artwork {
+  position: relative;
+  width: 100%;
+  transform-origin: 50% 76%;
+}
+.temple-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.temple-plaque {
+  position: absolute;
+  top: 49.3%;
+  left: 24%;
+  width: 52%;
+  text-align: center;
+  color: #673209;
+  text-shadow: 0 1px 0 #fff5d4, 0 2px 2px #b4792e40;
+}
+.temple-plaque > p {
+  font-family: var(--sans);
+  font-size: 1.85cqw;
+  font-weight: 500;
+  letter-spacing: 0.45cqw;
+  line-height: 1.4;
+  margin: 0 0 0.9cqw;
+}
+.temple-plaque h2 {
+  font-family: var(--serif);
+  font-size: 6.4cqw;
+  font-weight: 500;
+  line-height: 0.94;
+  letter-spacing: -0.15cqw;
+  margin: 0;
+  white-space: nowrap;
+}
+.temple-plaque h2 > span { display: inline; }
+.temple-plaque h2 i { font-size: 0.7em; color: #916018; }
+.temple-plaque h2 > span + span { margin-left: 0.7cqw; font-style: italic; }
+.lamp-glow, .door-glow {
+  position: absolute;
+  pointer-events: none;
+  background: radial-gradient(ellipse, #ffe7a4b0, #ffc64e40 35%, transparent 70%);
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+.lamp-glow { top: 74%; width: 14%; height: 9%; }
+.lamp-glow-left { left: 4%; }
+.lamp-glow-right { right: 4%; }
+.door-glow { top: 70%; left: 37%; width: 26%; height: 19%; opacity: 0.2; }
+.floor-shimmer {
+  position: absolute;
+  bottom: 4%;
+  left: 0;
+  width: 35%;
+  height: 12%;
+  background: linear-gradient(105deg, transparent, #fff1c538, transparent);
+  transform: translateX(-120%) skewX(-20deg);
+  pointer-events: none;
+  opacity: 0;
+}
+.petal-field { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.petal {
+  position: absolute;
+  left: var(--petal-left);
+  top: -25px;
+  width: 7px;
+  height: 12px;
+  border-radius: 80% 10% 70% 20%;
+  background: linear-gradient(135deg, #ffc1b3, #db5370 68%, #a91f45);
+  box-shadow: 0 1px 3px #3b173030;
+  opacity: 0;
+}
+.opening-flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 78%, #fff3c9 0%, #ffd58380 28%, transparent 72%);
+  opacity: 0;
+}
+.opening-actions {
+  position: absolute;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  left: 26px;
+  right: 26px;
+  text-align: center;
+  z-index: 2;
+}
+.opening-date { font-family: var(--sans); font-size: 10px; letter-spacing: 2.5px; margin: 0 0 12px; }
+.opening-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: 55px;
+  max-width: 330px;
+  margin: 0 auto;
+  padding: 16px;
+  border: 1px solid #ffe4a8;
+  border-radius: 3px;
+  background: linear-gradient(110deg, #f9e6bd, #e1b66a);
+  color: #442609;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 5px 28px #070e2445, 0 0 22px #e8b87118;
+  transition: background .2s, transform .2s;
+}
+.opening-button:hover { transform: translateY(-2px); background: #ffe9bb; }
+.opening-button svg { width: 20px; height: 20px; }
+.opening-hint { font-size: 10px; line-height: 1.4; margin: 13px 0 0; color: #e0cfb5; }
+.opening-hint > span { margin-inline: 5px; }
+.swipe-arrow { display: inline-block; }
+.is-at-opening .invitation-dock { opacity: 0; transform: translate(-50%, 20px); pointer-events: none; }
+.is-at-opening .reading-progress { opacity: 0; }
+.opening-card.is-opening .opening-actions { opacity: 0; transition: opacity .25s; }
+@media (prefers-reduced-motion: no-preference) {
+  .temple-artwork { animation: temple-breathe 16s ease-in-out infinite alternate paused; }
+  .petal { animation: petal-fall var(--petal-duration) linear var(--petal-delay) infinite paused; }
+  .lamp-glow { animation: lamp-flicker 3.4s ease-in-out infinite alternate paused; }
+  .lamp-glow-right { animation-delay: -1.7s; }
+  .door-glow { animation: lamp-flicker 5s ease-in-out infinite alternate paused; }
+  .floor-shimmer { animation: floor-reflection 11s ease-in-out infinite paused; }
+  .swipe-arrow { animation: swipe-cue 2.4s ease-in-out infinite paused; }
+  .is-at-opening .temple-artwork, .is-at-opening .petal,
+  .is-at-opening .lamp-glow, .is-at-opening .door-glow,
+  .is-at-opening .floor-shimmer, .is-at-opening .swipe-arrow { animation-play-state: running; }
+  .opening-card.is-opening .temple-artwork { animation: temple-enter .8s cubic-bezier(.3, 0, .2, 1) both; }
+  .opening-card.is-opening .opening-flash { animation: entrance-glow .8s ease both; }
+  @keyframes temple-breathe { from { transform: scale(1); } to { transform: scale(1.008); } }
+  @keyframes petal-fall {
+    0% { transform: translate3d(0, -20px, 0) rotate(0deg); opacity: 0; }
+    8% { opacity: .7; }
+    88% { opacity: .55; }
+    100% { transform: translate3d(var(--petal-drift), 104svh, 0) rotate(290deg); opacity: 0; }
+  }
+  @keyframes lamp-flicker { 0%, 100% { opacity: .3; } 35% { opacity: .6; } 70% { opacity: .42; } }
+  @keyframes floor-reflection {
+    0%, 20% { transform: translateX(-120%) skewX(-20deg); opacity: 0; }
+    35%, 60% { opacity: .35; }
+    80%, 100% { transform: translateX(340%) skewX(-20deg); opacity: 0; }
+  }
+  @keyframes swipe-cue { 0%, 100% { transform: translateY(2px); } 50% { transform: translateY(-2px); } }
+  @keyframes temple-enter { from { transform: scale(1.005); opacity: 1; } to { transform: scale(1.15); opacity: .35; } }
+  @keyframes entrance-glow { 0% { opacity: 0; } 65%, 100% { opacity: .65; } }
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -756,6 +930,7 @@ footer p {
   backdrop-filter: blur(16px);
   color: var(--paper);
   box-shadow: 0 9px 32px #241a2930;
+  transition: opacity .3s, transform .3s;
 }
 .invitation-dock a {
   flex: 1;
@@ -839,7 +1014,7 @@ body:has(.photo-dialog[open]) {
   transform: translateY(0);
 }
 @media (prefers-reduced-motion: no-preference) {
-  .hero-content {
+  .invitation-entered .hero-content {
     animation: cover-entrance 1s ease both;
   }
   @keyframes cover-entrance {

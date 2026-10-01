@@ -4,6 +4,8 @@ import "@fontsource/cormorant-garamond/latin-500.css";
 import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-500.css";
 import couplePhoto from "./assets/nikhil-sravanthi.jpg";
+import templeArtwork from "./assets/temple-opening.webp";
+import { initializeOpening } from "./opening.js";
 import "./style.css";
 
 const pin = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>`;
@@ -21,6 +23,29 @@ const mandap = `<svg class="mandap" viewBox="0 0 380 180" fill="none" stroke="cu
 
 document.querySelector("#app").innerHTML = `
   <a class="skip-link" href="#invitation">Skip to invitation</a>
+  <section class="opening-card" id="opening" aria-labelledby="opening-title" data-opened="false">
+    <div class="temple-scene">
+      <div class="temple-artwork">
+        <img class="temple-image" src="${templeArtwork}" alt="Ornate temple entrance with Lord Venkateswara, Lord Ganesha, flowers and brass lamps" width="941" height="1672" fetchpriority="high" decoding="async" />
+        <div class="temple-plaque">
+          <p>WEDDING INVITATION</p>
+          <h2 id="opening-title" translate="no"><span>Nikhil <i>&</i></span><span>Sravanthi</span></h2>
+        </div>
+        <div class="lamp-glow lamp-glow-left" aria-hidden="true"></div>
+        <div class="lamp-glow lamp-glow-right" aria-hidden="true"></div>
+        <div class="door-glow" aria-hidden="true"></div>
+        <div class="floor-shimmer" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="petal-field" aria-hidden="true">${[8, 92, 18, 81, 5, 95].map((left, index) => `<span class="petal" style="--petal-left:${left}%;--petal-delay:-${index * 2.7}s;--petal-duration:${12 + index * 1.3}s;--petal-drift:${index % 2 ? -18 : 22}px"></span>`).join("")}</div>
+    <div class="opening-flash" aria-hidden="true"></div>
+    <div class="opening-actions">
+      <p class="opening-date">15 NOVEMBER 2026</p>
+      <a class="opening-button" id="enter-invitation" href="#wedding"><span>Open our invitation</span>${arrow}</a>
+      <p class="opening-hint">Tap to open <span>·</span> or swipe up <span class="swipe-arrow" aria-hidden="true">↑</span></p>
+    </div>
+  </section>
+  <div id="wedding">
   <div class="reading-progress" aria-hidden="true"><span></span></div>
   <header class="header">
     <a class="monogram" href="#home" aria-label="Nikhil and Sravanthi home" lang="en" translate="no">N<span>&</span>S</a>
@@ -29,7 +54,7 @@ document.querySelector("#app").innerHTML = `
   </header>
   <main>
     <section class="hero" id="home" aria-labelledby="couple-name">
-      <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" lang="en" translate="no" width="891" height="1280" fetchpriority="high" decoding="async" /></figure>
+      <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" lang="en" translate="no" width="891" height="1280" fetchpriority="low" decoding="async" /></figure>
       <div class="hero-shade" aria-hidden="true"></div>
       <span class="hero-edition" lang="en">THE WEDDING OF</span>
       <button class="photo-expand" id="open-photo" type="button" aria-label="View full photograph">${expand}</button>
@@ -90,7 +115,10 @@ document.querySelector("#app").innerHTML = `
   <footer><span class="footer-monogram" lang="en" translate="no">N & S</span><p>With love, always.</p><span lang="en">2026</span></footer>
   <nav class="invitation-dock" aria-label="Invitation navigation"><a href="#invitation">${heart}<span>Invitation</span></a><a href="#muhurtham">${calendar}<span>Ceremony</span></a><a href="#venue">${pin}<span>Venue</span></a></nav>
   <dialog class="photo-dialog" id="photo-dialog" aria-label="Nikhil and Sravanthi photograph" lang="en" translate="no"><button id="close-photo" type="button" aria-label="Close photograph">${close}</button><img src="${couplePhoto}" alt="Nikhil and Sravanthi, full portrait" width="891" height="1280" /><p lang="en">Nikhil & Sravanthi</p></dialog>
+  </div>
 `;
+
+initializeOpening();
 
 const photoDialog = document.getElementById("photo-dialog");
 document
