@@ -67,7 +67,6 @@ document.querySelector("#app").innerHTML = `
     </section>
 
     <section class="invitation section" id="invitation" aria-labelledby="invitation-heading">
-      ${seal}
       <div class="section-marker"><span lang="en">01 /</span><p>THE INVITATION</p><span class="marker-line"></span></div>
       <div class="auspicious" data-reveal>${ganesha}<p>With the blessings of Lord Ganesha</p></div>
       <h2 id="invitation-heading" data-reveal>Your presence, our joy.<br /><span>Your blessings, our gift.</span></h2>
@@ -84,6 +83,7 @@ document.querySelector("#app").innerHTML = `
       <div class="section-marker"><span lang="en">02 /</span><p>THE CELEBRATION</p><span class="marker-line"></span></div>
       <h2 id="date-heading" data-reveal>Our wedding day</h2>
       <div class="date-card" data-reveal>
+        <div class="date-card-crest" aria-hidden="true">${lotus}</div>
         <div class="date-card-day"><strong lang="en">15</strong><div class="date-month"><span lang="en">November</span><span lang="en">2026 · SUNDAY</span></div></div>
         <div class="date-card-time"><span class="ceremony-label">The ceremony</span><p class="time" lang="en">9:57 <span>AM</span></p><p class="time-caption">Morning <span lang="en">· INDIA STANDARD TIME</span></p></div>
       </div>
@@ -97,18 +97,19 @@ document.querySelector("#app").innerHTML = `
       <div class="section-marker"><span lang="en">03 /</span><p>THE VENUE</p><span class="marker-line"></span></div>
       <div class="venue-location" lang="en">${pin}<span>HYDERABAD · TELANGANA</span></div>
       <h2 id="venue-heading" data-reveal>Join us at</h2>
-      <h3 lang="en" translate="no" data-reveal>CBS Convention</h3>
+      <h3 lang="en" translate="no" data-reveal><span>CBS</span> <span>Convention</span></h3>
       <address lang="en" translate="no">Narapally, Korremula Rd,<br />Sai Ram Nagar Colony, Venkatadri Twp,<br />Chowdhariguda, Majarguda,<br />Hyderabad, Telangana 500088</address>
       <a class="button button-dark" href="https://maps.app.goo.gl/dKanwQshRjnfzxzs5" target="_blank" rel="noopener noreferrer"><span>Get directions</span>${arrow}</a>
       <p class="map-note" lang="en">Find your way on Google Maps</p>
       <div class="venue-art" aria-hidden="true">${mandap}<span lang="en">WHERE OUR FOREVER BEGINS</span></div>
     </section>
 
-    <section class="closing section" aria-labelledby="closing-heading">
+    <section class="closing section" id="closing" aria-labelledby="closing-heading">
       ${lotus}<p class="closing-kicker">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
       <h2 id="closing-heading" data-reveal>With you beside us,<br />our forever begins.</h2>
       <div class="closing-names" lang="en" translate="no" data-reveal>Nikhil <span>&</span><br /><em>Sravanthi</em></div>
       <div class="closing-rule"><span></span>${heart}<span></span></div>
+      ${seal}
       <p class="closing-date" lang="en">15 NOVEMBER 2026 · HYDERABAD</p>
     </section>
   </main>

@@ -162,6 +162,7 @@ html.is-opening-locked,
   pointer-events: none;
 }
 .rose-petal {
+  --rose-opacity: .55;
   position: absolute;
   top: -24px;
   left: var(--rose-left);
@@ -170,6 +171,8 @@ html.is-opening-locked,
   perspective: 140px;
   opacity: 0;
 }
+.rose-petal:nth-child(7), .rose-petal:nth-child(8),
+.rose-petal:nth-child(11), .rose-petal:nth-child(12) { --rose-opacity: .3; }
 .rose-petal > span {
   display: block;
   width: 100%;
@@ -191,10 +194,10 @@ html.is-opening-locked,
   }
   @keyframes rose-fall {
     0% { transform: translate3d(0, 0, 0); opacity: 0; }
-    8% { opacity: .65; }
+    8% { opacity: var(--rose-opacity); }
     35% { transform: translate3d(var(--rose-drift), 35dvh, 0); }
     65% { transform: translate3d(calc(var(--rose-drift) * -.35), 65dvh, 0); }
-    90% { opacity: .5; }
+    90% { opacity: calc(var(--rose-opacity) * .75); }
     100% { transform: translate3d(var(--rose-drift), calc(100dvh + 48px), 0); opacity: 0; }
   }
   @keyframes rose-flutter {
@@ -247,22 +250,25 @@ html.is-opening-locked,
 .opening-button {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 24px;
   min-height: 55px;
-  max-width: 330px;
+  max-width: 290px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 16px 22px;
   border: 1px solid #ffe4a8;
-  border-radius: 3px;
+  border-radius: 6px;
   background: linear-gradient(110deg, #f9e6bd, #e1b66a);
   color: #442609;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
-  box-shadow: 0 5px 28px #070e2445, 0 0 22px #e8b87118;
+  box-shadow: inset 0 0 0 3px #fff2d835, 0 5px 28px #070e2445, 0 0 22px #e8b87118;
   transition: background .2s, transform .2s;
 }
-.opening-button:hover { transform: translateY(-2px); background: #ffe9bb; }
+.opening-button:active { transform: translateY(1px); }
+@media (hover: hover) {
+  .opening-button:hover { transform: translateY(-2px); background: #ffe9bb; }
+}
 .opening-button svg { width: 20px; height: 20px; }
 .is-at-opening .invitation-dock { opacity: 0; transform: translate(-50%, 20px); pointer-events: none; }
 .is-at-opening .reading-progress { opacity: 0; }
@@ -360,7 +366,8 @@ a:focus-visible {
 .hero {
   position: relative;
   isolation: isolate;
-  padding: 24px 24px 32px;
+  padding: calc(22px + env(safe-area-inset-top)) 0 calc(94px + env(safe-area-inset-bottom));
+  min-height: 100svh;
   background: #f9e7c4;
   background-image: var(--invitation-background);
   background-size: 100% 100%;
@@ -371,6 +378,7 @@ a:focus-visible {
 }
 .hero-photo {
   position: relative;
+  height: 100%;
   margin: 0;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
@@ -383,12 +391,20 @@ a:focus-visible {
   mask-image: linear-gradient(transparent, #000 5%, #000 87%, transparent);
   pointer-events: none;
 }
-.hero-portrait { position: relative; margin: 4px -12px 0; isolation: isolate; overflow: clip; }
+.hero-portrait {
+  position: relative;
+  margin: 0;
+  height: clamp(440px, calc(100svh - 190px), 720px);
+  isolation: isolate;
+  overflow: clip;
+}
 .portrait-aura { position: absolute; inset: 6% -4% 0; background: radial-gradient(ellipse, #efc77875, transparent 70%); pointer-events: none; }
 .hero-photo img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
   -webkit-mask-image: linear-gradient(transparent, #000 5%, #000 87%, transparent);
   mask-image: linear-gradient(transparent, #000 5%, #000 87%, transparent);
 }
@@ -396,23 +412,23 @@ a:focus-visible {
   position: static;
   font-family: var(--sans);
   font-size: 11px;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   order: -1;
   font-weight: 500;
-  margin: 0 0 18px;
+  margin: 0 0 14px;
   color: var(--plum);
 }
 .photo-expand {
   position: absolute;
   right: 20px;
   top: 28px;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   border: 1px solid #fff7;
   border-radius: 50%;
-  background: #702923c9;
+  background: #4d342780;
   color: #fff;
   backdrop-filter: blur(8px);
 }
@@ -432,17 +448,17 @@ a:focus-visible {
   text-shadow: 0 2px 16px #2c1610a6;
 }
 .hero-eyebrow {
-  font-size: 18px;
+  font-size: 20px;
   color: #ffe3ad;
   line-height: 1.5;
-  margin: 0 0 6px;
+  margin: 0 0 9px;
   font-family: var(--serif);
   font-weight: 500;
 }
 .hero h1 {
   position: relative;
   font-family: var(--serif);
-  font-size: clamp(42px, 13cqw, 58px);
+  font-size: clamp(46px, 15.5cqw, 68px);
   font-weight: 600;
   letter-spacing: 0;
   line-height: 1.05;
@@ -451,7 +467,7 @@ a:focus-visible {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  gap: 3px;
+  gap: 4px;
 }
 .hero h1 > span {
   display: inline;
@@ -469,24 +485,28 @@ a:focus-visible {
 .hero-date {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   font-family: var(--sans);
   font-size: 10px;
   letter-spacing: 1px;
-  margin-top: 13px;
+  margin-top: 18px;
   color: #fff4dc;
-  flex-wrap: wrap;
+  flex-direction: column;
+  line-height: 1.5;
 }
+.hero-date > span:last-child { font-size: 9px; letter-spacing: 1.8px; color: #ffe3ad; }
 .hero-cta {
   position: static;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 170px;
-  font-size: 12px;
+  justify-content: center;
+  gap: 16px;
+  width: 190px;
+  min-height: 44px;
+  font-size: 13px;
   padding: 9px 0;
   font-weight: 500;
-  margin: 14px auto 0;
+  margin: 8px auto 0;
   border-bottom: 1px solid var(--gold);
 }
 .hero-cta svg {
@@ -494,10 +514,10 @@ a:focus-visible {
   height: 25px;
 }
 .section {
-  padding: 52px clamp(24px, 9cqw, 42px);
+  padding: 64px clamp(26px, 9cqw, 42px) 72px;
   position: relative;
   background-color: #f9e7c4;
-  background-image: linear-gradient(90deg, #fff2d850, #fff4dcee 16%, #fff4dcee 84%, #fff2d850), var(--invitation-background);
+  background-image: linear-gradient(90deg, #fff4dc55, #fff4dcf2 20%, #fff4dcf2 80%, #fff4dc55), var(--invitation-background);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   text-align: center;
@@ -505,8 +525,22 @@ a:focus-visible {
 .section::before {
   content: "";
   position: absolute;
-  inset: 16px;
-  border: 1px solid #ae843e60;
+  top: 0;
+  left: 32px;
+  right: 32px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ae843e85 35%, #ae843e85 65%, transparent);
+  pointer-events: none;
+}
+.section::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: calc(50% - 3px);
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+  background: var(--gold);
   pointer-events: none;
 }
 .section-marker::before {
@@ -519,7 +553,7 @@ a:focus-visible {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   justify-content: center;
 }
 .section-marker > span:first-child {
@@ -546,13 +580,13 @@ a:focus-visible {
   font-family: var(--serif);
   font-weight: 600;
   margin: 0;
-  font-size: clamp(26px, 7.4cqw, 34px);
+  font-size: clamp(28px, 8.2cqw, 38px);
   line-height: 1.3;
   letter-spacing: 0;
   color: var(--plum);
 }
 .invitation {
-  padding-top: 40px;
+  padding-top: 56px;
 }
 .seal {
   width: 76px;
@@ -568,7 +602,7 @@ a:focus-visible {
   justify-content: center;
   gap: 1px;
   box-shadow: 0 5px 15px #34293220;
-  margin: 0 auto 28px;
+  margin: 0 auto 24px;
 }
 .seal-top,
 .seal-bottom {
@@ -587,19 +621,19 @@ a:focus-visible {
 }
 .auspicious {
   display: flex;
-  gap: 9px;
+  gap: 14px;
   align-items: center;
-  margin-bottom: 22px;
+  margin-bottom: 28px;
   flex-direction: column;
 }
 .ganesha {
-  width: 44px;
-  height: 51px;
+  width: 54px;
+  height: 62px;
   flex: 0 0 auto;
   color: var(--copper);
 }
 .auspicious p {
-  font-size: 17px;
+  font-size: 18px;
   color: var(--ink);
   line-height: 1.7;
   margin: 0;
@@ -612,8 +646,9 @@ a:focus-visible {
 .invitation-copy {
   color: var(--ink);
   font-size: 19px;
-  line-height: 1.6;
-  margin: 20px 0 32px;
+  line-height: 1.75;
+  margin: 24px auto 38px;
+  max-width: 32ch;
   font-family: var(--serif);
   font-weight: 500;
 }
@@ -642,7 +677,7 @@ a:focus-visible {
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: 0;
-  margin: 8px 0 12px;
+  margin: 8px 0 14px;
   color: var(--plum);
 }
 .parent-label {
@@ -653,7 +688,7 @@ a:focus-visible {
 }
 .parents {
   font-family: var(--serif);
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 600;
   margin: 0;
   line-height: 1.5;
@@ -665,7 +700,7 @@ a:focus-visible {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin: 24px auto;
+  margin: 30px auto;
   color: var(--copper);
   width: 75%;
 }
@@ -689,8 +724,8 @@ a:focus-visible {
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  margin-top: 32px;
-  padding-top: 24px;
+  margin-top: 38px;
+  padding-top: 28px;
   border-top: 1px solid #ae843e60;
   text-align: center;
 }
@@ -718,15 +753,29 @@ a:focus-visible {
   background: linear-gradient(90deg, var(--gold), transparent);
 }
 .muhurtham h2 {
-  font-size: clamp(26px, 7.4cqw, 34px);
+  font-size: clamp(28px, 8.2cqw, 38px);
   color: var(--plum);
 }
 .date-card {
-  margin: 26px 0 22px;
-  padding: 22px 16px;
-  border: 3px double #ae843e80;
-  background: #fff4dcbf;
+  position: relative;
+  margin: 42px 0 24px;
+  padding: 36px 16px 26px;
+  border: 1px solid #ae843e9c;
+  border-radius: 120px 120px 4px 4px / 32px 32px 4px 4px;
+  background: linear-gradient(180deg, #fff9e9e6, #fff4dccc);
+  box-shadow: 0 8px 24px #86552608;
 }
+.date-card-crest {
+  position: absolute;
+  top: -20px;
+  left: calc(50% - 24px);
+  width: 48px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+}
+.date-card-crest .lotus { width: 34px; height: 24px; }
 .date-card-day {
   display: flex;
   align-items: center;
@@ -766,8 +815,8 @@ a:focus-visible {
 }
 .date-card-time {
   border-top: 1px solid #ae843e60;
-  padding-top: 18px;
-  margin-top: 18px;
+  padding-top: 22px;
+  margin-top: 22px;
 }
 .ceremony-label {
   font-size: 12px;
@@ -799,19 +848,19 @@ a:focus-visible {
   letter-spacing: .6px;
 }
 .button {
-  min-height: 50px;
+  min-height: 54px;
   padding: 14px 16px;
   display: flex;
   align-items: center;
   gap: 13px;
   width: 100%;
   border: 1px solid #ae843e;
-  font-size: 12px;
+  font-size: 13px;
   transition:
     transform 0.2s,
     background 0.2s;
   font-weight: 500;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 .button svg {
   width: 20px;
@@ -822,22 +871,20 @@ a:focus-visible {
 .button svg:last-child {
   margin-left: auto;
 }
-.button:hover {
-  transform: translateY(-2px);
-}
+.button:active { transform: translateY(1px); }
 .button-light {
-  background: var(--plum);
-  color: var(--paper);
-}
-.button-light:hover {
-  background: #853c32;
+  background: #fff4dce6;
+  color: var(--plum);
 }
 .button-dark {
-  background: var(--plum);
+  background: linear-gradient(115deg, #7c3029, #64231e);
   color: var(--paper);
+  box-shadow: inset 0 0 0 3px #ffe4ac10, 0 5px 16px #70292314;
 }
-.button-dark:hover {
-  background: #853c32;
+@media (hover: hover) {
+  .button:hover { transform: translateY(-2px); }
+  .button-light:hover { background: #f4e2bf; }
+  .button-dark:hover { background: #853c32; }
 }
 .calendar-status {
   min-height: 22px;
@@ -849,7 +896,7 @@ a:focus-visible {
 .countdown-block {
   border-top: 1px solid #ae843e60;
   padding-top: 22px;
-  margin-top: 22px;
+  margin-top: 16px;
 }
 .countdown-label {
   font-size: 18px;
@@ -875,9 +922,10 @@ a:focus-visible {
 .countdown strong {
   display: block;
   font-family: var(--serif);
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 600;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 .countdown span {
   display: block;
@@ -899,7 +947,7 @@ a:focus-visible {
   font-weight: 500;
 }
 .venue {
-  padding-bottom: 48px;
+  padding-bottom: 64px;
 }
 .venue .section-marker {
   margin-bottom: 28px;
@@ -927,20 +975,21 @@ a:focus-visible {
 }
 .venue h3 {
   font-family: var(--serif);
-  font-size: clamp(34px, 10cqw, 44px);
+  font-size: clamp(40px, 13cqw, 58px);
   font-weight: 600;
   letter-spacing: 0;
-  line-height: 1.2;
-  margin: 0 0 22px;
+  line-height: 1.08;
+  margin: 0 0 26px;
   color: var(--plum);
 }
+.venue h3 > span { display: block; }
 .venue address {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.9;
   color: var(--ink);
   font-style: normal;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 .map-note {
   font-family: var(--sans);
@@ -950,7 +999,8 @@ a:focus-visible {
   margin: 14px 0 0;
 }
 .venue-art {
-  margin-top: 30px;
+  margin: 32px auto 0;
+  max-width: 280px;
   text-align: center;
   color: var(--copper);
 }
@@ -967,7 +1017,7 @@ a:focus-visible {
 }
 .closing {
   text-align: center;
-  padding: 56px clamp(24px, 9cqw, 42px) 48px;
+  padding: 64px clamp(26px, 9cqw, 42px) 60px;
 }
 .closing .lotus {
   width: 44px;
@@ -978,10 +1028,11 @@ a:focus-visible {
   font-size: 11px;
   color: var(--ink);
   line-height: 1.8;
+  letter-spacing: 1px;
   margin: 20px 0;
 }
 .closing h2 {
-  font-size: clamp(26px, 7.4cqw, 34px);
+  font-size: clamp(28px, 8.2cqw, 38px);
   line-height: 1.3;
 }
 .closing-names {
@@ -1061,11 +1112,11 @@ footer p {
   bottom: calc(12px + env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 40px);
+  width: calc(100% - 32px);
   max-width: 420px;
-  padding: 4px;
+  padding: 5px;
   border: 1px solid #ae843eb3;
-  border-radius: 8px;
+  border-radius: 12px;
   background: #fff4dcf5;
   backdrop-filter: blur(16px);
   color: var(--plum);
@@ -1081,7 +1132,7 @@ footer p {
   gap: 6px;
   min-height: 44px;
   padding-top: 0;
-  border-radius: 4px;
+  border-radius: 7px;
   transition: background 0.2s;
 }
 .invitation-dock a > svg {
@@ -1199,10 +1250,8 @@ body:has(.photo-dialog[open]) {
   }
 }
 @media (max-width: 360px) {
-  .hero { padding-inline: 20px; }
   .hero-date { gap: 5px; font-size: 9px; }
   .photo-expand { right: 18px; }
-  .venue address { font-size: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .rose-petal-field { display: none; }
