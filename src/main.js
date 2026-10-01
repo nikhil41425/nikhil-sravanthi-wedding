@@ -41,16 +41,6 @@ document.querySelector("#app").innerHTML = `
     <div class="petal-field" aria-hidden="true">${[8, 92, 18, 81, 5, 95].map((left, index) => `<span class="petal" style="--petal-left:${left}%;--petal-delay:-${index * 2.7}s;--petal-duration:${12 + index * 1.3}s;--petal-drift:${index % 2 ? -18 : 22}px"></span>`).join("")}</div>
     <div class="opening-flash" aria-hidden="true"></div>
     <div class="opening-ripple" aria-hidden="true"></div>
-    <div class="opening-name-reveal" aria-hidden="true">
-      <div class="name-reveal-glow"></div>
-      <div class="name-reveal-content">
-        <p class="name-reveal-caption">A beautiful beginning</p>
-        <div class="name-reveal-names" translate="no"><span>Nikhil</span><i>&</i><span>Sravanthi</span></div>
-        ${lotus}
-        <p class="name-reveal-date">15 NOVEMBER 2026</p>
-      </div>
-      <div class="name-reveal-motes">${[14, 82, 24, 74, 9, 90].map((left, index) => `<span style="--mote-left:${left}%;--mote-top:${20 + index * 10}%;--mote-delay:${index * 0.12}s"></span>`).join("")}</div>
-    </div>
     <div class="opening-actions">
       <p class="opening-date">15 NOVEMBER 2026</p>
       <a class="opening-button" id="enter-invitation" href="#wedding"><span>Tap to open</span>${arrow}</a>
@@ -66,15 +56,15 @@ document.querySelector("#app").innerHTML = `
   <main>
     <section class="hero" id="home" aria-labelledby="couple-name">
       <span class="hero-edition" lang="en">THE WEDDING OF</span>
+      <div class="hero-portrait">
+        <div class="portrait-aura" aria-hidden="true"></div>
+        <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" lang="en" translate="no" width="891" height="1280" fetchpriority="low" decoding="async" /><div class="portrait-text-shade" aria-hidden="true"></div></figure>
+        <div class="portrait-motes" aria-hidden="true">${[7, 94, 12, 88, 4, 96].map((left, index) => `<span style="--mote-left:${left}%;--mote-top:${14 + index * 12}%;--mote-delay:-${index * 1.8}s"></span>`).join("")}</div>
       <div class="hero-content">
         <p class="hero-eyebrow">A beautiful beginning</p>
         <h1 id="couple-name" lang="en" translate="no"><span>Nikhil</span><em>&</em><span class="bride-name">Sravanthi</span></h1>
         <div class="hero-date" lang="en"><span>15 NOVEMBER 2026</span><span>HYDERABAD, INDIA</span></div>
       </div>
-      <div class="hero-portrait">
-        <div class="portrait-aura" aria-hidden="true"></div>
-        <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" lang="en" translate="no" width="891" height="1280" fetchpriority="low" decoding="async" /></figure>
-        <div class="portrait-motes" aria-hidden="true">${[7, 94, 12, 88, 4, 96].map((left, index) => `<span style="--mote-left:${left}%;--mote-top:${14 + index * 12}%;--mote-delay:-${index * 1.8}s"></span>`).join("")}</div>
         <button class="photo-expand" id="open-photo" type="button" aria-label="View full photograph">${expand}</button>
       </div>
       <a class="hero-cta" href="#invitation"><span>The invitation</span>${arrow}</a>
