@@ -85,16 +85,23 @@ export function initializeOpening() {
 
   const directLinks = ["invitation", "muhurtham", "venue"];
   const destination = window.location.hash.slice(1);
-  if (directLinks.includes(destination)) {
+  const isReload = window.performance.getEntriesByType("navigation")[0]?.type === "reload";
+  if (directLinks.includes(destination) && !isReload) {
     revealInvitation();
     window.requestAnimationFrame(() => {
       document.getElementById(destination).scrollIntoView({ behavior: "instant" });
     });
   } else {
+    // Section anchors must not bypass the card or restore an old scroll on refresh.
+    window.history.scrollRestoration = "manual";
+    if (isReload) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
     root.classList.add("is-at-opening", "is-opening-locked");
     wedding.inert = true;
     skip.hidden = true;
     dock.inert = true;
     dock.setAttribute("aria-hidden", "true");
+    window.scrollTo({ top: 0, behavior: "instant" });
   }
 }

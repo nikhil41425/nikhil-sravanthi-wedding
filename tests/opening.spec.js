@@ -107,6 +107,28 @@ test("a direct venue link bypasses the opening card", async ({ page }) => {
   expect(await page.locator("body").innerText()).not.toMatch(/[\u0C00-\u0C7F]/u);
 });
 
+test("refreshing any invitation section returns to tap-only entry", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await page.getByRole("link", { name: "Tap to open" }).click();
+  for (const [label, hash] of [["Invitation", "invitation"], ["Ceremony", "muhurtham"], ["Venue", "venue"]]) {
+    await page.getByRole("navigation").getByRole("link", { name: label, exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`#${hash}$`));
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(100);
+    await page.reload();
+    await expect(page).toHaveURL(/\/$/);
+    await expect(page.locator("#opening")).toBeVisible();
+    await expect(page.locator("#wedding")).toBeHidden();
+    await expect(page.locator(".invitation-dock")).toHaveAttribute("aria-hidden", "true");
+    expect(await page.evaluate(() => scrollY)).toBe(0);
+    expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).toBe("hidden");
+    await page.getByRole("link", { name: "Tap to open" }).click();
+    await expect(page.locator("#wedding")).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toBeFocused();
+    expect(await page.evaluate(() => scrollY)).toBe(0);
+  }
+});
+
 test("old entry links and refreshes show the temple image again", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const hash of ["#wedding", "#home"]) {
