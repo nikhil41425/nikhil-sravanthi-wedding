@@ -1,6 +1,7 @@
 import "@fontsource/cormorant-garamond/latin-400.css";
 import "@fontsource/cormorant-garamond/latin-400-italic.css";
 import "@fontsource/cormorant-garamond/latin-500.css";
+import "@fontsource/cormorant-garamond/latin-600.css";
 import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-500.css";
 import couplePhoto from "./assets/nikhil-sravanthi.jpg";
@@ -97,7 +98,7 @@ document.querySelector("#app").innerHTML = `
       <div class="section-marker"><span lang="en">03 /</span><p>THE VENUE</p><span class="marker-line"></span></div>
       <div class="venue-location" lang="en">${pin}<span>HYDERABAD · TELANGANA</span></div>
       <h2 id="venue-heading" data-reveal>Join us at</h2>
-      <h3 lang="en" translate="no" data-reveal>CBS<br />Convention</h3>
+      <h3 lang="en" translate="no" data-reveal>CBS Convention</h3>
       <address lang="en" translate="no">Narapally, Korremula Rd,<br />Sai Ram Nagar Colony, Venkatadri Twp,<br />Chowdhariguda, Majarguda,<br />Hyderabad, Telangana 500088</address>
       <a class="button button-dark" href="https://maps.app.goo.gl/dKanwQshRjnfzxzs5" target="_blank" rel="noopener noreferrer"><span>Get directions</span>${arrow}</a>
       <p class="map-note" lang="en">Find your way on Google Maps</p>

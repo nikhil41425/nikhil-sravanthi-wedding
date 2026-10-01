@@ -4,7 +4,7 @@ A mobile-only, English-language wedding invitation with an animated temple openi
 
 The opening artwork fills the phone viewport edge to edge, using a local WebP with live English lettering, drifting petals, lamp glow, and subtle movement. **Tap to open** starts a 1.2-second zoom, golden light, and expanding ripple transition. The opening prevents scrolling until entry; the invitation scrolls normally afterward. Reduced-motion settings skip these effects. Refreshing or opening an old `/#wedding` link shows the temple card again; direct section links such as `/#venue` still work. There is no autoplay audio.
 
-All invitation sections use the supplied banana-leaf and temple artwork, bundled locally as `src/assets/invitation-background.jpg`. A soft cream overlay keeps the text readable, with green ceremony accents and the couple's photograph framed over the artwork.
+All invitation sections use the supplied banana-leaf and temple artwork, bundled locally as `src/assets/invitation-background.jpg`. The traditional invitation styling uses centred maroon headings, antique-gold borders, a soft cream reading area, and locally bundled Cormorant Garamond serif lettering. Both names share the same size and weight; the full couple's photograph sits above the names in a gold frame. Supporting text stays readable on small phones, and the compact section navigation uses a single active highlight.
 
 Wedding: **15 November 2026, Sunday, 9:57 AM IST**, at **CBS Convention, Hyderabad**.
 

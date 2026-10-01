@@ -22,7 +22,20 @@ test("every invitation section uses the supplied background with readable ceremo
     return image.naturalWidth === 720 && image.naturalHeight === 1280;
   });
   expect(imageLoaded).toBe(true);
-  expect(await page.locator(".muhurtham").evaluate(element => getComputedStyle(element).color)).toBe("rgb(48, 67, 41)");
+  const contrast = await page.locator(".muhurtham").evaluate(element => {
+    function luminance(color) {
+      const [r, g, b] = color.match(/[\d.]+/g).slice(0, 3).map(value => {
+        const channel = Number(value) / 255;
+        return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+      });
+      return r * 0.2126 + g * 0.7152 + b * 0.0722;
+    }
+    const style = getComputedStyle(element);
+    const foreground = luminance(style.color);
+    const background = luminance(style.backgroundColor);
+    return (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05);
+  });
+  expect(contrast).toBeGreaterThanOrEqual(4.5);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(await page.evaluate(() => innerWidth));
 });
 
