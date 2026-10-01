@@ -10,6 +10,7 @@
   --gold: #d7b98c;
   --serif: "Cormorant Garamond", Georgia, serif;
   --sans: "Manrope", sans-serif;
+  --invitation-background: url("./assets/invitation-background.jpg");
 }
 * {
   box-sizing: border-box;
@@ -298,6 +299,9 @@ a:focus-visible {
   justify-content: space-between;
   padding: env(safe-area-inset-top) 26px 0;
   gap: 12px;
+  background-image: linear-gradient(#fff2d8b3, #fff2d8b3), var(--invitation-background);
+  background-size: 100% auto;
+  background-position: center top;
 }
 .monogram {
   font-family: var(--serif);
@@ -323,11 +327,16 @@ a:focus-visible {
 .hero {
   position: relative;
   isolation: isolate;
-  background: var(--plum);
+  padding: 20px 16px;
+  background: #f9e7c4;
+  background-image: var(--invitation-background);
+  background-size: 100% 100%;
   color: var(--paper);
 }
 .hero-photo {
   margin: 0;
+  border: 1px solid #d9b879;
+  box-shadow: 0 8px 24px #49311b24;
 }
 .hero-photo img {
   display: block;
@@ -336,7 +345,7 @@ a:focus-visible {
 }
 .hero-shade {
   position: absolute;
-  inset: 0;
+  inset: 20px 16px;
   background: linear-gradient(
     180deg,
     #241a2948 0%,
@@ -350,8 +359,8 @@ a:focus-visible {
 }
 .hero-edition {
   position: absolute;
-  top: 7px;
-  left: 28px;
+  top: 27px;
+  left: 34px;
   font-family: var(--sans);
   font-size: 9px;
   letter-spacing: 2.2px;
@@ -361,8 +370,8 @@ a:focus-visible {
 }
 .photo-expand {
   position: absolute;
-  right: 22px;
-  top: 18px;
+  right: 30px;
+  top: 32px;
   width: 38px;
   height: 38px;
   display: grid;
@@ -379,9 +388,9 @@ a:focus-visible {
 }
 .hero-content {
   position: absolute;
-  bottom: 81px;
-  left: 28px;
-  right: 28px;
+  bottom: 89px;
+  left: 36px;
+  right: 36px;
 }
 .hero-eyebrow {
   font-size: 11px;
@@ -425,8 +434,8 @@ a:focus-visible {
 }
 .hero-cta {
   position: absolute;
-  bottom: 22px;
-  left: 28px;
+  bottom: 39px;
+  left: 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -441,6 +450,10 @@ a:focus-visible {
 .section {
   padding: 64px 28px;
   position: relative;
+  background-color: #f9e7c4;
+  background-image: linear-gradient(90deg, #fff2d830, #fff2d8e6 15%, #fff2d8e6 85%, #fff2d830), var(--invitation-background);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 .section-marker {
   display: flex;
@@ -624,19 +637,18 @@ a:focus-visible {
   line-height: 2;
 }
 .muhurtham {
-  background: var(--plum);
-  color: var(--paper);
+  color: #304329;
   overflow: hidden;
 }
 .muhurtham .section-marker > span:first-child {
-  color: var(--gold);
+  color: #85613a;
 }
 .muhurtham .marker-line {
-  background: #d7b98c45;
+  background: #85613a45;
 }
 .muhurtham h2 {
   font-size: 44px;
-  color: #e3c29e;
+  color: #304329;
 }
 .date-card {
   margin: 34px 0 27px;
@@ -669,21 +681,21 @@ a:focus-visible {
   font-size: 9px;
   letter-spacing: 1.3px;
   margin-top: 12px;
-  color: #e3cbb8;
+  color: #66543c;
 }
 .date-month p {
   margin: 9px 0 0;
   font-size: 11px;
-  color: #e3cbb8;
+  color: #66543c;
 }
 .date-card-time {
-  border-top: 1px solid #e3c29e35;
+  border-top: 1px solid #85613a40;
   padding-top: 25px;
   margin-top: 30px;
 }
 .ceremony-label {
   font-size: 11px;
-  color: #e3cbb8;
+  color: #66543c;
 }
 .time {
   font-family: var(--serif);
@@ -695,12 +707,12 @@ a:focus-visible {
 .time > span {
   font-size: 29px;
   letter-spacing: 0;
-  color: #e3c29e;
+  color: #85613a;
   margin-left: 5px;
 }
 .time-caption {
   font-size: 10px;
-  color: #e3cbb8;
+  color: #66543c;
   margin: 0;
   line-height: 2;
 }
@@ -735,11 +747,11 @@ a:focus-visible {
   transform: translateY(-2px);
 }
 .button-light {
-  background: #f8ede0;
-  color: var(--plum);
+  background: #304329;
+  color: #fff0d6;
 }
 .button-light:hover {
-  background: #e9c7ab;
+  background: #465c3a;
 }
 .button-dark {
   background: var(--plum);
@@ -752,17 +764,17 @@ a:focus-visible {
   min-height: 22px;
   margin: 8px 0 0;
   font-size: 10px;
-  color: #e3cbb8;
+  color: #66543c;
   line-height: 2;
 }
 .countdown-block {
-  border-top: 1px solid #e3c29e35;
+  border-top: 1px solid #85613a40;
   padding-top: 25px;
   margin-top: 30px;
 }
 .countdown-label {
   font-size: 11px;
-  color: #e3cbb8;
+  color: #66543c;
   margin: 0 0 23px;
 }
 .countdown {
@@ -777,7 +789,7 @@ a:focus-visible {
   padding-left: 0;
 }
 .countdown > div + div {
-  border-left: 1px solid #e3c29e35;
+  border-left: 1px solid #85613a40;
 }
 .countdown strong {
   display: block;
@@ -789,7 +801,7 @@ a:focus-visible {
 .countdown span {
   display: block;
   font-size: 9px;
-  color: #e3cbb8;
+  color: #66543c;
   margin-top: 11px;
 }
 .date-watermark {
@@ -799,13 +811,12 @@ a:focus-visible {
   font-style: italic;
   line-height: 1;
   letter-spacing: -1px;
-  color: #e3c29e48;
+  color: #52674485;
   margin-top: 45px;
   text-align: right;
   white-space: nowrap;
 }
 .venue {
-  background: #eee3d6;
   padding-bottom: 37px;
 }
 .venue .section-marker {
@@ -936,6 +947,9 @@ footer {
   padding: 22px 28px calc(114px + env(safe-area-inset-bottom));
   border-top: 1px solid #a45e4430;
   color: #756256;
+  background-image: linear-gradient(#fff2d8b3, #fff2d8b3), var(--invitation-background);
+  background-size: 100% auto;
+  background-position: center bottom;
 }
 footer > span {
   font-family: var(--sans);

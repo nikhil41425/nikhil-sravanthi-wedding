@@ -1,6 +1,31 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
+async function openInvitation(page) {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Tap to open" }).click();
+  await expect(page.locator("#wedding")).toBeVisible();
+}
+
+test("every invitation section uses the supplied background with readable ceremony text", async ({ page }) => {
+  await openInvitation(page);
+  const sections = page.locator(".header, main > section, footer");
+  expect(await sections.count()).toBe(7);
+  for (const section of await sections.all()) {
+    expect(await section.evaluate(element => getComputedStyle(element).backgroundImage)).toContain("invitation-background");
+  }
+  const imageLoaded = await page.locator(".invitation").evaluate(async element => {
+    const urls = [...getComputedStyle(element).backgroundImage.matchAll(/url\("?([^"\)]+)"?\)/g)];
+    const image = new Image();
+    image.src = urls[0][1];
+    await image.decode();
+    return image.naturalWidth === 720 && image.naturalHeight === 1280;
+  });
+  expect(imageLoaded).toBe(true);
+  expect(await page.locator(".muhurtham").evaluate(element => getComputedStyle(element).color)).toBe("rgb(48, 67, 41)");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(await page.evaluate(() => innerWidth));
+});
+
 test("invitation renders the approved details without page errors or horizontal overflow", async ({
   page,
 }) => {
@@ -8,7 +33,7 @@ test("invitation renders the approved details without page errors or horizontal 
   page.on("pageerror", (error) => errors.push(error.message));
   const failedRequests = [];
   page.on("requestfailed", (request) => failedRequests.push(request.url()));
-  await page.goto("/#wedding");
+  await openInvitation(page);
   await page.evaluate(() => document.fonts.ready);
   await expect(page).toHaveTitle("Nikhil & Sravanthi | Wedding Invitation");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
@@ -50,7 +75,7 @@ test("invitation renders the approved details without page errors or horizontal 
 test("navigation reaches the venue and directions use the supplied map", async ({
   page,
 }) => {
-  await page.goto("/#wedding");
+  await openInvitation(page);
   await page
     .getByRole("navigation")
     .getByRole("link", { name: "Venue", exact: true })
@@ -74,7 +99,7 @@ test("navigation reaches the venue and directions use the supplied map", async (
 test("full-photo viewer shows the original portrait and returns keyboard focus when dismissed", async ({
   page,
 }) => {
-  await page.goto("/#wedding");
+  await openInvitation(page);
   const openPhoto = page.getByRole("button", { name: "View full photograph" });
   await openPhoto.click();
   const dialog = page.getByRole("dialog", {
@@ -112,7 +137,7 @@ test("reduced-motion preference keeps content visible without entrance animation
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/#wedding");
+  await openInvitation(page);
   expect(
     await page.evaluate(() =>
       document.documentElement.classList.contains("motion-ready"),
@@ -139,7 +164,7 @@ test("reduced-motion preference keeps content visible without entrance animation
 test("calendar download contains the ceremony time in India and complete venue", async ({
   page,
 }) => {
-  await page.goto("/#wedding");
+  await openInvitation(page);
   const pendingDownload = page.waitForEvent("download");
   await page.getByRole("button", { name: "Add to calendar" }).click();
   const download = await pendingDownload;
@@ -163,7 +188,7 @@ test("countdown follows the India ceremony time and remains valid after the wedd
   page,
 }) => {
   await page.clock.setFixedTime(new Date("2026-11-14T04:27:00Z"));
-  await page.goto("/#wedding");
+  await openInvitation(page);
   await expect(page.locator("#days")).toHaveText("01");
   await expect(page.locator("#hours")).toHaveText("00");
   await expect(page.locator("#minutes")).toHaveText("00");

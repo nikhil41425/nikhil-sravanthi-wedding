@@ -27,7 +27,8 @@ test("edge-to-edge temple card plays its entrance animation and reveals the invi
   expect(await page.locator('.temple-artwork').evaluate(element => getComputedStyle(element).animationName)).toBe('temple-enter');
   expect(await page.locator('.opening-ripple').evaluate(element => getComputedStyle(element).animationName)).toBe('entrance-ripple');
   await expect(page.locator("#wedding")).toBeHidden();
-  await expect(page).toHaveURL(/#wedding$/);
+  await expect(page.locator("#wedding")).toBeVisible();
+  await expect(page).toHaveURL(/\/$/);
   await expect(card).toHaveAttribute("data-opened", "true");
   await expect(page.locator(".invitation-dock")).toHaveAttribute("aria-hidden", "false");
   await expect(page.getByRole("heading", { level: 1 })).toBeFocused();
@@ -45,7 +46,8 @@ test("reduced motion disables all opening effects and supports keyboard entry", 
   const enter = page.getByRole("link", { name: "Tap to open" });
   await enter.focus();
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/#wedding$/);
+  await expect(page.locator("#wedding")).toBeVisible();
+  await expect(page).toHaveURL(/\/$/);
   await expect(page.locator("#opening")).not.toHaveClass(/is-opening/);
   await expect(page.getByRole("heading", { level: 1 })).toBeFocused();
 });
@@ -70,7 +72,8 @@ test("scrolling cannot bypass tap entry and works normally after opening", async
   const enter = page.getByRole("link", {name:"Tap to open"});
   if (isMobile) await enter.tap();
   else await enter.click();
-  await expect(page).toHaveURL(/#wedding$/);
+  await expect(page.locator("#wedding")).toBeVisible();
+  await expect(page).toHaveURL(/\/$/);
   expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).not.toBe("hidden");
   await page.mouse.wheel(0, 1150);
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(100);
@@ -90,4 +93,21 @@ test("a direct venue link bypasses the opening card", async ({ page }) => {
   await expect(page.locator("#opening")).toBeHidden();
   expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).not.toBe("hidden");
   expect(await page.locator("body").innerText()).not.toMatch(/[\u0C00-\u0C7F]/u);
+});
+
+test("old entry links and refreshes show the temple image again", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const hash of ["#wedding", "#home"]) {
+    await page.goto(`/${hash}`);
+    await expect(page.locator("#opening")).toBeVisible();
+    await expect(page.locator("#wedding")).toBeHidden();
+    await expect.poll(() => page.locator(".temple-image").evaluate(image => image.complete && image.naturalWidth === 941)).toBe(true);
+    await page.getByRole("link", { name: "Tap to open" }).click();
+    await expect(page.locator("#wedding")).toBeVisible();
+    await expect(page).toHaveURL(/\/$/);
+    await page.reload();
+    await expect(page.locator("#opening")).toBeVisible();
+    await expect(page.locator("#wedding")).toBeHidden();
+    expect(await page.evaluate(() => scrollY)).toBe(0);
+  }
 });

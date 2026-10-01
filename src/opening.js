@@ -29,7 +29,8 @@ export function initializeOpening() {
     enter.removeAttribute("aria-busy");
     enter.removeAttribute("aria-disabled");
     window.scrollTo({ top: 0, behavior: "instant" });
-    window.history.pushState(null, "", "#wedding");
+    // Keep the shared URL clean so refreshing shows the opening card again.
+    window.history.replaceState(null, "", window.location.pathname + window.location.search);
     const heading = document.getElementById("couple-name");
     heading.setAttribute("tabindex", "-1");
     heading.focus({ preventScroll: true });
@@ -68,7 +69,7 @@ export function initializeOpening() {
     if (reducedMotion.matches && openingTimer !== null) enterInvitation();
   });
 
-  const directLinks = ["wedding", "home", "invitation", "muhurtham", "venue"];
+  const directLinks = ["invitation", "muhurtham", "venue"];
   const destination = window.location.hash.slice(1);
   if (directLinks.includes(destination)) {
     revealInvitation();
