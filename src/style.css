@@ -170,6 +170,38 @@ html.is-opening-locked,
   opacity: 0;
   pointer-events: none;
 }
+.opening-name-reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(90deg, #fff4dc80, #fff4dcf2 20%, #fff4dcf2 80%, #fff4dc80), var(--invitation-background);
+  background-size: 100% 100%;
+  color: var(--plum);
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.name-reveal-content { position: relative; text-align: center; }
+.name-reveal-caption { font-family: var(--serif); font-size: 21px; color: var(--copper); margin: 0 0 22px; }
+.name-reveal-names { display: grid; gap: 8px; font-family: var(--serif); font-size: clamp(46px, 15cqw, 68px); font-weight: 600; line-height: 1.08; }
+.name-reveal-names i { color: var(--copper); font-size: 28px; font-weight: 400; }
+.name-reveal-content .lotus { margin: 26px auto 18px; }
+.name-reveal-date { font-size: 11px; letter-spacing: 2px; color: var(--ink); }
+.name-reveal-glow { position: absolute; inset: 10%; background: radial-gradient(ellipse, #ffdda960, transparent 65%); }
+.name-reveal-motes, .portrait-motes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.name-reveal-motes > span, .portrait-motes > span {
+  position: absolute;
+  left: var(--mote-left);
+  top: var(--mote-top);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #e6ba68;
+  box-shadow: 0 0 8px 2px #e6ba6860;
+  opacity: 0;
+}
 .opening-actions {
   position: absolute;
   bottom: calc(28px + env(safe-area-inset-bottom));
@@ -215,6 +247,24 @@ html.is-opening-locked,
   .opening-card.is-opening .temple-artwork { animation: temple-enter 1.2s cubic-bezier(.3, 0, .2, 1) both; }
   .opening-card.is-opening .opening-flash { animation: entrance-glow 1.2s ease both; }
   .opening-card.is-opening .opening-ripple { animation: entrance-ripple 1.2s ease-out both; }
+  .opening-card.is-opening .opening-name-reveal { animation: name-stage 2.4s ease both; }
+  .opening-card.is-opening .name-reveal-content { animation: name-lettering 2.4s cubic-bezier(.2, .7, .2, 1) both; }
+  .opening-card.is-opening .name-reveal-motes > span { animation: name-sparkle 2s ease var(--mote-delay) both; }
+  @keyframes name-stage {
+    0%, 14% { opacity: 0; }
+    28%, 84% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  @keyframes name-lettering {
+    0%, 20% { opacity: 0; transform: translateY(18px) scale(.97); }
+    40%, 82% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-10px) scale(1.02); }
+  }
+  @keyframes name-sparkle {
+    0%, 25% { opacity: 0; transform: translateY(15px) scale(.5); }
+    60% { opacity: .85; }
+    100% { opacity: 0; transform: translateY(-38px) scale(1.2); }
+  }
   @keyframes temple-breathe { from { transform: scale(1); } to { transform: scale(1.008); } }
   @keyframes petal-fall {
     0% { transform: translate3d(0, -20px, 0) rotate(0deg); opacity: 0; }
@@ -341,18 +391,17 @@ a:focus-visible {
 }
 .hero-photo {
   margin: 0;
-  border: 4px double var(--gold);
-  box-shadow: 0 8px 24px #49311b24;
-  padding: 4px;
-  background: #fff1d3;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
+.hero-portrait { position: relative; margin: 4px -12px 0; isolation: isolate; overflow: clip; }
+.portrait-aura { position: absolute; inset: 6% -4% 0; background: radial-gradient(ellipse, #efc77875, transparent 70%); pointer-events: none; }
 .hero-photo img {
   display: block;
   width: 100%;
   height: auto;
-}
-.hero-shade {
-  display: none;
+  -webkit-mask-image: linear-gradient(transparent, #000 5%, #000 87%, transparent);
+  mask-image: linear-gradient(transparent, #000 5%, #000 87%, transparent);
 }
 .hero-edition {
   position: static;
@@ -366,8 +415,8 @@ a:focus-visible {
 }
 .photo-expand {
   position: absolute;
-  right: 40px;
-  top: 76px;
+  right: 20px;
+  top: 28px;
   width: 38px;
   height: 38px;
   display: grid;
@@ -384,10 +433,8 @@ a:focus-visible {
 }
 .hero-content {
   position: relative;
-  margin-top: 22px;
-  padding: 14px 0;
-  background: #fff4dce8;
-  border-block: 1px solid #ae843e70;
+  margin: 0;
+  padding: 0 0 20px;
 }
 .hero-eyebrow {
   font-size: 18px;
@@ -400,22 +447,23 @@ a:focus-visible {
 .hero h1 {
   position: relative;
   font-family: var(--serif);
-  font-size: clamp(29px, 8.6cqw, 41px);
+  font-size: clamp(42px, 13cqw, 58px);
   font-weight: 600;
   letter-spacing: 0;
-  line-height: 1.2;
+  line-height: 1.05;
   margin: 0;
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  gap: 7px;
+  gap: 3px;
 }
 .hero h1 > span {
   display: inline;
 }
 .hero h1 em {
   position: static;
-  font-size: 0.7em;
+  font-size: 26px;
   font-weight: 500;
   color: var(--copper);
 }
@@ -1120,6 +1168,20 @@ body:has(.photo-dialog[open]) {
   transform: translateY(0);
 }
 @media (prefers-reduced-motion: no-preference) {
+  .invitation-entered .hero-portrait { animation: portrait-reveal 1.5s cubic-bezier(.2, .7, .2, 1) .15s both; }
+  .hero-photo img { animation: portrait-drift 16s ease-in-out infinite alternate paused; }
+  .portrait-aura { animation: portrait-glow 7s ease-in-out infinite alternate paused; }
+  .portrait-motes > span { animation: portrait-sparkle 9s ease-in-out var(--mote-delay) infinite paused; }
+  .hero.is-visible .hero-photo img, .hero.is-visible .portrait-aura,
+  .hero.is-visible .portrait-motes > span { animation-play-state: running; }
+  @keyframes portrait-reveal { from { opacity: 0; transform: translateY(22px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes portrait-drift { from { transform: scale(1); } to { transform: scale(1.012); } }
+  @keyframes portrait-glow { from { opacity: .35; } to { opacity: .75; } }
+  @keyframes portrait-sparkle {
+    0%, 100% { opacity: 0; transform: translateY(14px); }
+    35% { opacity: .6; }
+    75% { opacity: 0; transform: translateY(-24px); }
+  }
   .invitation-entered .hero-content {
     animation: cover-entrance 1s ease both;
   }
@@ -1139,7 +1201,7 @@ body:has(.photo-dialog[open]) {
   .header-note { font-size: 16px; }
   .hero { padding-inline: 20px; }
   .hero-date { gap: 5px; font-size: 9px; }
-  .photo-expand { right: 34px; }
+  .photo-expand { right: 18px; }
   .venue address { font-size: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {

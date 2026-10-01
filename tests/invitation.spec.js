@@ -68,11 +68,7 @@ test("invitation renders the approved details without page errors or horizontal 
   await expect(page.locator("address")).toContainText(
     "Hyderabad, Telangana 500088",
   );
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= window.innerWidth,
-    ),
-  ).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize().width);
   const invitation = await page.locator("#app").boundingBox();
   expect(invitation.width).toBeLessThanOrEqual(480);
   const groom = await page.locator(".family h3").first().boundingBox();
@@ -114,6 +110,9 @@ test("full-photo viewer shows the original portrait and returns keyboard focus w
 }) => {
   await openInvitation(page);
   const openPhoto = page.getByRole("button", { name: "View full photograph" });
+  const names = await page.locator("#couple-name").boundingBox();
+  const photo = await page.locator(".hero-photo").boundingBox();
+  expect(names.y + names.height).toBeLessThan(photo.y);
   await openPhoto.click();
   const dialog = page.getByRole("dialog", {
     name: "Nikhil and Sravanthi photograph",

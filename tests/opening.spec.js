@@ -27,6 +27,10 @@ test("edge-to-edge temple card plays its entrance animation and reveals the invi
   expect(await page.locator('.temple-artwork').evaluate(element => getComputedStyle(element).animationName)).toBe('temple-enter');
   expect(await page.locator('.opening-ripple').evaluate(element => getComputedStyle(element).animationName)).toBe('entrance-ripple');
   await expect(page.locator("#wedding")).toBeHidden();
+  await expect.poll(() => page.locator(".opening-name-reveal").evaluate(element => Number(getComputedStyle(element).opacity))).toBeGreaterThan(0.95);
+  await expect(page.locator(".name-reveal-names")).toContainText("Nikhil");
+  await expect(page.locator(".name-reveal-names")).toContainText("Sravanthi");
+  await expect(page.locator("#wedding")).toBeHidden();
   await expect(page.locator("#wedding")).toBeVisible();
   await expect(page).toHaveURL(/\/$/);
   await expect(card).toHaveAttribute("data-opened", "true");
@@ -40,7 +44,7 @@ test("edge-to-edge temple card plays its entrance animation and reveals the invi
 test("reduced motion disables all opening effects and supports keyboard entry", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  for (const selector of [".temple-artwork", ".petal", ".lamp-glow", ".floor-shimmer"]) {
+  for (const selector of [".temple-artwork", ".petal", ".lamp-glow", ".floor-shimmer", ".opening-name-reveal", ".name-reveal-content"]) {
     expect(await page.locator(selector).first().evaluate(element => getComputedStyle(element).animationName)).toBe("none");
   }
   const enter = page.getByRole("link", { name: "Tap to open" });
