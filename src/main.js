@@ -99,8 +99,7 @@ document.querySelector("#app").innerHTML = `
       <h2 id="venue-heading" data-reveal>Join us at</h2>
       <h3 lang="en" translate="no" data-reveal><span>CBS</span> <span>Convention</span></h3>
       <address lang="en" translate="no">Narapally, Korremula Rd,<br />Sai Ram Nagar Colony, Venkatadri Twp,<br />Chowdhariguda, Majarguda,<br />Hyderabad, Telangana 500088</address>
-      <a class="button button-dark" href="https://maps.app.goo.gl/dKanwQshRjnfzxzs5" target="_blank" rel="noopener noreferrer"><span>Get directions</span>${arrow}</a>
-      <p class="map-note" lang="en">Find your way on Google Maps</p>
+      <a class="button button-dark directions-button" href="https://maps.app.goo.gl/dKanwQshRjnfzxzs5" target="_blank" rel="noopener noreferrer" aria-label="Get directions" aria-describedby="directions-note"><span class="directions-icon" aria-hidden="true">${pin}</span><span class="directions-copy"><span class="directions-title">Get directions</span><span class="directions-caption" id="directions-note">Open in Google Maps</span></span><span class="directions-arrow" aria-hidden="true">${arrow}</span></a>
       <div class="venue-art" aria-hidden="true">${mandap}<span lang="en">WHERE OUR FOREVER BEGINS</span></div>
     </section>
 

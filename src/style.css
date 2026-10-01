@@ -991,12 +991,65 @@ a:focus-visible {
   font-style: normal;
   margin-bottom: 28px;
 }
-.map-note {
+.directions-button {
+  position: relative;
+  min-height: 82px;
+  padding: 16px;
+  gap: 12px;
+  border: 1px solid #c49a55;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #81372e, #68261f 65%, #5b211c);
+  box-shadow: 0 8px 22px #70292324;
+  text-align: left;
+}
+.directions-button::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid #ecd3a833;
+  border-radius: 8px;
+  pointer-events: none;
+}
+.directions-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  border: 1px solid #e7c78a66;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffe4ac24, #ffe4ac08);
+  color: #ffe4ac;
+}
+.directions-copy { display: flex; flex-direction: column; gap: 3px; }
+.directions-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--paper);
+}
+.directions-caption {
   font-family: var(--sans);
-  font-size: 11px;
-  text-align: center;
-  color: var(--ink);
-  margin: 14px 0 0;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #ecd3a8;
+}
+.directions-arrow {
+  display: grid;
+  place-items: center;
+  margin-left: auto;
+  padding-left: 10px;
+  border-left: 1px solid #ecd3a833;
+  color: #ffe4ac;
+  transition: transform .2s ease;
+}
+.directions-button .directions-icon svg,
+.directions-button .directions-arrow svg { width: 20px; height: 20px; margin: 0; }
+@media (hover: hover) {
+  .directions-button:hover { background: linear-gradient(120deg, #914136, #762e26 65%, #68261f); }
+  .directions-button:hover .directions-arrow { transform: translateX(3px); }
 }
 .venue-art {
   margin: 32px auto 0;
