@@ -17,26 +17,26 @@ const ritual = `<svg class="ritual" viewBox="0 0 170 100" fill="none" stroke="cu
 const expand = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg>`;
 const close = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>`;
 const heart = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 20S3 14 3 8.5a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1C21 14 12 20 12 20Z"/></svg>`;
-const seal = `<div class="seal" aria-hidden="true"><span class="seal-top" lang="en">WITH LOVE</span><span class="seal-monogram" lang="en">N<i>&</i>S</span><span class="seal-bottom" lang="en">15 · 11 · 2026</span></div>`;
+const seal = `<div class="seal" aria-hidden="true"><span class="seal-top" lang="en">WITH LOVE</span><span class="seal-monogram" lang="en" translate="no">N<i>&</i>S</span><span class="seal-bottom" lang="en">15 · 11 · 2026</span></div>`;
 const mandap = `<svg class="mandap" viewBox="0 0 380 180" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M20 165h340M40 160h300M58 154h264M70 52h240M83 52v100m12-100v100m190-100v100m12-100v100M66 52l32-18h184l32 18H66ZM105 33l25-17h120l25 17M137 16l53-13 53 13M190 3V0"/><path d="M95 57q47 39 95 0 48 39 95 0M95 57q47 22 95 0 48 22 95 0"/><path d="M138 107h104l-10 11h-84l-10-11Zm10 11v33m84-33v33M174 105q-10-18 0-32 11 14 0 32Zm30 0q-10-18 0-32 11 14 0 32M189 106q-13-23 0-42 14 19 0 42"/><path d="M63 56h42M275 56h42M66 145h36M278 145h36"/><circle cx="190" cy="24" r="3"/></svg>`;
 
 document.querySelector("#app").innerHTML = `
   <a class="skip-link" href="#invitation">ఆహ్వానానికి వెళ్ళండి</a>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
   <header class="header">
-    <a class="monogram" href="#home" aria-label="Nikhil and Sravanthi home" lang="en">N<span>&</span>S</a>
+    <a class="monogram" href="#home" aria-label="Nikhil and Sravanthi home" lang="en" translate="no">N<span>&</span>S</a>
     <span class="header-note">మా వివాహ ఆహ్వానం</span>
     <span class="header-date" lang="en">15.11.26</span>
   </header>
   <main>
     <section class="hero" id="home" aria-labelledby="couple-name">
-      <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" width="890" height="1280" fetchpriority="high" decoding="async" /></figure>
+      <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" lang="en" translate="no" width="890" height="1280" fetchpriority="high" decoding="async" /></figure>
       <div class="hero-shade" aria-hidden="true"></div>
       <span class="hero-edition" lang="en">THE WEDDING OF</span>
       <button class="photo-expand" id="open-photo" type="button" aria-label="View full photograph">${expand}</button>
       <div class="hero-content">
         <p class="hero-eyebrow">ఒక అందమైన శుభారంభం</p>
-        <h1 id="couple-name" lang="en"><span>Nikhil</span><em>&</em><span class="bride-name">Sravanthi</span></h1>
+        <h1 id="couple-name" lang="en" translate="no"><span>Nikhil</span><em>&</em><span class="bride-name">Sravanthi</span></h1>
         <div class="hero-date" lang="en"><span>15 NOVEMBER 2026</span><span>HYDERABAD, INDIA</span></div>
       </div>
       <a class="hero-cta" href="#invitation"><span>మా శుభలేఖ</span>${arrow}</a>
@@ -49,9 +49,9 @@ document.querySelector("#app").innerHTML = `
       <h2 id="invitation-heading" data-reveal>మీ రాక మాకు ఆనందం.<br /><span>మీ ఆశీస్సులు మాకు వరం.</span></h2>
       <p class="invitation-copy" data-reveal>మా వివాహ మహోత్సవానికి విచ్చేసి, మీ ఆశీస్సులతో మా నూతన జీవితాన్ని దీవించగలరు.</p>
       <div class="families">
-        <div class="family" data-reveal><p class="family-role">వరుడు <span lang="en">THE GROOM</span></p><h3 lang="en">Nikhil</h3><p class="parent-label" lang="en">Son of</p><p class="parents" lang="en">Are Srinivas <span>&</span> Manjula</p></div>
+        <div class="family" data-reveal><p class="family-role">వరుడు <span lang="en">THE GROOM</span></p><h3 lang="en" translate="no">Nikhil</h3><p class="parent-label" lang="en">Son of</p><p class="parents" lang="en" translate="no">Are Srinivas <span>&</span> Manjula</p></div>
         <div class="family-symbol" aria-hidden="true"><span class="union-line"></span>${ritual}<span class="union-line"></span></div>
-        <div class="family" data-reveal><p class="family-role">వధువు <span lang="en">THE BRIDE</span></p><h3 lang="en">Sravanthi</h3><p class="parent-label" lang="en">Daughter of</p><p class="parents" lang="en">Pandula Narsimha <span>&</span> Madhavi</p></div>
+        <div class="family" data-reveal><p class="family-role">వధువు <span lang="en">THE BRIDE</span></p><h3 lang="en" translate="no">Sravanthi</h3><p class="parent-label" lang="en">Daughter of</p><p class="parents" lang="en" translate="no">Pandula Narsimha <span>&</span> Madhavi</p></div>
       </div>
       <div class="invitation-signoff" data-reveal>${lotus}<p>రెండు మనసులు. ఒక అందమైన ప్రయాణం.</p></div>
     </section>
@@ -73,8 +73,8 @@ document.querySelector("#app").innerHTML = `
       <div class="section-marker"><span lang="en">03 /</span><p>కలుసుకుందాం</p><span class="marker-line"></span></div>
       <div class="venue-location" lang="en">${pin}<span>HYDERABAD · TELANGANA</span></div>
       <h2 id="venue-heading" data-reveal>వివాహ వేదిక</h2>
-      <h3 lang="en" data-reveal>CBS<br />Convention</h3>
-      <address lang="en">Narapally, Korremula Rd,<br />Sai Ram Nagar Colony, Venkatadri Twp,<br />Chowdhariguda, Majarguda,<br />Hyderabad, Telangana 500088</address>
+      <h3 lang="en" translate="no" data-reveal>CBS<br />Convention</h3>
+      <address lang="en" translate="no">Narapally, Korremula Rd,<br />Sai Ram Nagar Colony, Venkatadri Twp,<br />Chowdhariguda, Majarguda,<br />Hyderabad, Telangana 500088</address>
       <a class="button button-dark" href="https://maps.app.goo.gl/dKanwQshRjnfzxzs5" target="_blank" rel="noopener noreferrer"><span>వేదికకు దారి</span>${arrow}</a>
       <p class="map-note" lang="en">Find your way on Google Maps</p>
       <div class="venue-art" aria-hidden="true">${mandap}<span lang="en">WHERE OUR FOREVER BEGINS</span></div>
@@ -83,14 +83,14 @@ document.querySelector("#app").innerHTML = `
     <section class="closing section" aria-labelledby="closing-heading">
       ${lotus}<p class="closing-kicker">మీ రాక కోసం ప్రేమతో ఎదురుచూస్తూ</p>
       <h2 id="closing-heading" data-reveal>మీ సమక్షంలో…<br />మా శుభారంభం.</h2>
-      <div class="closing-names" lang="en" data-reveal>Nikhil <span>&</span><br /><em>Sravanthi</em></div>
+      <div class="closing-names" lang="en" translate="no" data-reveal>Nikhil <span>&</span><br /><em>Sravanthi</em></div>
       <div class="closing-rule"><span></span>${heart}<span></span></div>
       <p class="closing-date" lang="en">15 NOVEMBER 2026 · HYDERABAD</p>
     </section>
   </main>
-  <footer><span class="footer-monogram" lang="en">N & S</span><p>ప్రేమతో ఆహ్వానిస్తున్నాం</p><span lang="en">2026</span></footer>
+  <footer><span class="footer-monogram" lang="en" translate="no">N & S</span><p>ప్రేమతో ఆహ్వానిస్తున్నాం</p><span lang="en">2026</span></footer>
   <nav class="invitation-dock" aria-label="ప్రధాన నావిగేషన్"><a href="#invitation">${heart}<span>ఆహ్వానం</span></a><a href="#muhurtham">${calendar}<span>ముహూర్తం</span></a><a href="#venue">${pin}<span>వేదిక</span></a></nav>
-  <dialog class="photo-dialog" id="photo-dialog" aria-label="Nikhil and Sravanthi photograph"><button id="close-photo" type="button" aria-label="Close photograph">${close}</button><img src="${couplePhoto}" alt="Nikhil and Sravanthi, full portrait" width="890" height="1280" /><p lang="en">Nikhil & Sravanthi</p></dialog>
+  <dialog class="photo-dialog" id="photo-dialog" aria-label="Nikhil and Sravanthi photograph" lang="en" translate="no"><button id="close-photo" type="button" aria-label="Close photograph">${close}</button><img src="${couplePhoto}" alt="Nikhil and Sravanthi, full portrait" width="890" height="1280" /><p lang="en">Nikhil & Sravanthi</p></dialog>
 `;
 
 const photoDialog = document.getElementById("photo-dialog");
