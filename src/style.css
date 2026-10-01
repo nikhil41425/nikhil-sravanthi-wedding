@@ -94,6 +94,42 @@ html.is-opening-locked,
   height: auto;
   display: block;
 }
+.sky-clouds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.cloud-window {
+  position: absolute;
+  top: 20.5%;
+  width: 29%;
+  height: 15%;
+  overflow: hidden;
+  clip-path: polygon(0 0, 96% 0, 89% 38%, 77% 71%, 64% 74%, 65% 53%, 54% 35%, 33% 22%, 0 14%);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 82%, transparent);
+}
+.cloud-window-left { left: 0; }
+.cloud-window-right { right: 0; transform: scaleX(-1); }
+.cloud-bank {
+  position: absolute;
+  display: flex;
+  width: 200%;
+  left: 0;
+  top: 7%;
+  opacity: .7;
+  --cloud-duration: 42s;
+  --cloud-delay: -18s;
+}
+.cloud-bank img { display: block; width: 50%; height: auto; flex: 0 0 50%; }
+.cloud-bank-far {
+  top: 43%;
+  opacity: .4;
+  --cloud-duration: 64s;
+  --cloud-delay: -32s;
+}
+.cloud-window-right .cloud-bank { --cloud-duration: 50s; --cloud-delay: -7s; }
+.cloud-window-right .cloud-bank-far { --cloud-duration: 72s; --cloud-delay: -25s; }
 .temple-plaque {
   position: absolute;
   top: 49.3%;
@@ -292,6 +328,13 @@ html.is-opening-locked,
 .is-at-opening .reading-progress { opacity: 0; }
 .opening-card.is-opening .opening-actions { opacity: 0; transition: opacity .25s; }
 @media (prefers-reduced-motion: no-preference) {
+  .cloud-bank { animation: cloud-drift var(--cloud-duration) linear var(--cloud-delay) infinite paused; }
+  .cloud-window-right .cloud-bank { animation-direction: reverse; }
+  .is-at-opening .cloud-bank { animation-play-state: running; }
+  @keyframes cloud-drift {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
   .petal { animation: petal-fall var(--petal-duration) linear var(--petal-delay) infinite paused; }
   .lamp-glow { animation: lamp-flicker 3.4s ease-in-out infinite alternate paused; }
   .lamp-glow-right { animation-delay: -1.7s; }

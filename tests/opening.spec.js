@@ -20,6 +20,9 @@ test("edge-to-edge temple card plays its entrance animation and reveals the invi
   await expect(page.locator(".invitation-dock")).toHaveAttribute("aria-hidden", "true");
   expect(await page.locator(".invitation-dock").evaluate(nav => nav.inert)).toBe(true);
   await expect(page.locator("#wedding")).toBeHidden();
+  const clouds = page.locator(".cloud-bank").first();
+  expect(await clouds.evaluate(element => getComputedStyle(element).animationIterationCount)).toBe("infinite");
+  expect(await clouds.evaluate(element => getComputedStyle(element).animationPlayState)).toBe("running");
   expect(await page.locator("body").innerText()).not.toMatch(/swipe|scroll/i);
   const enter = page.getByRole("link", { name: "Tap to open" });
   const door = page.locator(".door-leaf-left img");
@@ -47,7 +50,7 @@ test("edge-to-edge temple card plays its entrance animation and reveals the invi
 test("reduced motion disables all opening effects and supports keyboard and touch entry", async ({ page, isMobile }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  for (const selector of [".temple-artwork", ".petal", ".lamp-glow", ".floor-shimmer", ".door-leaf"]) {
+  for (const selector of [".temple-artwork", ".petal", ".lamp-glow", ".floor-shimmer", ".door-leaf", ".cloud-bank"]) {
     expect(await page.locator(selector).first().evaluate(element => getComputedStyle(element).animationName)).toBe("none");
   }
   const enter = page.getByRole("link", { name: "Tap to open" });

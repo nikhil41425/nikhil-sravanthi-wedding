@@ -7,6 +7,7 @@ import "@fontsource/manrope/latin-500.css";
 import couplePhoto from "./assets/nikhil-sravanthi.jpg";
 import templeArtwork from "./assets/temple-opening.webp";
 import templeDoor from "./assets/temple-door.webp";
+import cloudArtwork from "./assets/drifting-cloud.webp";
 import familyArtwork from "./assets/wedding-kalash.webp";
 import ceremonyArtwork from "./assets/ceremony-lamps.webp";
 import venueArtwork from "./assets/wedding-mandap.webp";
@@ -33,6 +34,7 @@ document.querySelector("#app").innerHTML = `
     <div class="temple-scene">
       <div class="temple-artwork">
         <img class="temple-image" src="${templeArtwork}" alt="Ornate temple entrance with Lord Venkateswara, Lord Ganesha, flowers and brass lamps" width="941" height="1672" fetchpriority="high" decoding="async" />
+        <div class="sky-clouds" aria-hidden="true">${["left", "right"].map(side => `<div class="cloud-window cloud-window-${side}">${["near", "far"].map(depth => `<div class="cloud-bank cloud-bank-${depth}">${[0, 1].map(() => `<img src="${cloudArtwork}" alt="" width="768" height="256" decoding="async" />`).join("")}</div>`).join("")}</div>`).join("")}</div>
         <div class="temple-plaque">
           <p>WEDDING INVITATION</p>
           <h2 id="opening-title" translate="no"><span>Nikhil <i>&</i></span><span>Sravanthi</span></h2>
