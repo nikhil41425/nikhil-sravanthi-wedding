@@ -7,10 +7,11 @@ async function openInvitation(page) {
   await expect(page.locator("#wedding")).toBeVisible();
 }
 
-test("every invitation section uses the supplied background with readable ceremony text", async ({ page }) => {
+test("portrait has a quiet background and invitation sections retain readable ceremony text", async ({ page }) => {
   await openInvitation(page);
-  const sections = page.locator("main > section, footer");
-  expect(await sections.count()).toBe(6);
+  expect(await page.locator(".hero").evaluate(element => getComputedStyle(element).backgroundImage)).not.toContain("url(");
+  const sections = page.locator("main > .section, footer");
+  expect(await sections.count()).toBe(5);
   for (const section of await sections.all()) {
     expect(await section.evaluate(element => getComputedStyle(element).backgroundImage)).toContain("invitation-background");
   }

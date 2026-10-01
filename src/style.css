@@ -370,9 +370,11 @@ a:focus-visible {
   isolation: isolate;
   padding: calc(22px + env(safe-area-inset-top)) 0 calc(94px + env(safe-area-inset-bottom));
   min-height: 100svh;
-  background: #f9e7c4;
-  background-image: var(--invitation-background);
-  background-size: 100% 100%;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse at 50% 12%, #f2deb870, transparent 55%),
+    radial-gradient(ellipse at 50% 85%, #e1be7433, transparent 60%),
+    linear-gradient(180deg, #fff8e9, #f9efd9 70%, #fff4dc);
   color: var(--plum);
   display: flex;
   flex-direction: column;
@@ -400,7 +402,7 @@ a:focus-visible {
   isolation: isolate;
   overflow: clip;
 }
-.portrait-aura { position: absolute; inset: 6% -4% 0; background: radial-gradient(ellipse, #efc77875, transparent 70%); pointer-events: none; }
+.portrait-aura { position: absolute; inset: 6% -4% 0; background: radial-gradient(ellipse, #d5ad6133, transparent 70%); pointer-events: none; }
 .hero-photo img {
   display: block;
   width: 100%;
