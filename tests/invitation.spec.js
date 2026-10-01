@@ -87,7 +87,7 @@ test("full-photo viewer shows the original portrait and returns keyboard focus w
       portrait.evaluate(
         (image) =>
           image.complete &&
-          image.naturalWidth === 890 &&
+          image.naturalWidth === 891 &&
           image.naturalHeight === 1280,
       ),
     )

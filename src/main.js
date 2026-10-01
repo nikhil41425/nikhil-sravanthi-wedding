@@ -30,7 +30,7 @@ document.querySelector("#app").innerHTML = `
   </header>
   <main>
     <section class="hero" id="home" aria-labelledby="couple-name">
-      <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" lang="en" translate="no" width="890" height="1280" fetchpriority="high" decoding="async" /></figure>
+      <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" lang="en" translate="no" width="891" height="1280" fetchpriority="high" decoding="async" /></figure>
       <div class="hero-shade" aria-hidden="true"></div>
       <span class="hero-edition" lang="en">THE WEDDING OF</span>
       <button class="photo-expand" id="open-photo" type="button" aria-label="View full photograph">${expand}</button>
@@ -90,7 +90,7 @@ document.querySelector("#app").innerHTML = `
   </main>
   <footer><span class="footer-monogram" lang="en" translate="no">N & S</span><p>ప్రేమతో ఆహ్వానిస్తున్నాం</p><span lang="en">2026</span></footer>
   <nav class="invitation-dock" aria-label="ప్రధాన నావిగేషన్"><a href="#invitation">${heart}<span>ఆహ్వానం</span></a><a href="#muhurtham">${calendar}<span>ముహూర్తం</span></a><a href="#venue">${pin}<span>వేదిక</span></a></nav>
-  <dialog class="photo-dialog" id="photo-dialog" aria-label="Nikhil and Sravanthi photograph" lang="en" translate="no"><button id="close-photo" type="button" aria-label="Close photograph">${close}</button><img src="${couplePhoto}" alt="Nikhil and Sravanthi, full portrait" width="890" height="1280" /><p lang="en">Nikhil & Sravanthi</p></dialog>
+  <dialog class="photo-dialog" id="photo-dialog" aria-label="Nikhil and Sravanthi photograph" lang="en" translate="no"><button id="close-photo" type="button" aria-label="Close photograph">${close}</button><img src="${couplePhoto}" alt="Nikhil and Sravanthi, full portrait" width="891" height="1280" /><p lang="en">Nikhil & Sravanthi</p></dialog>
 `;
 
 const photoDialog = document.getElementById("photo-dialog");
