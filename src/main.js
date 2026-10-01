@@ -56,7 +56,7 @@ document.querySelector("#app").innerHTML = `
       <span class="hero-edition" lang="en">THE WEDDING OF</span>
       <div class="hero-portrait">
         <div class="portrait-aura" aria-hidden="true"></div>
-        <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" lang="en" translate="no" width="890" height="1280" fetchpriority="low" decoding="async" /><div class="portrait-text-shade" aria-hidden="true"></div></figure>
+        <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" lang="en" translate="no" width="891" height="1280" fetchpriority="low" decoding="async" /><div class="portrait-text-shade" aria-hidden="true"></div></figure>
         <div class="portrait-motes" aria-hidden="true">${[7, 94, 12, 88, 4, 96].map((left, index) => `<span style="--mote-left:${left}%;--mote-top:${14 + index * 12}%;--mote-delay:-${index * 1.8}s"></span>`).join("")}</div>
       <div class="hero-content">
         <p class="hero-eyebrow">A beautiful beginning</p>
@@ -116,7 +116,7 @@ document.querySelector("#app").innerHTML = `
   </main>
   <footer><span class="footer-monogram" lang="en" translate="no">N & S</span><p>With love, always.</p><span lang="en">2026</span></footer>
   <nav class="invitation-dock" aria-label="Invitation navigation"><a href="#invitation">${heart}<span>Invitation</span></a><a href="#muhurtham">${calendar}<span>Ceremony</span></a><a href="#venue">${pin}<span>Venue</span></a></nav>
-  <dialog class="photo-dialog" id="photo-dialog" aria-label="Nikhil and Sravanthi photograph" lang="en" translate="no"><button id="close-photo" type="button" aria-label="Close photograph">${close}</button><img src="${couplePhoto}" alt="Nikhil and Sravanthi, full portrait" width="890" height="1280" /><p lang="en">Nikhil & Sravanthi</p></dialog>
+  <dialog class="photo-dialog" id="photo-dialog" aria-label="Nikhil and Sravanthi photograph" lang="en" translate="no"><button id="close-photo" type="button" aria-label="Close photograph">${close}</button><img src="${couplePhoto}" alt="Nikhil and Sravanthi, full portrait" width="891" height="1280" /><p lang="en">Nikhil & Sravanthi</p></dialog>
   </div>
 `;
 
