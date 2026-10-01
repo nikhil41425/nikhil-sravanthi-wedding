@@ -1,0 +1,103 @@
+import { test, expect } from "@playwright/test";
+import { readFile } from "node:fs/promises";
+
+test("invitation renders the approved details without page errors or horizontal overflow", async ({
+  page,
+}) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  const failedRequests = [];
+  page.on("requestfailed", (request) => failedRequests.push(request.url()));
+  await page.goto("/");
+  await page.evaluate(() => document.fonts.ready);
+  await expect(page).toHaveTitle("Nikhil & Sravanthi | వివాహ ఆహ్వానం");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Nikhil&Sravanthi",
+  );
+  await expect(page.locator(".parents").first()).toHaveText(
+    "Are Srinivas & Manjula",
+  );
+  await expect(page.locator(".parents").last()).toHaveText(
+    "Pandula Narsimha & Madhavi",
+  );
+  await expect(page.locator(".date-card")).toContainText("2026 · SUNDAY");
+  await expect(page.locator(".date-card")).toContainText("9:57 AM");
+  await expect(
+    page.getByRole("heading", { name: "CBS Convention" }),
+  ).toBeVisible();
+  await expect(page.locator("address")).toContainText(
+    "Hyderabad, Telangana 500088",
+  );
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth,
+    ),
+  ).toBe(true);
+  const invitation = await page.locator("#app").boundingBox();
+  expect(invitation.width).toBeLessThanOrEqual(480);
+  const groom = await page.locator(".family h3").first().boundingBox();
+  const bride = await page.locator(".family h3").last().boundingBox();
+  expect(bride.y).toBeGreaterThan(groom.y + groom.height);
+  expect(
+    await page.evaluate(() => document.fonts.check('16px "Noto Serif Telugu"')),
+  ).toBe(true);
+  expect(errors).toEqual([]);
+  expect(failedRequests).toEqual([]);
+});
+
+test("navigation reaches the venue and directions use the supplied map", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("navigation")
+    .getByRole("link", { name: "వేదిక", exact: true })
+    .click();
+  await expect(page).toHaveURL(/#venue$/);
+  const directions = page.getByRole("link", { name: "వేదికకు దారి" });
+  await expect(directions).toHaveAttribute(
+    "href",
+    "https://maps.app.goo.gl/dKanwQshRjnfzxzs5",
+  );
+  await expect(directions).toHaveAttribute("target", "_blank");
+  await expect(directions).toHaveAttribute("rel", "noopener noreferrer");
+  await expect(directions).toBeInViewport();
+});
+
+test("calendar download contains the ceremony time in India and complete venue", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const pendingDownload = page.waitForEvent("download");
+  await page.getByRole("button", { name: "క్యాలెండర్‌లో చేర్చండి" }).click();
+  const download = await pendingDownload;
+  expect(download.suggestedFilename()).toBe("Nikhil-and-Sravanthi-Wedding.ics");
+  const content = await readFile(await download.path(), "utf8");
+  const unfolded = content.replace(/\r\n /g, "");
+  expect(unfolded).toContain("DTSTART:20261115T042700Z");
+  expect(unfolded).toContain("SUMMARY:Nikhil & Sravanthi Wedding");
+  expect(unfolded).toContain("LOCATION:CBS Convention");
+  expect(unfolded).toContain("Hyderabad\\, Telangana 500088");
+  expect(unfolded).toContain("END:VCALENDAR");
+  expect(
+    content.split("\r\n").every((line) => Buffer.byteLength(line) <= 75),
+  ).toBe(true);
+  await expect(page.getByRole("status")).toContainText(
+    "క్యాలెండర్ ఫైల్ సిద్ధమైంది",
+  );
+});
+
+test("countdown follows the India ceremony time and remains valid after the wedding", async ({
+  page,
+}) => {
+  await page.clock.setFixedTime(new Date("2026-11-14T04:27:00Z"));
+  await page.goto("/");
+  await expect(page.locator("#days")).toHaveText("01");
+  await expect(page.locator("#hours")).toHaveText("00");
+  await expect(page.locator("#minutes")).toHaveText("00");
+  await page.clock.setFixedTime(new Date("2026-11-16T04:27:00Z"));
+  await expect(page.locator("#days")).toHaveText("00");
+  await expect(page.locator("#countdown-label")).toHaveText(
+    "మా నూతన ప్రయాణం మొదలైంది",
+  );
+});
