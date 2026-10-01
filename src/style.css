@@ -163,9 +163,6 @@ html.is-opening-locked,
   overflow: hidden;
   pointer-events: none;
 }
-.rose-petal-canvas { display: block; width: 100%; height: 100%; pointer-events: none; }
-.has-3d-petals > .rose-petal { display: none; animation: none; }
-.has-3d-petals > .rose-petal > span { animation: none; }
 .rose-petal {
   --rose-opacity: .55;
   position: absolute;
