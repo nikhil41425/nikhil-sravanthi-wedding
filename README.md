@@ -1,6 +1,6 @@
 # Nikhil & Sravanthi — Wedding invitation
 
-A mobile-only Telugu wedding invitation with a portrait cover, English names, original SVG illustrations, locally bundled fonts, a live countdown, Google Maps directions, and an iCalendar download. Includes a full-photo viewer, section navigation, scroll reveals, and reduced-motion support.
+A mobile-only, English-language wedding invitation with a portrait cover, English names, original SVG illustrations, locally bundled fonts, a live countdown, Google Maps directions, and an iCalendar download. Includes a full-photo viewer, section navigation, scroll reveals, and reduced-motion support.
 
 Wedding: **15 November 2026, Sunday, 9:57 AM IST**, at **CBS Convention, Hyderabad**.
 

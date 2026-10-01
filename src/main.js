@@ -3,7 +3,6 @@ import "@fontsource/cormorant-garamond/latin-400-italic.css";
 import "@fontsource/cormorant-garamond/latin-500.css";
 import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-500.css";
-import "@fontsource/noto-serif-telugu/telugu-400.css";
 import couplePhoto from "./assets/nikhil-sravanthi.jpg";
 import "./style.css";
 
@@ -21,11 +20,11 @@ const seal = `<div class="seal" aria-hidden="true"><span class="seal-top" lang="
 const mandap = `<svg class="mandap" viewBox="0 0 380 180" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M20 165h340M40 160h300M58 154h264M70 52h240M83 52v100m12-100v100m190-100v100m12-100v100M66 52l32-18h184l32 18H66ZM105 33l25-17h120l25 17M137 16l53-13 53 13M190 3V0"/><path d="M95 57q47 39 95 0 48 39 95 0M95 57q47 22 95 0 48 22 95 0"/><path d="M138 107h104l-10 11h-84l-10-11Zm10 11v33m84-33v33M174 105q-10-18 0-32 11 14 0 32Zm30 0q-10-18 0-32 11 14 0 32M189 106q-13-23 0-42 14 19 0 42"/><path d="M63 56h42M275 56h42M66 145h36M278 145h36"/><circle cx="190" cy="24" r="3"/></svg>`;
 
 document.querySelector("#app").innerHTML = `
-  <a class="skip-link" href="#invitation">ఆహ్వానానికి వెళ్ళండి</a>
+  <a class="skip-link" href="#invitation">Skip to invitation</a>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
   <header class="header">
     <a class="monogram" href="#home" aria-label="Nikhil and Sravanthi home" lang="en" translate="no">N<span>&</span>S</a>
-    <span class="header-note">మా వివాహ ఆహ్వానం</span>
+    <span class="header-note">Our wedding</span>
     <span class="header-date" lang="en">15.11.26</span>
   </header>
   <main>
@@ -35,61 +34,61 @@ document.querySelector("#app").innerHTML = `
       <span class="hero-edition" lang="en">THE WEDDING OF</span>
       <button class="photo-expand" id="open-photo" type="button" aria-label="View full photograph">${expand}</button>
       <div class="hero-content">
-        <p class="hero-eyebrow">ఒక అందమైన శుభారంభం</p>
+        <p class="hero-eyebrow">A beautiful beginning</p>
         <h1 id="couple-name" lang="en" translate="no"><span>Nikhil</span><em>&</em><span class="bride-name">Sravanthi</span></h1>
         <div class="hero-date" lang="en"><span>15 NOVEMBER 2026</span><span>HYDERABAD, INDIA</span></div>
       </div>
-      <a class="hero-cta" href="#invitation"><span>మా శుభలేఖ</span>${arrow}</a>
+      <a class="hero-cta" href="#invitation"><span>The invitation</span>${arrow}</a>
     </section>
 
     <section class="invitation section" id="invitation" aria-labelledby="invitation-heading">
       ${seal}
-      <div class="section-marker"><span lang="en">01 /</span><p>సప్రేమ ఆహ్వానం</p><span class="marker-line"></span></div>
-      <div class="auspicious" data-reveal>${ganesha}<p>శ్రీరస్తు · శుభమస్తు · అవిఘ్నమస్తు</p></div>
-      <h2 id="invitation-heading" data-reveal>మీ రాక మాకు ఆనందం.<br /><span>మీ ఆశీస్సులు మాకు వరం.</span></h2>
-      <p class="invitation-copy" data-reveal>మా వివాహ మహోత్సవానికి విచ్చేసి, మీ ఆశీస్సులతో మా నూతన జీవితాన్ని దీవించగలరు.</p>
+      <div class="section-marker"><span lang="en">01 /</span><p>THE INVITATION</p><span class="marker-line"></span></div>
+      <div class="auspicious" data-reveal>${ganesha}<p>With the blessings of Lord Ganesha</p></div>
+      <h2 id="invitation-heading" data-reveal>Your presence, our joy.<br /><span>Your blessings, our gift.</span></h2>
+      <p class="invitation-copy" data-reveal>Together with our families, we invite you to celebrate our wedding and bless the beginning of our life together.</p>
       <div class="families">
-        <div class="family" data-reveal><p class="family-role">వరుడు <span lang="en">THE GROOM</span></p><h3 lang="en" translate="no">Nikhil</h3><p class="parent-label" lang="en">Son of</p><p class="parents" lang="en" translate="no">Are Srinivas <span>&</span> Manjula</p></div>
+        <div class="family" data-reveal><p class="family-role"><span lang="en">THE GROOM</span></p><h3 lang="en" translate="no">Nikhil</h3><p class="parent-label" lang="en">Son of</p><p class="parents" lang="en" translate="no">Are Srinivas <span>&</span> Manjula</p></div>
         <div class="family-symbol" aria-hidden="true"><span class="union-line"></span>${ritual}<span class="union-line"></span></div>
-        <div class="family" data-reveal><p class="family-role">వధువు <span lang="en">THE BRIDE</span></p><h3 lang="en" translate="no">Sravanthi</h3><p class="parent-label" lang="en">Daughter of</p><p class="parents" lang="en" translate="no">Pandula Narsimha <span>&</span> Madhavi</p></div>
+        <div class="family" data-reveal><p class="family-role"><span lang="en">THE BRIDE</span></p><h3 lang="en" translate="no">Sravanthi</h3><p class="parent-label" lang="en">Daughter of</p><p class="parents" lang="en" translate="no">Pandula Narsimha <span>&</span> Madhavi</p></div>
       </div>
-      <div class="invitation-signoff" data-reveal>${lotus}<p>రెండు మనసులు. ఒక అందమైన ప్రయాణం.</p></div>
+      <div class="invitation-signoff" data-reveal>${lotus}<p>Two hearts. One beautiful journey.</p></div>
     </section>
 
     <section class="muhurtham section" id="muhurtham" aria-labelledby="date-heading">
-      <div class="section-marker"><span lang="en">02 /</span><p>ఒక మధురమైన ఆరంభం</p><span class="marker-line"></span></div>
-      <h2 id="date-heading" data-reveal>సుముహూర్తం</h2>
+      <div class="section-marker"><span lang="en">02 /</span><p>THE CELEBRATION</p><span class="marker-line"></span></div>
+      <h2 id="date-heading" data-reveal>Our wedding day</h2>
       <div class="date-card" data-reveal>
-        <div class="date-card-day"><strong lang="en">15</strong><div class="date-month"><span lang="en">November</span><span lang="en">2026 · SUNDAY</span><p>ఆదివారం</p></div></div>
-        <div class="date-card-time"><span class="ceremony-label">వివాహ వేడుక</span><p class="time" lang="en">9:57 <span>AM</span></p><p class="time-caption">ఉదయం <span lang="en">· INDIA STANDARD TIME</span></p></div>
+        <div class="date-card-day"><strong lang="en">15</strong><div class="date-month"><span lang="en">November</span><span lang="en">2026 · SUNDAY</span></div></div>
+        <div class="date-card-time"><span class="ceremony-label">The ceremony</span><p class="time" lang="en">9:57 <span>AM</span></p><p class="time-caption">Morning <span lang="en">· INDIA STANDARD TIME</span></p></div>
       </div>
-      <button class="button button-light" id="add-calendar" type="button">${calendar}<span>క్యాలెండర్‌లో చేర్చండి</span>${arrow}</button>
+      <button class="button button-light" id="add-calendar" type="button">${calendar}<span>Add to calendar</span>${arrow}</button>
       <p class="calendar-status" id="calendar-status" role="status"></p>
-      <div class="countdown-block" data-reveal><p class="countdown-label" id="countdown-label">మా పెళ్లి వేడుకకు ఇంకా</p><div class="countdown" aria-label="Time until the wedding"><div><strong id="days" lang="en">—</strong><span>రోజులు</span></div><div><strong id="hours" lang="en">—</strong><span>గంటలు</span></div><div><strong id="minutes" lang="en">—</strong><span>నిమిషాలు</span></div><div><strong id="seconds" lang="en">—</strong><span>క్షణాలు</span></div></div></div>
+      <div class="countdown-block" data-reveal><p class="countdown-label" id="countdown-label">Counting down to forever</p><div class="countdown" aria-label="Time until the wedding"><div><strong id="days" lang="en">—</strong><span>Days</span></div><div><strong id="hours" lang="en">—</strong><span>Hours</span></div><div><strong id="minutes" lang="en">—</strong><span>Minutes</span></div><div><strong id="seconds" lang="en">—</strong><span>Seconds</span></div></div></div>
       <span class="date-watermark" lang="en" aria-hidden="true">a day to remember.</span>
     </section>
 
     <section class="venue section" id="venue" aria-labelledby="venue-heading">
-      <div class="section-marker"><span lang="en">03 /</span><p>కలుసుకుందాం</p><span class="marker-line"></span></div>
+      <div class="section-marker"><span lang="en">03 /</span><p>THE VENUE</p><span class="marker-line"></span></div>
       <div class="venue-location" lang="en">${pin}<span>HYDERABAD · TELANGANA</span></div>
-      <h2 id="venue-heading" data-reveal>వివాహ వేదిక</h2>
+      <h2 id="venue-heading" data-reveal>Join us at</h2>
       <h3 lang="en" translate="no" data-reveal>CBS<br />Convention</h3>
       <address lang="en" translate="no">Narapally, Korremula Rd,<br />Sai Ram Nagar Colony, Venkatadri Twp,<br />Chowdhariguda, Majarguda,<br />Hyderabad, Telangana 500088</address>
-      <a class="button button-dark" href="https://maps.app.goo.gl/dKanwQshRjnfzxzs5" target="_blank" rel="noopener noreferrer"><span>వేదికకు దారి</span>${arrow}</a>
+      <a class="button button-dark" href="https://maps.app.goo.gl/dKanwQshRjnfzxzs5" target="_blank" rel="noopener noreferrer"><span>Get directions</span>${arrow}</a>
       <p class="map-note" lang="en">Find your way on Google Maps</p>
       <div class="venue-art" aria-hidden="true">${mandap}<span lang="en">WHERE OUR FOREVER BEGINS</span></div>
     </section>
 
     <section class="closing section" aria-labelledby="closing-heading">
-      ${lotus}<p class="closing-kicker">మీ రాక కోసం ప్రేమతో ఎదురుచూస్తూ</p>
-      <h2 id="closing-heading" data-reveal>మీ సమక్షంలో…<br />మా శుభారంభం.</h2>
+      ${lotus}<p class="closing-kicker">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
+      <h2 id="closing-heading" data-reveal>With you beside us,<br />our forever begins.</h2>
       <div class="closing-names" lang="en" translate="no" data-reveal>Nikhil <span>&</span><br /><em>Sravanthi</em></div>
       <div class="closing-rule"><span></span>${heart}<span></span></div>
       <p class="closing-date" lang="en">15 NOVEMBER 2026 · HYDERABAD</p>
     </section>
   </main>
-  <footer><span class="footer-monogram" lang="en" translate="no">N & S</span><p>ప్రేమతో ఆహ్వానిస్తున్నాం</p><span lang="en">2026</span></footer>
-  <nav class="invitation-dock" aria-label="ప్రధాన నావిగేషన్"><a href="#invitation">${heart}<span>ఆహ్వానం</span></a><a href="#muhurtham">${calendar}<span>ముహూర్తం</span></a><a href="#venue">${pin}<span>వేదిక</span></a></nav>
+  <footer><span class="footer-monogram" lang="en" translate="no">N & S</span><p>With love, always.</p><span lang="en">2026</span></footer>
+  <nav class="invitation-dock" aria-label="Invitation navigation"><a href="#invitation">${heart}<span>Invitation</span></a><a href="#muhurtham">${calendar}<span>Ceremony</span></a><a href="#venue">${pin}<span>Venue</span></a></nav>
   <dialog class="photo-dialog" id="photo-dialog" aria-label="Nikhil and Sravanthi photograph" lang="en" translate="no"><button id="close-photo" type="button" aria-label="Close photograph">${close}</button><img src="${couplePhoto}" alt="Nikhil and Sravanthi, full portrait" width="891" height="1280" /><p lang="en">Nikhil & Sravanthi</p></dialog>
 `;
 
@@ -187,7 +186,7 @@ function updateCountdown() {
   });
   if (!remaining)
     document.getElementById("countdown-label").textContent =
-      "మా నూతన ప్రయాణం మొదలైంది";
+      "Our new journey has begun.";
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
@@ -235,5 +234,5 @@ document.getElementById("add-calendar").addEventListener("click", () => {
   link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
   document.getElementById("calendar-status").textContent =
-    "క్యాలెండర్ ఫైల్ సిద్ధమైంది. మీ క్యాలెండర్‌లో తెరవండి.";
+    "Your calendar file is ready. Open it in your calendar app.";
 });

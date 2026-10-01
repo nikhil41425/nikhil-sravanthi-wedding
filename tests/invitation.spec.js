@@ -10,7 +10,9 @@ test("invitation renders the approved details without page errors or horizontal 
   page.on("requestfailed", (request) => failedRequests.push(request.url()));
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
-  await expect(page).toHaveTitle("Nikhil & Sravanthi | వివాహ ఆహ్వానం");
+  await expect(page).toHaveTitle("Nikhil & Sravanthi | Wedding Invitation");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  expect(await page.locator("body").innerText()).not.toMatch(/[\u0C00-\u0C7F]/u);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Nikhil&Sravanthi",
   );
@@ -39,7 +41,7 @@ test("invitation renders the approved details without page errors or horizontal 
   const bride = await page.locator(".family h3").last().boundingBox();
   expect(bride.y).toBeGreaterThan(groom.y + groom.height);
   expect(
-    await page.evaluate(() => document.fonts.check('16px "Noto Serif Telugu"')),
+    await page.evaluate(() => document.fonts.check('16px "Manrope"')),
   ).toBe(true);
   expect(errors).toEqual([]);
   expect(failedRequests).toEqual([]);
@@ -51,10 +53,10 @@ test("navigation reaches the venue and directions use the supplied map", async (
   await page.goto("/");
   await page
     .getByRole("navigation")
-    .getByRole("link", { name: "వేదిక", exact: true })
+    .getByRole("link", { name: "Venue", exact: true })
     .click();
   await expect(page).toHaveURL(/#venue$/);
-  const directions = page.getByRole("link", { name: "వేదికకు దారి" });
+  const directions = page.getByRole("link", { name: "Get directions" });
   await expect(directions).toHaveAttribute(
     "href",
     "https://maps.app.goo.gl/dKanwQshRjnfzxzs5",
@@ -65,7 +67,7 @@ test("navigation reaches the venue and directions use the supplied map", async (
   await expect(
     page
       .getByRole("navigation")
-      .getByRole("link", { name: "వేదిక", exact: true }),
+      .getByRole("link", { name: "Venue", exact: true }),
   ).toHaveAttribute("aria-current", "location");
 });
 
@@ -123,10 +125,10 @@ test("reduced-motion preference keeps content visible without entrance animation
   ).toBe("none");
   await page
     .getByRole("navigation")
-    .getByRole("link", { name: "ఆహ్వానం", exact: true })
+    .getByRole("link", { name: "Invitation", exact: true })
     .click();
   const invitation = page.getByRole("heading", {
-    name: "మీ రాక మాకు ఆనందం. మీ ఆశీస్సులు మాకు వరం.",
+    name: "Your presence, our joy. Your blessings, our gift.",
   });
   await expect(invitation).toBeInViewport();
   expect(
@@ -139,7 +141,7 @@ test("calendar download contains the ceremony time in India and complete venue",
 }) => {
   await page.goto("/");
   const pendingDownload = page.waitForEvent("download");
-  await page.getByRole("button", { name: "క్యాలెండర్‌లో చేర్చండి" }).click();
+  await page.getByRole("button", { name: "Add to calendar" }).click();
   const download = await pendingDownload;
   expect(download.suggestedFilename()).toBe("Nikhil-and-Sravanthi-Wedding.ics");
   const content = await readFile(await download.path(), "utf8");
@@ -153,7 +155,7 @@ test("calendar download contains the ceremony time in India and complete venue",
     content.split("\r\n").every((line) => Buffer.byteLength(line) <= 75),
   ).toBe(true);
   await expect(page.getByRole("status")).toContainText(
-    "క్యాలెండర్ ఫైల్ సిద్ధమైంది",
+    "Your calendar file is ready",
   );
 });
 
@@ -168,6 +170,6 @@ test("countdown follows the India ceremony time and remains valid after the wedd
   await page.clock.setFixedTime(new Date("2026-11-16T04:27:00Z"));
   await expect(page.locator("#days")).toHaveText("00");
   await expect(page.locator("#countdown-label")).toHaveText(
-    "మా నూతన ప్రయాణం మొదలైంది",
+    "Our new journey has begun.",
   );
 });

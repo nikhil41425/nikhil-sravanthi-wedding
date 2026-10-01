@@ -1,5 +1,5 @@
 :root {
-  font-family: "Noto Serif Telugu", serif;
+  font-family: "Manrope", sans-serif;
   color: #342932;
   background: #ddd4cb;
   font-synthesis: none;
@@ -245,8 +245,9 @@ a:focus-visible {
   color: var(--copper);
 }
 .section-marker p {
-  font-size: 11px;
-  line-height: 2;
+  font-size: 9px;
+  line-height: 1.6;
+  letter-spacing: 1.5px;
   margin: 0;
 }
 .marker-line {
@@ -255,10 +256,11 @@ a:focus-visible {
   flex: 1;
 }
 .section h2 {
+  font-family: var(--serif);
   font-weight: 400;
   margin: 0;
-  font-size: 25px;
-  line-height: 1.9;
+  font-size: 44px;
+  line-height: 1.1;
   letter-spacing: -0.5px;
 }
 .invitation {
@@ -312,9 +314,9 @@ a:focus-visible {
   color: var(--copper);
 }
 .auspicious p {
-  font-size: 10px;
+  font-size: 11px;
   color: #816048;
-  line-height: 2;
+  line-height: 1.7;
   margin: 0;
 }
 .invitation h2 span {
@@ -323,7 +325,7 @@ a:focus-visible {
 .invitation-copy {
   color: #756256;
   font-size: 14px;
-  line-height: 2.25;
+  line-height: 1.9;
   margin: 24px 0 42px;
 }
 .families {
@@ -340,7 +342,7 @@ a:focus-visible {
 }
 .family-role > span {
   font-family: var(--sans);
-  font-size: 8px;
+  font-size: 10px;
   letter-spacing: 1.8px;
 }
 .family h3 {
@@ -423,7 +425,7 @@ a:focus-visible {
   background: #d7b98c45;
 }
 .muhurtham h2 {
-  font-size: 29px;
+  font-size: 44px;
   color: #e3c29e;
 }
 .date-card {
@@ -499,7 +501,7 @@ a:focus-visible {
 }
 .button {
   min-height: 56px;
-  padding: 16px 20px 12px;
+  padding: 16px 20px;
   display: flex;
   align-items: center;
   gap: 13px;
@@ -673,8 +675,8 @@ a:focus-visible {
   margin: 23px 0;
 }
 .closing h2 {
-  font-size: 25px;
-  line-height: 1.9;
+  font-size: 42px;
+  line-height: 1.15;
 }
 .closing-names {
   font-family: var(--serif);
@@ -773,7 +775,7 @@ footer p {
   color: #e4c7a6;
 }
 .invitation-dock a > span {
-  font-size: 10px;
+  font-size: 11px;
 }
 .invitation-dock a:hover,
 .invitation-dock a[aria-current] {
@@ -879,7 +881,7 @@ body:has(.photo-dialog[open]) {
     padding-inline: 24px;
   }
   .section h2 {
-    font-size: 22px;
+    font-size: 38px;
   }
   .family h3 {
     font-size: 59px;
