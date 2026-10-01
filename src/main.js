@@ -6,6 +6,7 @@ import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-500.css";
 import couplePhoto from "./assets/nikhil-sravanthi.jpg";
 import templeArtwork from "./assets/temple-opening.webp";
+import templeDoor from "./assets/temple-door.webp";
 import familyArtwork from "./assets/wedding-kalash.webp";
 import ceremonyArtwork from "./assets/ceremony-lamps.webp";
 import venueArtwork from "./assets/wedding-mandap.webp";
@@ -40,6 +41,10 @@ document.querySelector("#app").innerHTML = `
         <div class="lamp-glow lamp-glow-right" aria-hidden="true"></div>
         <div class="door-glow" aria-hidden="true"></div>
         <div class="floor-shimmer" aria-hidden="true"></div>
+        <a class="opening-door" id="enter-invitation" href="#wedding" aria-label="Tap to open">
+          <span class="door-leaf door-leaf-left" aria-hidden="true"><img src="${templeDoor}" alt="" width="512" height="768" fetchpriority="high" decoding="async" /></span>
+          <span class="door-leaf door-leaf-right" aria-hidden="true"><img src="${templeDoor}" alt="" width="512" height="768" fetchpriority="high" decoding="async" /></span>
+        </a>
       </div>
     </div>
     <div class="petal-field" aria-hidden="true">${[8, 92, 18, 81, 5, 95].map((left, index) => `<span class="petal" style="--petal-left:${left}%;--petal-delay:-${index * 2.7}s;--petal-duration:${12 + index * 1.3}s;--petal-drift:${index % 2 ? -18 : 22}px"></span>`).join("")}</div>
@@ -47,7 +52,6 @@ document.querySelector("#app").innerHTML = `
     <div class="opening-ripple" aria-hidden="true"></div>
     <div class="opening-actions">
       <p class="opening-date">15 NOVEMBER 2026</p>
-      <a class="opening-button" id="enter-invitation" href="#wedding"><span>Tap to open</span>${arrow}</a>
     </div>
   </section>
   <div id="wedding" hidden>

@@ -22,10 +22,16 @@ test("edge-to-edge temple card plays its entrance animation and reveals the invi
   await expect(page.locator("#wedding")).toBeHidden();
   expect(await page.locator("body").innerText()).not.toMatch(/swipe|scroll/i);
   const enter = page.getByRole("link", { name: "Tap to open" });
+  const door = page.locator(".door-leaf-left img");
+  await expect.poll(() => door.evaluate(image => image.complete && image.naturalWidth === 512 && image.naturalHeight === 768)).toBe(true);
+  await expect(enter).toBeInViewport({ ratio: 1 });
+  await expect(page.locator(".opening-actions a")).toHaveCount(0);
   await enter.click();
   await expect(enter).toHaveAttribute("aria-busy", "true");
   expect(await page.locator('.temple-artwork').evaluate(element => getComputedStyle(element).animationName)).toBe('temple-enter');
   expect(await page.locator('.opening-ripple').evaluate(element => getComputedStyle(element).animationName)).toBe('entrance-ripple');
+  expect(await page.locator('.door-leaf-left').evaluate(element => getComputedStyle(element).animationName)).toBe('temple-door-left');
+  expect(await page.locator('.door-leaf-right').evaluate(element => getComputedStyle(element).animationName)).toBe('temple-door-right');
   await expect(page.locator("#wedding")).toBeHidden();
   await expect(page.locator(".opening-name-reveal")).toHaveCount(0);
   await expect(page.locator("#wedding")).toBeVisible();
@@ -41,7 +47,7 @@ test("edge-to-edge temple card plays its entrance animation and reveals the invi
 test("reduced motion disables all opening effects and supports keyboard and touch entry", async ({ page, isMobile }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  for (const selector of [".temple-artwork", ".petal", ".lamp-glow", ".floor-shimmer"]) {
+  for (const selector of [".temple-artwork", ".petal", ".lamp-glow", ".floor-shimmer", ".door-leaf"]) {
     expect(await page.locator(selector).first().evaluate(element => getComputedStyle(element).animationName)).toBe("none");
   }
   const enter = page.getByRole("link", { name: "Tap to open" });

@@ -67,7 +67,7 @@ html.is-opening-locked,
 }
 .temple-scene {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 50%;
   width: max(100%, calc(100dvh * 0.562799 + 1px));
   aspect-ratio: 941 / 1672;
@@ -254,46 +254,65 @@ html.is-opening-locked,
   z-index: 2;
 }
 .opening-date { font-family: var(--sans); font-size: 10px; letter-spacing: 2.5px; margin: 0 0 12px; }
-.opening-button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  min-height: 55px;
-  max-width: 290px;
-  margin: 0 auto;
-  padding: 16px 22px;
-  border: 1px solid #ffe4a8;
-  border-radius: 6px;
-  background: linear-gradient(110deg, #f9e6bd, #e1b66a);
-  color: #442609;
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: inset 0 0 0 3px #fff2d835, 0 5px 28px #070e2445, 0 0 22px #e8b87118;
-  transition: background .2s, transform .2s;
+.opening-door {
+  position: absolute;
+  left: 37.5%;
+  top: 68.2%;
+  width: 25%;
+  height: 21.5%;
+  display: block;
+  z-index: 2;
+  perspective: 650px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
-.opening-button:active { transform: translateY(1px); }
+.opening-door:focus-visible { outline: 2px solid #fff0c4; outline-offset: 4px; }
+.door-leaf {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 0 8px #44260950;
+}
+.door-leaf-left { left: 0; transform-origin: left center; }
+.door-leaf-right { right: 0; transform-origin: right center; }
+.door-leaf img {
+  display: block;
+  width: 200%;
+  max-width: none;
+  height: 100%;
+}
+.door-leaf-right img { margin-left: -100%; }
 @media (hover: hover) {
-  .opening-button:hover { transform: translateY(-2px); background: #ffe9bb; }
+  .opening-door:hover .door-leaf { filter: brightness(1.1); }
 }
-.opening-button svg { width: 20px; height: 20px; }
 .is-at-opening .invitation-dock { opacity: 0; transform: translate(-50%, 20px); pointer-events: none; }
 .is-at-opening .reading-progress { opacity: 0; }
 .opening-card.is-opening .opening-actions { opacity: 0; transition: opacity .25s; }
 @media (prefers-reduced-motion: no-preference) {
-  .temple-artwork { animation: temple-breathe 16s ease-in-out infinite alternate paused; }
   .petal { animation: petal-fall var(--petal-duration) linear var(--petal-delay) infinite paused; }
   .lamp-glow { animation: lamp-flicker 3.4s ease-in-out infinite alternate paused; }
   .lamp-glow-right { animation-delay: -1.7s; }
   .door-glow { animation: lamp-flicker 5s ease-in-out infinite alternate paused; }
   .floor-shimmer { animation: floor-reflection 11s ease-in-out infinite paused; }
-  .is-at-opening .temple-artwork, .is-at-opening .petal,
+  .is-at-opening .petal,
   .is-at-opening .lamp-glow, .is-at-opening .door-glow,
   .is-at-opening .floor-shimmer { animation-play-state: running; }
   .opening-card.is-opening .temple-artwork { animation: temple-enter 1.2s cubic-bezier(.3, 0, .2, 1) both; }
   .opening-card.is-opening .opening-flash { animation: entrance-glow 1.2s ease both; }
   .opening-card.is-opening .opening-ripple { animation: entrance-ripple 1.2s ease-out both; }
-  @keyframes temple-breathe { from { transform: scale(1); } to { transform: scale(1.008); } }
+  .opening-card.is-opening .door-leaf-left { animation: temple-door-left 1s cubic-bezier(.3, 0, .2, 1) both; }
+  .opening-card.is-opening .door-leaf-right { animation: temple-door-right 1s cubic-bezier(.3, 0, .2, 1) both; }
+  @keyframes temple-door-left {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(-105deg); }
+  }
+  @keyframes temple-door-right {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(105deg); }
+  }
   @keyframes petal-fall {
     0% { transform: translate3d(0, -20px, 0) rotate(0deg); opacity: 0; }
     8% { opacity: .7; }
@@ -308,7 +327,7 @@ html.is-opening-locked,
   }
   @keyframes temple-enter {
     0% { transform: scale(1.005); opacity: 1; }
-    30% { opacity: 1; }
+    45% { transform: scale(1.005); opacity: 1; }
     100% { transform: scale(1.28); opacity: .15; }
   }
   @keyframes entrance-glow { 0% { opacity: 0; } 70%, 100% { opacity: .9; } }
