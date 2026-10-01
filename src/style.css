@@ -10,6 +10,11 @@
   --gold: #ae843e;
   --gold-line: #ae843e70;
   --gold-light: #ecd3a8;
+  --kumkum: #a12e35;
+  --peacock: #11635e;
+  --lotus-pink: #9a2f61;
+  --saffron: #875409;
+  --indigo: #453889;
   --serif: "Cormorant Garamond", Georgia, serif;
   --sans: "Manrope", sans-serif;
   --invitation-background: url("./assets/invitation-background.jpg");
@@ -95,7 +100,7 @@ html.is-opening-locked,
   left: 24%;
   width: 52%;
   text-align: center;
-  color: #673209;
+  color: var(--kumkum);
   text-shadow: 0 1px 0 #fff5d4, 0 2px 2px #b4792e40;
 }
 .temple-plaque > p {
@@ -117,7 +122,7 @@ html.is-opening-locked,
 }
 .temple-plaque h2 > span { display: inline; }
 .temple-plaque h2 i { font-size: 0.7em; color: #916018; }
-.temple-plaque h2 > span + span { margin-left: 0.7cqw; font-style: italic; }
+.temple-plaque h2 > span + span { margin-left: 0.7cqw; font-style: italic; color: var(--peacock); }
 .lamp-glow, .door-glow {
   position: absolute;
   pointer-events: none;
@@ -420,7 +425,7 @@ a:focus-visible {
   order: -1;
   font-weight: 500;
   margin: 0 0 14px;
-  color: var(--plum);
+  color: var(--kumkum);
 }
 .photo-expand {
   position: absolute;
@@ -475,16 +480,18 @@ a:focus-visible {
 }
 .hero h1 > span {
   display: inline;
+  color: #fff0cc;
 }
 .hero h1 em {
   position: static;
   font-size: 26px;
   font-weight: 500;
-  color: #ffe3ad;
+  color: #ffdd80;
 }
 .hero h1 .bride-name {
   font-style: normal;
   margin: 0;
+  color: #ffe5ed;
 }
 .hero-date {
   display: flex;
@@ -512,6 +519,7 @@ a:focus-visible {
   font-weight: 500;
   margin: 8px auto 0;
   border-bottom: 1px solid var(--gold);
+  color: var(--peacock);
 }
 .hero-cta svg {
   width: 25px;
@@ -526,6 +534,7 @@ a:focus-visible {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   text-align: center;
+  color: var(--ink);
 }
 .section::before {
   content: "";
@@ -591,7 +600,10 @@ a:focus-visible {
   color: var(--plum);
 }
 .invitation {
-  --section-wash: linear-gradient(90deg, #fff4dc99, #fff4dcfa 16%, #fff4dcfa 84%, #fff4dc99);
+  --plum: var(--kumkum);
+  --copper: var(--saffron);
+  --section-wash: linear-gradient(90deg, #fff0e5bb, #fff4eafa 16%, #fff4eafa 84%, #fff0e5bb);
+  background-color: #fff0e5;
   padding-top: 56px;
 }
 .seal {
@@ -647,7 +659,7 @@ a:focus-visible {
   font-weight: 500;
 }
 .invitation h2 span {
-  color: var(--copper);
+  color: var(--peacock);
 }
 .invitation-copy {
   color: var(--ink);
@@ -684,7 +696,7 @@ a:focus-visible {
   line-height: 1.15;
   letter-spacing: 0;
   margin: 8px 0 14px;
-  color: var(--plum);
+  color: var(--peacock);
 }
 .parent-label {
   font-family: var(--sans);
@@ -738,7 +750,11 @@ a:focus-visible {
 }
 .family:last-child h3 {
   font-style: normal;
+  color: var(--lotus-pink);
 }
+.family:last-child .family-role { color: var(--lotus-pink); }
+.family:first-child .family-role { color: var(--peacock); }
+.parents { color: var(--plum); }
 .invitation-signoff {
   display: flex;
   flex-direction: column;
@@ -757,14 +773,18 @@ a:focus-visible {
 .invitation-signoff p {
   margin: 0;
   font-size: 17px;
-  color: var(--ink);
+  color: var(--peacock);
   line-height: 2;
   font-family: var(--serif);
   font-weight: 500;
 }
 .muhurtham {
-  --section-wash: linear-gradient(#fff4dce8, #fff4dcf7 58%, #fff4dca6);
-  color: var(--plum);
+  --plum: var(--peacock);
+  --ink: #234f43;
+  --copper: var(--saffron);
+  --paper: #eef7ed;
+  --section-wash: linear-gradient(#e6f4eef2, #f0f7ecfa 58%, #e4f0d9cc);
+  background-color: #e6f4ee;
   overflow: hidden;
 }
 .muhurtham .section-marker > span:first-child {
@@ -783,7 +803,7 @@ a:focus-visible {
   padding: 38px 16px 24px;
   border: 1px solid var(--gold);
   border-radius: 120px 120px 4px 4px / 32px 32px 4px 4px;
-  background: linear-gradient(180deg, #fff9e9e6, #fff4dccc);
+  background: linear-gradient(180deg, #fffbea, #fff1d8eb);
   box-shadow: 0 8px 24px #86552608;
 }
 .date-card-crest {
@@ -809,6 +829,7 @@ a:focus-visible {
   font-weight: 500;
   line-height: 1;
   letter-spacing: -3px;
+  color: var(--kumkum);
 }
 .date-month {
   padding-bottom: 3px;
@@ -850,6 +871,7 @@ a:focus-visible {
   line-height: 1.15;
   margin: 6px 0;
   font-weight: 600;
+  color: var(--kumkum);
 }
 .time > span {
   font-size: 22px;
@@ -894,7 +916,7 @@ a:focus-visible {
 }
 .button:active { transform: translateY(1px); }
 .button-light {
-  background: #fff4dce6;
+  background: #f4fbf0e6;
   color: var(--plum);
 }
 .button-dark {
@@ -904,7 +926,7 @@ a:focus-visible {
 }
 @media (hover: hover) {
   .button:hover { transform: translateY(-2px); }
-  .button-light:hover { background: #f4e2bf; }
+  .button-light:hover { background: #e0f0e5; }
   .button-dark:hover { background: #853c32; }
 }
 .calendar-status {
@@ -948,6 +970,10 @@ a:focus-visible {
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
+.countdown > div:nth-child(1) strong { color: var(--kumkum); }
+.countdown > div:nth-child(2) strong { color: var(--peacock); }
+.countdown > div:nth-child(3) strong { color: var(--indigo); }
+.countdown > div:nth-child(4) strong { color: var(--lotus-pink); }
 .countdown span {
   display: block;
   font-size: 11px;
@@ -968,7 +994,12 @@ a:focus-visible {
   font-weight: 500;
 }
 .venue {
-  --section-wash: linear-gradient(#fff4dcf2, #fff4dce6 52%, #fff4dc66);
+  --plum: var(--indigo);
+  --ink: #343d59;
+  --copper: var(--peacock);
+  --paper: #f2f3ff;
+  --section-wash: linear-gradient(#edf2fff5, #f0f4fff0 52%, #f4efe6b3);
+  background-color: #edf2ff;
   background-size: 100% 100%, 100% auto;
   background-position: center, center bottom;
   padding-bottom: 64px;
@@ -1007,6 +1038,7 @@ a:focus-visible {
   color: var(--plum);
 }
 .venue h3 > span { display: block; }
+.venue h3 > span:first-child { color: var(--peacock); }
 .venue address {
   font-family: var(--sans);
   font-size: 14px;
@@ -1022,8 +1054,8 @@ a:focus-visible {
   gap: 12px;
   border: 1px solid var(--gold);
   border-radius: 12px;
-  background: linear-gradient(120deg, #81372e, #68261f 65%, #5b211c);
-  box-shadow: 0 8px 22px #70292324;
+  background: linear-gradient(120deg, #187269, #10564f 65%, #0c4845);
+  box-shadow: 0 8px 22px #11635e24;
   text-align: left;
 }
 .directions-button::after {
@@ -1072,7 +1104,7 @@ a:focus-visible {
 .directions-button .directions-icon svg,
 .directions-button .directions-arrow svg { width: 20px; height: 20px; margin: 0; }
 @media (hover: hover) {
-  .directions-button:hover { background: linear-gradient(120deg, #914136, #762e26 65%, #68261f); }
+  .directions-button:hover { background: linear-gradient(120deg, #218077, #16665d 65%, #105650); }
   .directions-button:hover .directions-arrow { transform: translateX(3px); }
 }
 .venue-art {
@@ -1089,7 +1121,12 @@ a:focus-visible {
   margin-top: 13px;
 }
 .closing {
-  --section-wash: linear-gradient(#fff4dcdd, #fff4dce6 45%, #fff4dc99);
+  --plum: var(--lotus-pink);
+  --ink: #603346;
+  --copper: var(--saffron);
+  --paper: #fff0f3;
+  --section-wash: linear-gradient(#fff0f5f5, #ffedf2f2 45%, #ffe7ebd9);
+  background-color: #fff0f5;
   text-align: center;
   padding: 64px clamp(26px, 9cqw, 42px) 60px;
 }
@@ -1100,7 +1137,7 @@ a:focus-visible {
 }
 .closing-kicker {
   font-size: 11px;
-  color: var(--ink);
+  color: var(--peacock);
   line-height: 1.8;
   letter-spacing: 1px;
   margin: 20px 0;
@@ -1116,7 +1153,7 @@ a:focus-visible {
   line-height: 1.2;
   margin: 24px 0 0;
   font-weight: 600;
-  color: var(--plum);
+  color: var(--peacock);
 }
 .closing-names > span {
   color: var(--copper);
@@ -1127,6 +1164,7 @@ a:focus-visible {
 .closing-names > em {
   font-weight: 600;
   font-style: normal;
+  color: var(--lotus-pink);
 }
 .closing-rule {
   display: flex;
@@ -1153,6 +1191,7 @@ a:focus-visible {
   margin: 0;
 }
 footer {
+  --ink: var(--peacock);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1160,7 +1199,8 @@ footer {
   padding: 22px 24px calc(92px + env(safe-area-inset-bottom));
   border-top: 1px solid #ae843e60;
   color: var(--ink);
-  background-image: linear-gradient(#fff2d8b3, #fff2d8b3), var(--invitation-background);
+  background-color: #e5f2ed;
+  background-image: linear-gradient(#e5f2edeb, #e5f2edeb), var(--invitation-background);
   background-size: 100% auto;
   background-position: center bottom;
 }
@@ -1168,6 +1208,7 @@ footer > span {
   font-family: var(--sans);
   font-size: 10px;
 }
+footer > span:last-child { color: var(--kumkum); }
 footer .footer-monogram {
   font-family: var(--serif);
   font-size: 23px;
@@ -1203,6 +1244,7 @@ footer p {
   pointer-events: none;
 }
 .invitation-dock a {
+  --dock-accent: var(--kumkum);
   flex: 1;
   display: flex;
   flex-direction: row;
@@ -1213,18 +1255,21 @@ footer p {
   padding-top: 0;
   border-radius: 7px;
   transition: background 0.2s;
+  color: var(--dock-accent);
 }
+.invitation-dock a[href="#muhurtham"] { --dock-accent: var(--peacock); }
+.invitation-dock a[href="#venue"] { --dock-accent: var(--indigo); }
 .invitation-dock a > svg {
   width: 16px;
   height: 16px;
-  color: var(--copper);
+  color: var(--dock-accent);
 }
 .invitation-dock a > span {
   font-size: 11px;
   font-weight: 500;
 }
 .invitation-dock a[aria-current] {
-  background: var(--plum);
+  background: var(--dock-accent);
   color: var(--paper);
 }
 .invitation-dock a[aria-current] > svg {
