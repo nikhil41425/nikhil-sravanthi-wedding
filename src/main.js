@@ -2,6 +2,7 @@ import "@fontsource/cormorant-garamond/latin-400.css";
 import "@fontsource/cormorant-garamond/latin-400-italic.css";
 import "@fontsource/cormorant-garamond/latin-500.css";
 import "@fontsource/noto-serif-telugu/telugu-400.css";
+import couplePhoto from "./assets/nikhil-sravanthi.jpg";
 import "./style.css";
 
 const pin = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>`;
@@ -42,6 +43,15 @@ document.querySelector("#app").innerHTML = `
         <a class="hero-cta" href="#invitation">మా శుభలేఖ ${arrow}</a>
       </div>
       <a class="scroll-cue" href="#invitation" aria-label="ఆహ్వానానికి వెళ్ళండి"><span></span></a>
+    </section>
+
+    <section class="couple-portrait" aria-label="Nikhil and Sravanthi photograph">
+      <figure class="couple-photo">
+        <div class="portrait-frame">
+          <img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" width="890" height="1280" loading="lazy" decoding="async" />
+        </div>
+        <figcaption lang="en">Nikhil <span>&</span> Sravanthi</figcaption>
+      </figure>
     </section>
 
     <section class="invitation section" id="invitation" aria-labelledby="invitation-heading">
