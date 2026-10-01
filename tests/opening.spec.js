@@ -86,6 +86,9 @@ test("scrolling cannot bypass tap entry and works normally after opening", async
   expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).not.toBe("hidden");
   await page.mouse.wheel(0, 1150);
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(100);
+  await expect(page.locator(".invitation-dock")).toHaveAttribute("aria-hidden", "true");
+  expect(await page.locator(".invitation-dock").evaluate(nav => nav.inert)).toBe(true);
+  await page.mouse.wheel(0, -120);
   await expect(page.locator(".invitation-dock")).toHaveAttribute("aria-hidden", "false");
   expect(await page.locator(".invitation-dock").evaluate(nav => nav.inert)).toBe(false);
   await page.getByRole("navigation").getByRole("link", { name: "Venue", exact: true }).click();

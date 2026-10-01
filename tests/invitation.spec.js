@@ -105,6 +105,33 @@ test("navigation reaches the venue and directions use the supplied map", async (
   ).toHaveAttribute("aria-current", "location");
 });
 
+test("navigation returns for keyboard use and stays visible during section jumps", async ({ page, isMobile }) => {
+  await openInvitation(page);
+  const dock = page.locator(".invitation-dock");
+  if (isMobile) {
+    const client = await page.context().newCDPSession(page);
+    const { width, height } = page.viewportSize();
+    await client.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ x: width / 2, y: height * .7 }] });
+    for (const fraction of [.6, .5, .4, .3]) {
+      await client.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [{ x: width / 2, y: height * fraction }] });
+      await page.waitForTimeout(40);
+    }
+    await client.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  } else {
+    await page.mouse.wheel(0, 500);
+  }
+  await expect(dock).toHaveAttribute("aria-hidden", "true");
+  expect(await dock.evaluate(element => element.inert)).toBe(true);
+  await page.keyboard.press("Tab");
+  await expect(dock).toHaveAttribute("aria-hidden", "false");
+  expect(await dock.evaluate(element => element.inert)).toBe(false);
+  await dock.getByRole("link", { name: "Venue", exact: true }).click();
+  await expect(page.getByRole("link", { name: "Get directions" })).toBeInViewport();
+  await expect(dock).toHaveAttribute("aria-hidden", "false");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  expect(await dock.evaluate(element => getComputedStyle(element).transitionDuration)).toBe("0s");
+});
+
 test("full-photo viewer shows the original portrait and returns keyboard focus when dismissed", async ({
   page,
 }) => {

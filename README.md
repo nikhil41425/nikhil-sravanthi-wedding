@@ -6,6 +6,8 @@ The opening artwork fills the phone viewport edge to edge, using a local WebP wi
 
 All invitation sections use the supplied banana-leaf and temple artwork, bundled locally as `src/assets/invitation-background.jpg`. The traditional invitation styling uses centred maroon headings, fine gold dividers, a soft cream reading area, and locally bundled Cormorant Garamond serif lettering. The cover fills the phone screen, and both names share the same size and weight and animate directly over the lower part of the borderless photograph, using warm ivory lettering over a soft brown gradient. CSS masks fade all four photo edges into the artwork without changing the original image; the full-photo viewer preserves the entire original portrait. The portrait fades in with subtle movement, a soft gold glow, and floating accents; continuous portrait effects pause when it is offscreen. A lotus crest tops the ceremony card, the venue has a larger two-line heading and readable address, and the closing carries the wedding seal. Supporting text stays readable on small phones, and the compact section navigation uses a single active highlight. Rose petals drift across every section beneath the navigation, with softer opacity through the central reading area. Petals never intercept taps and disappear when reduced motion is requested.
 
+The background treatment varies by section: softened leaves behind family details, a quiet cream wash behind the ceremony, and more temple scenery at the venue. Shared gold accents and illustration strokes tie the sections together. The navigation tucks away on deliberate downward scrolling and returns on upward scrolling, keyboard focus, or reaching the end of the page. Section-link jumps keep it visible. Hidden navigation is inert and excluded from assistive navigation, and reduced-motion settings remove the slide transition.
+
 Wedding: **15 November 2026, Sunday, 9:57 AM IST**, at **CBS Convention, Hyderabad**.
 
 ## Development
@@ -35,7 +37,7 @@ npm test
 
 The invitation stays in a single column, filling phone screens and remaining phone-sized on larger displays.
 
-The 36 browser checks cover phone layouts and the width constraint on larger screens, edge-to-edge artwork, the opening transition, keyboard entry, scrolling disabled before entry and restored afterward, landing visibility after refresh, direct links, section backgrounds, invitation details, navigation, directions, calendar date/time, the countdown, the photo viewer, and reduced-motion support.
+The 39 browser checks cover phone layouts and the width constraint on larger screens, edge-to-edge artwork, the opening transition, keyboard entry, scrolling disabled before entry and restored afterward, landing visibility after refresh, direct links, section backgrounds, invitation details, navigation, directions, calendar date/time, the countdown, the photo viewer, and reduced-motion support. Navigation checks include real touch scrolling, hiding and returning on scroll direction, keyboard recovery, and visibility during section-link jumps.
 The cloud environment uses its preinstalled `/usr/bin/chromium`, so the browser install step can be skipped there. Set `BROWSER_EXECUTABLE_PATH` to use another installed Chromium browser.
 
 Edit invitation content in `src/main.js` and styling in `src/style.css`. The ceremony time is explicitly stored with the `+05:30` India timezone; the calendar export uses the equivalent `04:27 UTC`.
