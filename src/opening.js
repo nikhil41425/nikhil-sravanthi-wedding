@@ -10,6 +10,12 @@ export function initializeOpening() {
   let touchStart = null;
   let consumedTouch = null;
 
+  function loadPortrait() {
+    const portrait = document.querySelector(".hero-photo img");
+    portrait.fetchPriority = "high";
+    portrait.loading = "eager";
+  }
+
   document.addEventListener("pointerdown", () => { consumedTouch = null; }, { capture: true });
   document.addEventListener("click", (event) => {
     const touch = consumedTouch;
@@ -23,6 +29,7 @@ export function initializeOpening() {
   }, { capture: true });
 
   function revealInvitation() {
+    loadPortrait();
     opening.dataset.opened = "true";
     opening.hidden = true;
     wedding.hidden = false;
@@ -52,6 +59,9 @@ export function initializeOpening() {
   function startOpening(event) {
     event.preventDefault();
     if (openingTimer !== null) return;
+    // Use the door transition to fetch the next screen without competing
+    // with the opening artwork on initial load.
+    loadPortrait();
     if (reducedMotion.matches) {
       enterInvitation();
       return;

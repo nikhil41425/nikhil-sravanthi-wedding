@@ -30,6 +30,14 @@ npm run preview
 
 Deploy the generated `dist/` directory to a static hosting provider. There is no backend, no credential requirement, and no external font request.
 
+The opening artwork is preloaded from the document head. The portrait waits until entry, then loads at high priority during the door transition; section illustrations and the photo dialog use lazy loading. Scroll effects read positions only for nearby ornaments. The countdown runs only while the invitation and browser tab are visible, updates only changed digits, catches up immediately on return, and stops after the wedding.
+
+Dependency-free performance regression checks cover the countdown lifecycle and offscreen scroll work:
+
+```sh
+npm run test:unit
+```
+
 ## Browser checks
 
 ```sh
@@ -42,4 +50,4 @@ The invitation stays in a single column, filling phone screens and remaining pho
 The 39 browser checks cover phone layouts and the width constraint on larger screens, edge-to-edge artwork, the opening transition, keyboard entry, scrolling disabled before entry and restored afterward, landing visibility after refresh, direct links, section backgrounds, invitation details, navigation, directions, calendar date/time, the countdown, the photo viewer, and reduced-motion support. Navigation checks include real touch scrolling, hiding and returning on scroll direction, keyboard recovery, and visibility during section-link jumps.
 The cloud environment uses its preinstalled `/usr/bin/chromium`, so the browser install step can be skipped there. Set `BROWSER_EXECUTABLE_PATH` to use another installed Chromium browser.
 
-Edit invitation content in `src/main.js` and styling in `src/style.css`. The ceremony time is explicitly stored with the `+05:30` India timezone; the calendar export uses the equivalent `04:27 UTC`.
+Edit invitation content in `src/main.js` and styling in `src/style.css`. The countdown ceremony time in `src/countdown.js` is explicitly stored with the `+05:30` India timezone; the calendar export in `src/main.js` uses the equivalent `04:27 UTC`.

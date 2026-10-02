@@ -12,6 +12,7 @@ import familyArtwork from "./assets/wedding-kalash.webp";
 import ceremonyArtwork from "./assets/ceremony-lamps.webp";
 import venueArtwork from "./assets/wedding-mandap.webp";
 import closingArtwork from "./assets/lotus-blessing.webp";
+import { initializeCountdown } from "./countdown.js";
 import { initializeOpening } from "./opening.js";
 import { initializeDockNavigation } from "./navigation.js";
 import { initializeScrollMotion } from "./scroll-motion.js";
@@ -64,7 +65,7 @@ document.querySelector("#app").innerHTML = `
       <span class="hero-edition" lang="en">THE WEDDING OF</span>
       <div class="hero-portrait">
         <div class="portrait-aura" aria-hidden="true"></div>
-        <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" lang="en" translate="no" width="891" height="1280" fetchpriority="low" decoding="async" /><div class="portrait-text-shade" aria-hidden="true"></div></figure>
+        <figure class="hero-photo"><img src="${couplePhoto}" alt="Nikhil and Sravanthi together in traditional attire" lang="en" translate="no" width="891" height="1280" loading="lazy" decoding="async" /><div class="portrait-text-shade" aria-hidden="true"></div></figure>
         <div class="portrait-motes" aria-hidden="true">${[7, 94, 12, 88, 4, 96].map((left, index) => `<span style="--mote-left:${left}%;--mote-top:${14 + index * 12}%;--mote-delay:-${index * 1.8}s"></span>`).join("")}</div>
       <div class="hero-content">
         <p class="hero-eyebrow">A beautiful beginning</p>
@@ -125,7 +126,7 @@ document.querySelector("#app").innerHTML = `
   </main>
   <footer><span class="footer-monogram" lang="en" translate="no">N & S</span><p>With love, always.</p><span lang="en">2026</span></footer>
   <nav class="invitation-dock" aria-label="Invitation navigation"><a href="#invitation">${heart}<span>Invitation</span></a><a href="#muhurtham">${calendar}<span>Ceremony</span></a><a href="#venue">${pin}<span>Venue</span></a></nav>
-  <dialog class="photo-dialog" id="photo-dialog" aria-label="Nikhil and Sravanthi photograph" lang="en" translate="no"><button id="close-photo" type="button" aria-label="Close photograph">${close}</button><img src="${couplePhoto}" alt="Nikhil and Sravanthi, full portrait" width="891" height="1280" /><p lang="en">Nikhil & Sravanthi</p></dialog>
+  <dialog class="photo-dialog" id="photo-dialog" aria-label="Nikhil and Sravanthi photograph" lang="en" translate="no"><button id="close-photo" type="button" aria-label="Close photograph">${close}</button><img src="${couplePhoto}" alt="Nikhil and Sravanthi, full portrait" width="891" height="1280" loading="lazy" decoding="async" /><p lang="en">Nikhil & Sravanthi</p></dialog>
   </div>
 `;
 
@@ -179,9 +180,10 @@ if ("IntersectionObserver" in window) {
 }
 
 let progressQueued = false;
+const progressBar = document.querySelector(".reading-progress span");
 function updateProgress() {
   const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  document.querySelector(".reading-progress span").style.transform =
+  progressBar.style.transform =
     `scaleX(${scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0})`;
   progressQueued = false;
 }
@@ -198,27 +200,7 @@ window.addEventListener(
 window.addEventListener("resize", updateProgress);
 updateProgress();
 
-const weddingTime = new Date("2026-11-15T09:57:00+05:30").getTime();
-function updateCountdown() {
-  const remaining = Math.max(0, Math.floor((weddingTime - Date.now()) / 1000));
-  const values = [
-    Math.floor(remaining / 86400),
-    Math.floor(remaining / 3600) % 24,
-    Math.floor(remaining / 60) % 60,
-    remaining % 60,
-  ];
-  ["days", "hours", "minutes", "seconds"].forEach((id, index) => {
-    document.getElementById(id).textContent = String(values[index]).padStart(
-      2,
-      "0",
-    );
-  });
-  if (!remaining)
-    document.getElementById("countdown-label").textContent =
-      "Our new journey has begun.";
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
+initializeCountdown();
 
 function escapeCalendar(value) {
   return value

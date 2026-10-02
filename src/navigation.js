@@ -9,6 +9,7 @@ export function initializeDockNavigation() {
 
   function showDock() {
     if (wedding.hidden) return;
+    if (!dock.inert && dock.getAttribute("aria-hidden") === "false" && !dock.classList.contains("is-scroll-hidden")) return;
     dock.classList.remove("is-scroll-hidden");
     dock.inert = false;
     dock.setAttribute("aria-hidden", "false");
@@ -48,7 +49,7 @@ export function initializeDockNavigation() {
     distance = nextDirection === direction ? distance + Math.abs(delta) : Math.abs(delta);
     direction = nextDirection;
     if (direction < 0 && distance >= 12) showDock();
-    if (direction > 0 && distance >= 48) {
+    if (direction > 0 && distance >= 48 && !dock.classList.contains("is-scroll-hidden")) {
       dock.classList.add("is-scroll-hidden");
       dock.inert = true;
       dock.setAttribute("aria-hidden", "true");

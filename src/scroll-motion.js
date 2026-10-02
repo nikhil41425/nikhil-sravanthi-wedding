@@ -44,12 +44,21 @@ export function initializeScrollMotion() {
 
   const ornaments = document.querySelectorAll(".section-illustration, .date-watermark");
   ornaments.forEach(element => element.classList.add("scroll-ornament"));
+  const visibleOrnaments = new Set();
+  const ornamentObserver = new IntersectionObserver(entries => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (isIntersecting) visibleOrnaments.add(target);
+      else visibleOrnaments.delete(target);
+    });
+    queueOrnaments();
+  }, { rootMargin: "32px 0px" });
+  ornaments.forEach(element => ornamentObserver.observe(element));
   let queued = false;
   function updateOrnaments() {
     queued = false;
     if (preference.matches || document.hidden) return;
     const viewport = window.innerHeight;
-    const positions = [...ornaments].map(element => ({ element, bounds: element.getBoundingClientRect() }));
+    const positions = [...visibleOrnaments].map(element => ({ element, bounds: element.getBoundingClientRect() }));
     positions.forEach(({ element, bounds }) => {
       if (bounds.bottom >= 0 && bounds.top <= viewport) {
         const progress = Math.max(0, Math.min(1, (bounds.top + bounds.height / 2) / viewport));
