@@ -97,7 +97,7 @@ document.querySelector("#app").innerHTML = `
         <div class="date-card-day"><strong lang="en">15</strong><div class="date-month"><span lang="en">November</span><span lang="en">2026 · SUNDAY</span></div></div>
         <div class="date-card-time"><span class="ceremony-label">The ceremony</span><p class="time" lang="en">9:57 <span>AM</span></p><p class="time-caption">Morning <span lang="en">· INDIA STANDARD TIME</span></p></div>
       </div>
-      <button class="button button-light" id="add-calendar" type="button">${calendar}<span>Add to calendar</span>${arrow}</button>
+      <button class="button button-light action-card" id="add-calendar" type="button" aria-label="Add to calendar" aria-describedby="calendar-note"><span class="action-icon" aria-hidden="true">${calendar}</span><span class="action-copy"><span class="action-title">Add to calendar</span><span class="action-caption" id="calendar-note">15 November · 9:57 AM IST</span></span><span class="action-arrow" aria-hidden="true">${arrow}</span></button>
       <p class="calendar-status" id="calendar-status" role="status"></p>
       <div class="countdown-block" data-reveal><p class="countdown-label" id="countdown-label">Counting down to forever</p><div class="countdown" aria-label="Time until the wedding"><div><strong id="days" lang="en">—</strong><span>Days</span></div><div><strong id="hours" lang="en">—</strong><span>Hours</span></div><div><strong id="minutes" lang="en">—</strong><span>Minutes</span></div><div><strong id="seconds" lang="en">—</strong><span>Seconds</span></div></div></div>
       <div class="ceremony-art" aria-hidden="true"><img class="section-illustration" src="${ceremonyArtwork}" alt="" width="768" height="512" loading="lazy" decoding="async" /></div>
@@ -110,7 +110,7 @@ document.querySelector("#app").innerHTML = `
       <h2 id="venue-heading" data-reveal>Join us at</h2>
       <h3 lang="en" translate="no" data-reveal><span>CBS</span> <span>Convention</span></h3>
       <address lang="en" translate="no">Narapally, Korremula Rd,<br />Sai Ram Nagar Colony, Venkatadri Twp,<br />Chowdhariguda, Majarguda,<br />Hyderabad, Telangana 500088</address>
-      <a class="button button-dark directions-button" href="https://maps.app.goo.gl/dKanwQshRjnfzxzs5" target="_blank" rel="noopener noreferrer" aria-label="Get directions" aria-describedby="directions-note"><span class="directions-icon" aria-hidden="true">${pin}</span><span class="directions-copy"><span class="directions-title">Get directions</span><span class="directions-caption" id="directions-note">Open in Google Maps</span></span><span class="directions-arrow" aria-hidden="true">${arrow}</span></a>
+      <a class="button button-dark action-card directions-button" href="https://maps.app.goo.gl/dKanwQshRjnfzxzs5" target="_blank" rel="noopener noreferrer" aria-label="Get directions" aria-describedby="directions-note"><span class="action-icon" aria-hidden="true">${pin}</span><span class="action-copy"><span class="action-title">Get directions</span><span class="action-caption" id="directions-note">Open in Google Maps</span></span><span class="action-arrow" aria-hidden="true">${arrow}</span></a>
       <div class="venue-art" aria-hidden="true"><img class="section-illustration" src="${venueArtwork}" alt="" width="768" height="512" loading="lazy" decoding="async" /><span lang="en">WHERE OUR FOREVER BEGINS</span></div>
     </section>
 
