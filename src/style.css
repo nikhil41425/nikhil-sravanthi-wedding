@@ -589,10 +589,16 @@ a:focus-visible {
 }
 .section {
   --section-wash: linear-gradient(90deg, #fff4dc55, #fff4dcf2 20%, #fff4dcf2 80%, #fff4dc55);
+  --seam-top: #fbf1e2;
+  --seam-bottom: #fbf1e2;
   padding: 64px clamp(26px, 9cqw, 42px) 72px;
   position: relative;
   background-color: #f9e7c4;
-  background-image: var(--section-wash), var(--invitation-background);
+  background-image:
+    linear-gradient(var(--seam-top), transparent 64px),
+    linear-gradient(to top, var(--seam-bottom), transparent 64px),
+    var(--section-wash),
+    var(--invitation-background);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   text-align: center;
@@ -662,6 +668,7 @@ a:focus-visible {
   color: var(--plum);
 }
 .invitation {
+  --seam-top: #fff4dc;
   --plum: var(--kumkum);
   --copper: var(--saffron);
   --section-wash: linear-gradient(90deg, #fff0e5bb, #fff4eafa 16%, #fff4eafa 84%, #fff0e5bb);
@@ -891,6 +898,7 @@ a:focus-visible {
   font-weight: 500;
   line-height: 1;
   letter-spacing: -3px;
+  font-variant-numeric: lining-nums;
   color: var(--kumkum);
 }
 .date-month {
@@ -933,6 +941,7 @@ a:focus-visible {
   line-height: 1.15;
   margin: 6px 0;
   font-weight: 600;
+  font-variant-numeric: lining-nums;
   color: var(--kumkum);
 }
 .time > span {
@@ -1013,24 +1022,24 @@ a:focus-visible {
 .countdown {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: clamp(6px, 2.4cqw, 10px);
 }
 .countdown > div {
+  min-width: 0;
   text-align: center;
-  padding: 0 8px;
-}
-.countdown > div:first-child {
-  padding-left: 0;
-}
-.countdown > div + div {
-  border-left: 1px solid #ae843e60;
+  padding: 16px 2px 12px;
+  border: 1px solid var(--gold-line);
+  border-radius: 40px 40px 6px 6px / 14px 14px 6px 6px;
+  background: linear-gradient(180deg, #fffbea, #fff1d8d9);
+  box-shadow: 0 6px 16px #86552610;
 }
 .countdown strong {
   display: block;
   font-family: var(--serif);
-  font-size: 34px;
+  font-size: clamp(28px, 9cqw, 36px);
   font-weight: 600;
   line-height: 1;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 .countdown > div:nth-child(1) strong { color: var(--kumkum); }
 .countdown > div:nth-child(2) strong { color: var(--peacock); }
@@ -1038,7 +1047,8 @@ a:focus-visible {
 .countdown > div:nth-child(4) strong { color: var(--lotus-pink); }
 .countdown span {
   display: block;
-  font-size: 11px;
+  font-size: 10px;
+  letter-spacing: .3px;
   color: var(--ink);
   margin-top: 8px;
 }
@@ -1062,8 +1072,8 @@ a:focus-visible {
   --paper: #f2f3ff;
   --section-wash: linear-gradient(#edf2fff5, #f0f4fff0 52%, #f4efe6b3);
   background-color: #edf2ff;
-  background-size: 100% 100%, 100% auto;
-  background-position: center, center bottom;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% auto;
+  background-position: center, center, center, center bottom;
   padding-bottom: 64px;
 }
 .venue .section-marker {
@@ -1103,11 +1113,16 @@ a:focus-visible {
 .venue h3 > span:first-child { color: var(--peacock); }
 .venue address {
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: clamp(13px, 4.1cqw, 14px);
   line-height: 1.9;
   color: var(--ink);
   font-style: normal;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
+  padding: 16px clamp(4px, 3cqw, 14px);
+  border: 1px solid var(--gold-line);
+  border-radius: 12px;
+  background: #ffffffa6;
+  box-shadow: 0 6px 18px #45388910;
 }
 .directions-button {
   position: relative;
@@ -1188,6 +1203,7 @@ a:focus-visible {
   --copper: var(--saffron);
   --paper: #fff0f3;
   --section-wash: linear-gradient(#fff0f5f5, #ffedf2f2 45%, #ffe7ebd9);
+  --seam-bottom: #ffe9ee;
   background-color: #fff0f5;
   text-align: center;
   padding: 64px clamp(26px, 9cqw, 42px) 60px;
@@ -1253,16 +1269,18 @@ a:focus-visible {
   margin: 0;
 }
 footer {
-  --ink: var(--peacock);
+  --ink: var(--lotus-pink);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 22px 24px calc(92px + env(safe-area-inset-bottom));
+  justify-content: center;
+  gap: 4px;
+  padding: 28px 24px calc(96px + env(safe-area-inset-bottom));
   border-top: 1px solid #ae843e60;
   color: var(--ink);
-  background-color: #e5f2ed;
-  background-image: linear-gradient(#e5f2edeb, #e5f2edeb), var(--invitation-background);
+  text-align: center;
+  background-color: #ffe9ee;
+  background-image: linear-gradient(#ffe9eef2, #ffe7ebeb), var(--invitation-background);
   background-size: 100% auto;
   background-position: center bottom;
 }
@@ -1270,7 +1288,7 @@ footer > span {
   font-family: var(--sans);
   font-size: 10px;
 }
-footer > span:last-child { color: var(--kumkum); }
+footer > span:last-child { color: var(--saffron); letter-spacing: 2px; }
 footer .footer-monogram {
   font-family: var(--serif);
   font-size: 23px;
