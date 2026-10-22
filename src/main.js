@@ -76,10 +76,9 @@ document.querySelector("#app").innerHTML = `
       <a class="hero-cta" href="#invitation"><span>The invitation</span>${arrow}</a>
     </section>
 
-    <section class="invitation section" id="invitation" aria-labelledby="invitation-heading">
+    <section class="invitation section" id="invitation" aria-label="The invitation">
       <div class="section-marker"><span lang="en">01 /</span><p>THE INVITATION</p><span class="marker-line"></span></div>
       <div class="auspicious" data-reveal>${ganesha}<p>With the blessings of Lord Ganesha</p></div>
-      <h2 id="invitation-heading" data-reveal>Your presence, our joy.<br /><span>Your blessings, our gift.</span></h2>
       <p class="invitation-copy" data-reveal>Together with our families, we invite you to celebrate our wedding and bless the beginning of our life together.</p>
       <div class="families">
         <div class="family" data-reveal><p class="family-role"><span lang="en">THE GROOM</span></p><h3 lang="en" translate="no">Nikhil</h3><p class="parent-label" lang="en">Son of</p><p class="parents" lang="en" translate="no">Are Srinivas <span>&</span> Manjula</p></div>

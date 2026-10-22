@@ -728,10 +728,6 @@ p { text-wrap: pretty; }
   font-family: var(--serif);
   font-weight: 500;
 }
-.invitation h2 span {
-  font-style: italic;
-  font-weight: 500;
-}
 .invitation-copy {
   color: var(--ink);
   font-size: 19px;

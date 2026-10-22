@@ -195,9 +195,7 @@ test("reduced-motion preference keeps content visible without entrance animation
     .getByRole("navigation")
     .getByRole("link", { name: "Invitation", exact: true })
     .click();
-  const invitation = page.getByRole("heading", {
-    name: "Your presence, our joy. Your blessings, our gift.",
-  });
+  const invitation = page.getByText("With the blessings of Lord Ganesha");
   await expect(invitation).toBeInViewport();
   expect(
     await invitation.evaluate((element) => getComputedStyle(element).opacity),
