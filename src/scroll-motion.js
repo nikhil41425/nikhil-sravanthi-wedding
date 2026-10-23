@@ -10,7 +10,7 @@ export function initializeScrollMotion() {
     ".date-card": "card",
     ".countdown-block": "countdown",
     ".seal": "seal",
-    ".venue-location, .venue address, .closing-kicker, .closing-date": "copy",
+    ".venue-location, .venue address, .closing-date": "copy",
     ".section .button": "action",
   };
   Object.entries(treatments).forEach(([selector, treatment]) => {

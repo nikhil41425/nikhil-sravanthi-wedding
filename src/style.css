@@ -1216,36 +1216,6 @@ p { text-wrap: pretty; }
   height: 30px;
   margin: 0 auto;
 }
-.closing-kicker {
-  font-size: 11px;
-  color: var(--copper);
-  line-height: 1.8;
-  letter-spacing: 1.8px;
-  margin: 20px 0;
-}
-.closing h2 {
-  font-size: clamp(28px, 8.2cqw, 38px);
-  line-height: 1.3;
-}
-.closing-names {
-  font-family: var(--serif);
-  font-size: clamp(42px, 13cqw, 56px);
-  letter-spacing: 0;
-  line-height: 1.2;
-  margin: 24px 0 0;
-  font-weight: 600;
-  color: var(--plum);
-}
-.closing-names > span {
-  color: var(--copper);
-  font-size: .55em;
-  font-style: italic;
-  letter-spacing: 0;
-}
-.closing-names > em {
-  font-weight: 600;
-  font-style: normal;
-}
 .closing-rule {
   display: flex;
   gap: 13px;

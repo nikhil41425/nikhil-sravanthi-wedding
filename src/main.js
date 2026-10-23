@@ -113,10 +113,8 @@ document.querySelector("#app").innerHTML = `
       <div class="venue-art" aria-hidden="true"><img class="section-illustration" src="${venueArtwork}" alt="" width="768" height="512" loading="lazy" decoding="async" /><span lang="en">WHERE OUR FOREVER BEGINS</span></div>
     </section>
 
-    <section class="closing section" id="closing" aria-labelledby="closing-heading">
-      <div class="closing-ornament" aria-hidden="true"><img class="section-illustration" src="${closingArtwork}" alt="" width="768" height="384" loading="lazy" decoding="async" /></div><p class="closing-kicker">WE CAN'T WAIT TO CELEBRATE WITH YOU</p>
-      <h2 id="closing-heading" data-reveal>With you beside us,<br />our forever begins.</h2>
-      <div class="closing-names" lang="en" translate="no" data-reveal>Nikhil <span>&</span><br /><em>Sravanthi</em></div>
+    <section class="closing section" id="closing" aria-label="With love">
+      <div class="closing-ornament" aria-hidden="true"><img class="section-illustration" src="${closingArtwork}" alt="" width="768" height="384" loading="lazy" decoding="async" /></div>
       <div class="closing-rule"><span></span>${heart}<span></span></div>
       ${seal}
       <p class="closing-date" lang="en">15 NOVEMBER 2026 · HYDERABAD</p>
