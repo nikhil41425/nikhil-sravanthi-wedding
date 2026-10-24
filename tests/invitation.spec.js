@@ -140,8 +140,8 @@ test("full-photo viewer shows the original portrait and returns keyboard focus w
   const openPhoto = page.getByRole("button", { name: "View full photograph" });
   const names = await page.locator("#couple-name").boundingBox();
   const photo = await page.locator(".hero-photo").boundingBox();
-  expect(names.y).toBeGreaterThan(photo.y);
-  expect(names.y + names.height).toBeLessThan(photo.y + photo.height);
+  // Names sit beneath the photograph so neither face is covered.
+  expect(names.y).toBeGreaterThan(photo.y + photo.height * 0.75);
   expect(names.x).toBeGreaterThanOrEqual(photo.x);
   expect(names.x + names.width).toBeLessThanOrEqual(photo.x + photo.width);
   await openPhoto.click();
@@ -157,8 +157,8 @@ test("full-photo viewer shows the original portrait and returns keyboard focus w
       portrait.evaluate(
         (image) =>
           image.complete &&
-          image.naturalWidth === 891 &&
-          image.naturalHeight === 1280,
+          image.naturalWidth === 1325 &&
+          image.naturalHeight === 1273,
       ),
     )
     .toBe(true);

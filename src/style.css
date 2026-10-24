@@ -449,23 +449,14 @@ a:focus-visible {
 }
 .hero-photo {
   position: relative;
-  height: 100%;
+  aspect-ratio: 1325 / 1273;
   margin: 0;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
-.portrait-text-shade {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 76%, #3d24198c, #3d241933 40%, transparent 65%), linear-gradient(transparent 32%, #3d241908 45%, #3d241942 60%, #3d2419ab 80%, #3d241966 90%, transparent);
-  -webkit-mask-image: linear-gradient(transparent, #000 5%, #000 87%, transparent);
-  mask-image: linear-gradient(transparent, #000 5%, #000 87%, transparent);
-  pointer-events: none;
-}
 .hero-portrait {
   position: relative;
   margin: 0;
-  height: clamp(440px, calc(100svh - 190px), 720px);
   isolation: isolate;
   overflow: clip;
 }
@@ -476,8 +467,8 @@ a:focus-visible {
   height: 100%;
   object-fit: cover;
   object-position: center 35%;
-  -webkit-mask-image: linear-gradient(transparent, #000 5%, #000 87%, transparent);
-  mask-image: linear-gradient(transparent, #000 5%, #000 87%, transparent);
+  -webkit-mask-image: linear-gradient(transparent, #000 5%, #000 82%, transparent);
+  mask-image: linear-gradient(transparent, #000 5%, #000 82%, transparent);
 }
 .hero-edition {
   position: static;
@@ -508,19 +499,15 @@ a:focus-visible {
   height: 18px;
 }
 .hero-content {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  left: 20px;
-  right: 20px;
-  bottom: 12%;
-  margin: 0;
+  margin: -14px 20px 0;
   padding: 0;
-  color: #fff4dc;
-  text-shadow: 0 2px 16px #2c1610a6;
+  color: var(--plum);
 }
 .hero-eyebrow {
   font-size: 20px;
-  color: #ffe3ad;
+  color: var(--copper);
   line-height: 1.5;
   margin: 0 0 9px;
   font-family: var(--serif);
@@ -529,7 +516,7 @@ a:focus-visible {
 .hero h1 {
   position: relative;
   font-family: var(--serif);
-  font-size: clamp(46px, 15.5cqw, 68px);
+  font-size: clamp(44px, 14cqw, 62px);
   font-weight: 600;
   letter-spacing: 0;
   line-height: 1.05;
@@ -542,13 +529,13 @@ a:focus-visible {
 }
 .hero h1 > span {
   display: inline;
-  color: #fff0cc;
+  color: var(--kumkum);
 }
 .hero h1 em {
   position: static;
   font-size: 26px;
   font-weight: 500;
-  color: #ffdd80;
+  color: var(--gold);
 }
 .hero h1 .bride-name {
   font-style: normal;
@@ -562,11 +549,11 @@ a:focus-visible {
   font-size: 11px;
   letter-spacing: 1.8px;
   margin-top: 18px;
-  color: #fff4dc;
+  color: var(--ink);
   flex-direction: column;
   line-height: 1.5;
 }
-.hero-date > span:last-child { color: #ffe3ad; }
+.hero-date > span:last-child { color: var(--copper); }
 .hero-cta {
   position: static;
   display: flex;
@@ -1478,7 +1465,6 @@ body:has(.photo-dialog[open]) {
   }
 }
 @media (max-width: 360px) {
-  .hero-date { gap: 5px; font-size: 9px; }
   .photo-expand { right: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
