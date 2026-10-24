@@ -78,9 +78,9 @@ document.querySelector("#app").innerHTML = `
       <div class="auspicious" data-reveal>${ganesha}<p>With the blessings of Lord Ganesha</p></div>
       <p class="invitation-copy" data-reveal>Together with our families, we invite you to celebrate our wedding and bless the beginning of our life together.</p>
       <div class="families">
-        <div class="family" data-reveal><p class="family-role"><span lang="en">THE GROOM</span></p><h3 lang="en" translate="no">Nikhil</h3><p class="parent-label" lang="en">Son of</p><p class="parents" lang="en" translate="no">Are Srinivas <span>&</span> Manjula</p></div>
+        <div class="family" data-reveal><p class="family-role"><span lang="en">THE GROOM</span></p><h3 lang="en" translate="no">Nikhil</h3></div>
         <div class="family-symbol" aria-hidden="true"><span class="union-line"></span><img class="section-illustration family-art" src="${familyArtwork}" alt="" width="768" height="512" loading="lazy" decoding="async" /><span class="union-line"></span></div>
-        <div class="family" data-reveal><p class="family-role"><span lang="en">THE BRIDE</span></p><h3 lang="en" translate="no">Sravanthi</h3><p class="parent-label" lang="en">Daughter of</p><p class="parents" lang="en" translate="no">Pandula Narsimha <span>&</span> Madhavi</p></div>
+        <div class="family" data-reveal><p class="family-role"><span lang="en">THE BRIDE</span></p><h3 lang="en" translate="no">Sravanthi</h3></div>
       </div>
       <div class="invitation-signoff" data-reveal>${lotus}<p>Two hearts. One beautiful journey.</p></div>
     </section>

@@ -55,12 +55,8 @@ test("invitation renders the approved details without page errors or horizontal 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Nikhil&Sravanthi",
   );
-  await expect(page.locator(".parents").first()).toHaveText(
-    "Are Srinivas & Manjula",
-  );
-  await expect(page.locator(".parents").last()).toHaveText(
-    "Pandula Narsimha & Madhavi",
-  );
+  await expect(page.locator(".family h3")).toHaveText(["Nikhil", "Sravanthi"]);
+  expect(await page.locator(".families").innerText()).not.toMatch(/Son of|Daughter of/);
   await expect(page.locator(".date-card")).toContainText("2026 · SUNDAY");
   await expect(page.locator(".date-card")).toContainText("9:57 AM");
   await expect(

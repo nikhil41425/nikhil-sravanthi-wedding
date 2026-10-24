@@ -804,24 +804,8 @@ p { text-wrap: pretty; }
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: 0;
-  margin: 8px 0 14px;
+  margin: 8px 0 0;
   color: var(--plum);
-}
-.parent-label {
-  font-family: var(--sans);
-  font-size: 12px;
-  color: var(--ink);
-  margin: 0 0 5px;
-}
-.parents {
-  font-family: var(--serif);
-  font-size: 19px;
-  font-weight: 600;
-  margin: 0;
-  line-height: 1.5;
-}
-.parents span {
-  color: var(--copper);
 }
 .family-symbol {
   display: flex;
@@ -857,7 +841,6 @@ p { text-wrap: pretty; }
 .family:last-child {
   padding-left: 0;
 }
-.parents { color: var(--ink); }
 .invitation-signoff {
   display: flex;
   flex-direction: column;
