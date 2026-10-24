@@ -235,3 +235,15 @@ test("countdown follows the India ceremony time and remains valid after the wedd
     "Our new journey has begun.",
   );
 });
+
+test("link previews show the couple banner", async ({ page, request }) => {
+  await page.goto("/");
+  const image = await page.locator('meta[property="og:image"]').getAttribute("content");
+  expect(image).toBe("https://nikhil-sravanthi-wedding-9hx4.vercel.app/og-image.jpg");
+  await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute("content", "1200");
+  await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute("content", "630");
+  const response = await request.get("/og-image.jpg");
+  expect(response.ok()).toBe(true);
+  expect(response.headers()["content-type"]).toContain("image/jpeg");
+  expect((await response.body()).length).toBeLessThan(300_000);
+});
