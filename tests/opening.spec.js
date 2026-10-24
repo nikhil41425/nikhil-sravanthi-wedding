@@ -1,40 +1,36 @@
 import { test, expect } from "@playwright/test";
 
-test("edge-to-edge temple card plays its entrance animation and reveals the invitation", async ({ page }) => {
+test("full-screen envelope card plays its opening animation and reveals the invitation", async ({ page }) => {
   await page.goto("/");
   const card = page.locator("#opening");
-  const artwork = page.locator(".temple-image");
-  await expect(artwork).toBeVisible();
-  await expect.poll(() => artwork.evaluate(image => image.complete && image.naturalWidth === 941 && image.naturalHeight === 1672)).toBe(true);
+  const envelope = page.locator(".envelope");
+  await expect(envelope).toBeVisible();
+  await expect(page.locator(".envelope-seal")).toContainText("N&S");
   const cardBounds = await card.boundingBox();
   expect(cardBounds.y).toBe(0);
   expect(cardBounds.height).toBe(await page.evaluate(() => innerHeight));
   expect(cardBounds.width).toBeLessThanOrEqual(480);
-  const imageBounds = await artwork.boundingBox();
-  expect(imageBounds.x).toBeLessThanOrEqual(cardBounds.x);
-  expect(imageBounds.x + imageBounds.width).toBeGreaterThanOrEqual(cardBounds.x + cardBounds.width);
-  expect(imageBounds.y).toBeLessThanOrEqual(cardBounds.y);
-  expect(imageBounds.y + imageBounds.height).toBeGreaterThanOrEqual(cardBounds.y + cardBounds.height);
+  const envelopeBounds = await envelope.boundingBox();
+  expect(envelopeBounds.x).toBeGreaterThanOrEqual(cardBounds.x);
+  expect(envelopeBounds.x + envelopeBounds.width).toBeLessThanOrEqual(cardBounds.x + cardBounds.width);
   await expect(page.locator("#opening-title")).toContainText("Nikhil");
   await expect(page.locator("#opening-title")).toContainText("Sravanthi");
   await expect(page.locator(".invitation-dock")).toHaveAttribute("aria-hidden", "true");
   expect(await page.locator(".invitation-dock").evaluate(nav => nav.inert)).toBe(true);
   await expect(page.locator("#wedding")).toBeHidden();
-  const clouds = page.locator(".cloud-bank").first();
-  expect(await clouds.evaluate(element => getComputedStyle(element).animationIterationCount)).toBe("infinite");
-  expect(await clouds.evaluate(element => getComputedStyle(element).animationPlayState)).toBe("running");
+  const halo = page.locator(".seal-halo");
+  expect(await halo.evaluate(element => getComputedStyle(element).animationIterationCount)).toBe("infinite");
+  expect(await halo.evaluate(element => getComputedStyle(element).animationPlayState)).toBe("running");
   expect(await page.locator("body").innerText()).not.toMatch(/swipe|scroll/i);
   const enter = page.getByRole("link", { name: "Tap to open" });
-  const door = page.locator(".door-leaf-left img");
-  await expect.poll(() => door.evaluate(image => image.complete && image.naturalWidth === 512 && image.naturalHeight === 768)).toBe(true);
   await expect(enter).toBeInViewport({ ratio: 1 });
   await expect(page.locator(".opening-actions a")).toHaveCount(0);
   await enter.click();
   await expect(enter).toHaveAttribute("aria-busy", "true");
-  expect(await page.locator('.temple-artwork').evaluate(element => getComputedStyle(element).animationName)).toBe('temple-enter');
-  expect(await page.locator('.opening-ripple').evaluate(element => getComputedStyle(element).animationName)).toBe('entrance-ripple');
-  expect(await page.locator('.door-leaf-left').evaluate(element => getComputedStyle(element).animationName)).toBe('temple-door-left');
-  expect(await page.locator('.door-leaf-right').evaluate(element => getComputedStyle(element).animationName)).toBe('temple-door-right');
+  expect(await page.locator(".envelope-seal").evaluate(element => getComputedStyle(element).animationName)).toBe("envelope-seal-break");
+  expect(await page.locator(".envelope-flap").evaluate(element => getComputedStyle(element).animationName)).toBe("envelope-flap-open");
+  expect(await page.locator(".envelope-card").evaluate(element => getComputedStyle(element).animationName)).toBe("envelope-card-rise");
+  expect(await page.locator(".opening-flash").evaluate(element => getComputedStyle(element).animationName)).toBe("opening-to-paper");
   await expect(page.locator("#wedding")).toBeHidden();
   await expect(page.locator(".opening-name-reveal")).toHaveCount(0);
   await expect(page.locator("#wedding")).toBeVisible();
@@ -50,7 +46,7 @@ test("edge-to-edge temple card plays its entrance animation and reveals the invi
 test("reduced motion disables all opening effects and supports keyboard and touch entry", async ({ page, isMobile }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  for (const selector of [".temple-artwork", ".petal", ".lamp-glow", ".floor-shimmer", ".door-leaf", ".cloud-bank"]) {
+  for (const selector of [".envelope", ".envelope-seal", ".envelope-flap", ".envelope-card", ".seal-halo", ".petal"]) {
     expect(await page.locator(selector).first().evaluate(element => getComputedStyle(element).animationName)).toBe("none");
   }
   const enter = page.getByRole("link", { name: "Tap to open" });
@@ -138,13 +134,13 @@ test("refreshing any invitation section returns to tap-only entry", async ({ pag
   }
 });
 
-test("old entry links and refreshes show the temple image again", async ({ page }) => {
+test("old entry links and refreshes show the envelope card again", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const hash of ["#wedding", "#home"]) {
     await page.goto(`/${hash}`);
     await expect(page.locator("#opening")).toBeVisible();
     await expect(page.locator("#wedding")).toBeHidden();
-    await expect.poll(() => page.locator(".temple-image").evaluate(image => image.complete && image.naturalWidth === 941)).toBe(true);
+    await expect(page.locator(".envelope")).toBeVisible();
     await page.getByRole("link", { name: "Tap to open" }).click();
     await expect(page.locator("#wedding")).toBeVisible();
     await expect(page).toHaveURL(/\/$/);

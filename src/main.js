@@ -5,9 +5,6 @@ import "@fontsource/cormorant-garamond/latin-600.css";
 import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-500.css";
 import couplePhoto from "./assets/nikhil-sravanthi.jpg";
-import templeArtwork from "./assets/temple-opening.webp";
-import templeDoor from "./assets/temple-door.webp";
-import cloudArtwork from "./assets/drifting-cloud.webp";
 import familyArtwork from "./assets/wedding-kalash.webp";
 import ceremonyArtwork from "./assets/ceremony-lamps.webp";
 import venueArtwork from "./assets/wedding-mandap.webp";
@@ -31,29 +28,29 @@ const seal = `<div class="seal" aria-hidden="true"><span class="seal-top" lang="
 document.querySelector("#app").innerHTML = `
   <a class="skip-link" href="#invitation">Skip to invitation</a>
   <section class="opening-card" id="opening" aria-labelledby="opening-title" data-opened="false">
-    <div class="temple-scene">
-      <div class="temple-artwork">
-        <img class="temple-image" src="${templeArtwork}" alt="Ornate temple entrance with Lord Venkateswara, Lord Ganesha, flowers and brass lamps" width="941" height="1672" fetchpriority="high" decoding="async" />
-        <div class="sky-clouds" aria-hidden="true">${["left", "right"].map(side => `<div class="cloud-window cloud-window-${side}">${["near", "far"].map(depth => `<div class="cloud-bank cloud-bank-${depth}">${[0, 1].map(() => `<img src="${cloudArtwork}" alt="" width="768" height="256" decoding="async" />`).join("")}</div>`).join("")}</div>`).join("")}</div>
-        <div class="temple-plaque">
-          <p>WEDDING INVITATION</p>
-          <h2 id="opening-title" translate="no"><span>Nikhil <i>&</i></span><span>Sravanthi</span></h2>
-        </div>
-        <div class="lamp-glow lamp-glow-left" aria-hidden="true"></div>
-        <div class="lamp-glow lamp-glow-right" aria-hidden="true"></div>
-        <div class="door-glow" aria-hidden="true"></div>
-        <div class="floor-shimmer" aria-hidden="true"></div>
-        <a class="opening-door" id="enter-invitation" href="#wedding" aria-label="Tap to open">
-          <span class="door-leaf door-leaf-left" aria-hidden="true"><img src="${templeDoor}" alt="" width="512" height="768" fetchpriority="high" decoding="async" /></span>
-          <span class="door-leaf door-leaf-right" aria-hidden="true"><img src="${templeDoor}" alt="" width="512" height="768" fetchpriority="high" decoding="async" /></span>
-        </a>
-      </div>
+    <div class="opening-frame" aria-hidden="true"></div>
+    <div class="opening-stage">
+      <header class="opening-header">
+        ${ganesha}
+        <p class="opening-kicker">WEDDING INVITATION</p>
+        <h2 id="opening-title" translate="no"><span>Nikhil</span> <i>&</i> <span>Sravanthi</span></h2>
+        <span class="opening-rule" aria-hidden="true"><span></span></span>
+      </header>
+      <a class="opening-envelope" id="enter-invitation" href="#wedding" aria-label="Tap to open">
+        <span class="envelope" aria-hidden="true">
+          <svg class="envelope-back" viewBox="0 0 100 70" preserveAspectRatio="none"><rect width="100" height="70" rx="2" /></svg>
+          <span class="envelope-card">${lotus}<span class="envelope-card-title">You are invited</span><span class="envelope-card-date">15 · 11 · 2026</span></span>
+          <svg class="envelope-pocket" viewBox="0 0 100 70" preserveAspectRatio="none"><path class="pocket-fill" d="M0 0 50 40 100 0V70H0Z" /><path class="pocket-fold" d="M0 70 43 35M100 70 57 35" /></svg>
+          <svg class="envelope-flap" viewBox="0 0 100 70" preserveAspectRatio="none"><path class="flap-fill" d="M0 0H100L50 44Z" /><path class="flap-line" d="M7 1.5 50 39 93 1.5" /></svg>
+          <span class="envelope-seal"><span class="seal-halo"></span><span class="envelope-seal-monogram" translate="no">N<i>&</i>S</span></span>
+        </span>
+        <span class="opening-hint">Tap to open</span>
+      </a>
     </div>
     <div class="petal-field" aria-hidden="true">${[8, 92, 18, 81, 5, 95].map((left, index) => `<span class="petal" style="--petal-left:${left}%;--petal-delay:-${index * 2.7}s;--petal-duration:${12 + index * 1.3}s;--petal-drift:${index % 2 ? -18 : 22}px"></span>`).join("")}</div>
     <div class="opening-flash" aria-hidden="true"></div>
-    <div class="opening-ripple" aria-hidden="true"></div>
     <div class="opening-actions">
-      <p class="opening-date">15 NOVEMBER 2026</p>
+      <p class="opening-date">15 NOVEMBER 2026 · HYDERABAD</p>
     </div>
   </section>
   <div id="wedding" hidden>

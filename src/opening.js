@@ -59,7 +59,7 @@ export function initializeOpening() {
     opening.classList.add("is-opening");
     enter.setAttribute("aria-busy", "true");
     enter.setAttribute("aria-disabled", "true");
-    openingTimer = window.setTimeout(enterInvitation, 1200);
+    openingTimer = window.setTimeout(enterInvitation, 1650);
   }
 
   enter.addEventListener("click", startOpening);
