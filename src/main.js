@@ -82,7 +82,6 @@ document.querySelector("#app").innerHTML = `
         <div class="family-symbol" aria-hidden="true"><span class="union-line"></span><img class="section-illustration family-art" src="${familyArtwork}" alt="" width="768" height="512" loading="lazy" decoding="async" /><span class="union-line"></span></div>
         <div class="family" data-reveal><p class="family-role"><span lang="en">THE BRIDE</span></p><h3 lang="en" translate="no">Sravanthi</h3></div>
       </div>
-      <div class="invitation-signoff" data-reveal>${lotus}<p>Two hearts. One beautiful journey.</p></div>
     </section>
 
     <section class="muhurtham section" id="muhurtham" aria-labelledby="date-heading">

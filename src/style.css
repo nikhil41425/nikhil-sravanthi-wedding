@@ -841,29 +841,10 @@ p { text-wrap: pretty; }
 .family:last-child {
   padding-left: 0;
 }
-.invitation-signoff {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  margin-top: 38px;
-  padding-top: 28px;
-  border-top: 1px solid #ae843e60;
-  text-align: center;
-}
 .lotus {
   width: 44px;
   height: 29px;
   color: var(--copper);
-}
-.invitation-signoff p {
-  margin: 0;
-  font-size: 18px;
-  font-style: italic;
-  color: var(--plum);
-  line-height: 2;
-  font-family: var(--serif);
-  font-weight: 500;
 }
 .muhurtham {
   --plum: var(--peacock);
