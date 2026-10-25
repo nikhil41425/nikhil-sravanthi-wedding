@@ -535,24 +535,6 @@ a:focus-visible {
   margin: 0 0 14px;
   color: var(--kumkum);
 }
-.photo-expand {
-  position: absolute;
-  right: 20px;
-  top: 28px;
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border: 1px solid #fff7;
-  border-radius: 50%;
-  background: #4d342780;
-  color: #fff;
-  backdrop-filter: blur(8px);
-}
-.photo-expand svg {
-  width: 18px;
-  height: 18px;
-}
 .hero-content {
   position: relative;
   z-index: 2;
@@ -1340,52 +1322,6 @@ footer p {
     background: #ae843e26;
   }
 }
-.photo-dialog {
-  width: calc(100% - 32px);
-  max-width: 540px;
-  max-height: calc(100dvh - 40px);
-  padding: 0;
-  border: 1px solid #dbc4ad60;
-  background: var(--plum);
-  color: var(--paper);
-}
-.photo-dialog::backdrop {
-  background: #241a29e6;
-  backdrop-filter: blur(10px);
-}
-.photo-dialog > img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: calc(100dvh - 100px);
-  object-fit: contain;
-}
-.photo-dialog > button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  background: #302632cc;
-  color: #fff;
-  border: 1px solid #fff8;
-  border-radius: 50%;
-}
-.photo-dialog > button svg {
-  width: 20px;
-  height: 20px;
-}
-.photo-dialog > p {
-  font-family: var(--serif);
-  text-align: center;
-  font-size: 25px;
-  margin: 12px 0 17px;
-}
-body:has(.photo-dialog[open]) {
-  overflow: hidden;
-}
 .motion-ready [data-reveal] {
   opacity: 0;
   transform: translateY(22px);
@@ -1482,9 +1418,6 @@ body:has(.photo-dialog[open]) {
       transform: translateY(0);
     }
   }
-}
-@media (max-width: 360px) {
-  .photo-expand { right: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .rose-petal-field { display: none; }

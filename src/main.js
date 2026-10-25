@@ -20,8 +20,6 @@ const calendar = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 const lotus = `<svg class="lotus" viewBox="0 0 100 64" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M50 53C27 37 41 17 50 6c9 11 23 31 0 47Z"/><path d="M50 53C21 54 14 33 15 20c16 3 28 13 35 33Zm0 0c29 1 36-20 35-33-16 3-28 13-35 33Z"/><path d="M50 53C28 64 9 50 4 35c17-1 33 5 46 18Zm0 0c22 11 41-3 46-18-17-1-33 5-46 18ZM24 60h52"/></svg>`;
 const ganesha = `<svg class="ganesha" viewBox="0 0 100 110" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m36 22 14-14 14 14M33 27h34M38 21h24M50 2v5M39 30c-9 3-13 12-10 22l8 8m24-30c9 3 13 12 10 22l-8 8M29 34c-19-12-25 16-11 22l10-4m43-18c19-12 25 16 11 22l-10-4M37 45l4 2m18-2-4 2M49 37v8m-5 13c-6 16 17 14 14 26-2 8-16 7-16-1M39 60c-6 4-8 14-4 22m27-22c8 10 4 23-2 30M27 66C9 71 11 93 29 93h9m35-27c18 5 16 27-2 27H60M33 96h35M42 102h18"/><path d="m19 69-6-8m68 8 6-8M47 27h6"/></svg>`;
 
-const expand = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg>`;
-const close = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>`;
 const heart = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 20S3 14 3 8.5a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1C21 14 12 20 12 20Z"/></svg>`;
 const seal = `<div class="seal" aria-hidden="true"><span class="seal-top" lang="en">WITH LOVE</span><span class="seal-monogram" lang="en" translate="no">N<i>&</i>S</span><span class="seal-bottom" lang="en">15 · 11 · 2026</span></div>`;
 
@@ -68,7 +66,6 @@ document.querySelector("#app").innerHTML = `
         <h1 id="couple-name" lang="en" translate="no"><span>Nikhil</span><em>&</em><span class="bride-name">Sravanthi</span></h1>
         <div class="hero-date" lang="en"><span>15 NOVEMBER 2026</span><span>HYDERABAD, INDIA</span></div>
       </div>
-        <button class="photo-expand" id="open-photo" type="button" aria-label="View full photograph">${expand}</button>
       </div>
       <a class="hero-cta" href="#invitation"><span>The invitation</span>${arrow}</a>
     </section>
@@ -118,7 +115,6 @@ document.querySelector("#app").innerHTML = `
   </main>
   <footer><span class="footer-monogram" lang="en" translate="no">N & S</span><p>With love, always.</p><span lang="en">2026</span></footer>
   <nav class="invitation-dock" aria-label="Invitation navigation"><a href="#invitation">${heart}<span>Invitation</span></a><a href="#muhurtham">${calendar}<span>Ceremony</span></a><a href="#venue">${pin}<span>Venue</span></a></nav>
-  <dialog class="photo-dialog" id="photo-dialog" aria-label="Nikhil and Sravanthi photograph" lang="en" translate="no"><button id="close-photo" type="button" aria-label="Close photograph">${close}</button><img src="${couplePhoto}" alt="Nikhil and Sravanthi, full portrait" width="1325" height="1273" /><p lang="en">Nikhil & Sravanthi</p></dialog>
   </div>
 `;
 
@@ -130,26 +126,6 @@ const heroMotionObserver = new IntersectionObserver(([entry]) => {
   entry.target.classList.toggle("is-visible", entry.isIntersecting);
 });
 heroMotionObserver.observe(document.getElementById("home"));
-
-const photoDialog = document.getElementById("photo-dialog");
-document
-  .getElementById("open-photo")
-  .addEventListener("click", () => photoDialog.showModal());
-document
-  .getElementById("close-photo")
-  .addEventListener("click", () => photoDialog.close());
-photoDialog.addEventListener("click", (event) => {
-  if (event.target === photoDialog) {
-    const bounds = photoDialog.getBoundingClientRect();
-    if (
-      event.clientX < bounds.left ||
-      event.clientX > bounds.right ||
-      event.clientY < bounds.top ||
-      event.clientY > bounds.bottom
-    )
-      photoDialog.close();
-  }
-});
 
 if ("IntersectionObserver" in window) {
   const navigationObserver = new IntersectionObserver(

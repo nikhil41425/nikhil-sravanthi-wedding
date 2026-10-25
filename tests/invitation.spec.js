@@ -129,47 +129,17 @@ test("navigation returns for keyboard use and stays visible during section jumps
   expect(await dock.evaluate(element => getComputedStyle(element).transitionDuration)).toBe("0s");
 });
 
-test("full-photo viewer shows the original portrait and returns keyboard focus when dismissed", async ({
+test("portrait shows both faces with the names beneath and no full-screen control", async ({
   page,
 }) => {
   await openInvitation(page);
-  const openPhoto = page.getByRole("button", { name: "View full photograph" });
   const names = await page.locator("#couple-name").boundingBox();
   const photo = await page.locator(".hero-photo").boundingBox();
   // Names sit beneath the photograph so neither face is covered.
   expect(names.y).toBeGreaterThan(photo.y + photo.height * 0.75);
   expect(names.x).toBeGreaterThanOrEqual(photo.x);
   expect(names.x + names.width).toBeLessThanOrEqual(photo.x + photo.width);
-  await openPhoto.click();
-  const dialog = page.getByRole("dialog", {
-    name: "Nikhil and Sravanthi photograph",
-  });
-  await expect(dialog).toBeVisible();
-  const portrait = dialog.getByRole("img", {
-    name: "Nikhil and Sravanthi, full portrait",
-  });
-  await expect
-    .poll(() =>
-      portrait.evaluate(
-        (image) =>
-          image.complete &&
-          image.naturalWidth === 1325 &&
-          image.naturalHeight === 1273,
-      ),
-    )
-    .toBe(true);
-  expect(
-    await portrait.evaluate((image) => getComputedStyle(image).objectFit),
-  ).toBe("contain");
-  expect(
-    await page.evaluate(() => getComputedStyle(document.body).overflow),
-  ).toBe("hidden");
-  await page.keyboard.press("Escape");
-  await expect(dialog).not.toBeVisible();
-  await expect(openPhoto).toBeFocused();
-  await openPhoto.click();
-  await page.getByRole("button", { name: "Close photograph" }).click();
-  await expect(dialog).not.toBeVisible();
+  await expect(page.locator("#home button, dialog")).toHaveCount(0);
 });
 
 test("reduced-motion preference keeps content visible without entrance animations", async ({
