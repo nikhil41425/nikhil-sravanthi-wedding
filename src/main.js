@@ -5,10 +5,8 @@ import "@fontsource/cormorant-garamond/latin-600.css";
 import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-500.css";
 import couplePhoto from "./assets/nikhil-sravanthi.jpg";
-import familyArtwork from "./assets/wedding-kalash.webp";
 import ceremonyArtwork from "./assets/ceremony-lamps.webp";
 import venueArtwork from "./assets/wedding-mandap.webp";
-import closingArtwork from "./assets/lotus-blessing.webp";
 import { initializeOpening } from "./opening.js";
 import { initializeDockNavigation } from "./navigation.js";
 import { initializeScrollMotion } from "./scroll-motion.js";
@@ -55,7 +53,9 @@ document.querySelector("#app").innerHTML = `
   <div class="rose-petal-field" aria-hidden="true">${[6, 91, 23, 76, 12, 86, 38, 64, 4, 95, 29, 71].map((left, index) => `<span class="rose-petal" style="--rose-left:${left}%;--rose-delay:-${index * 2.3 + 1}s;--rose-duration:${14 + index % 5 * 1.7}s;--rose-drift:${index % 2 ? -26 : 26}px;--rose-size:${9 + index % 4 * 1.5}px;--rose-flutter:${3 + index % 3 * 0.8}s"><span></span></span>`).join("")}</div>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
   <main>
-    <section class="hero" id="home" aria-labelledby="couple-name">
+    <section class="invitation section" id="invitation" aria-labelledby="couple-name">
+    <header class="hero" id="home">
+      <div class="section-marker"><span lang="en">01</span><p>THE INVITATION</p><span class="marker-line"></span></div>
       <span class="hero-edition" lang="en">THE WEDDING OF</span>
       <div class="hero-portrait">
         <div class="portrait-aura" aria-hidden="true"></div>
@@ -67,22 +67,16 @@ document.querySelector("#app").innerHTML = `
         <div class="hero-date" lang="en"><span>15 NOVEMBER 2026</span><span>HYDERABAD, INDIA</span></div>
       </div>
       </div>
-      <a class="hero-cta" href="#invitation"><span>The invitation</span>${arrow}</a>
-    </section>
-
-    <section class="invitation section" id="invitation" aria-label="The invitation">
-      <div class="section-marker"><span lang="en">01 /</span><p>THE INVITATION</p><span class="marker-line"></span></div>
+    </header>
+    <div class="invitation-note">
       <div class="auspicious" data-reveal>${ganesha}<p>With the blessings of Lord Ganesha</p></div>
       <p class="invitation-copy" data-reveal>Together with our families, we invite you to celebrate our wedding and bless the beginning of our life together.</p>
-      <div class="families">
-        <div class="family" data-reveal><p class="family-role"><span lang="en">THE GROOM</span></p><h3 lang="en" translate="no">Nikhil</h3></div>
-        <div class="family-symbol" aria-hidden="true"><span class="union-line"></span><img class="section-illustration family-art" src="${familyArtwork}" alt="" width="768" height="512" loading="lazy" decoding="async" /><span class="union-line"></span></div>
-        <div class="family" data-reveal><p class="family-role"><span lang="en">THE BRIDE</span></p><h3 lang="en" translate="no">Sravanthi</h3></div>
-      </div>
+      <a class="hero-cta" href="#muhurtham"><span>The celebration</span>${arrow}</a>
+    </div>
     </section>
 
     <section class="muhurtham section" id="muhurtham" aria-labelledby="date-heading">
-      <div class="section-marker"><span lang="en">02 /</span><p>THE CELEBRATION</p><span class="marker-line"></span></div>
+      <div class="section-marker"><span lang="en">02</span><p>THE CELEBRATION</p><span class="marker-line"></span></div>
       <h2 id="date-heading" data-reveal>Our wedding day</h2>
       <div class="date-card" data-reveal>
         <div class="date-card-crest" aria-hidden="true">${lotus}</div>
@@ -97,23 +91,20 @@ document.querySelector("#app").innerHTML = `
     </section>
 
     <section class="venue section" id="venue" aria-labelledby="venue-heading">
-      <div class="section-marker"><span lang="en">03 /</span><p>THE VENUE</p><span class="marker-line"></span></div>
+      <div class="section-marker"><span lang="en">03</span><p>THE VENUE</p><span class="marker-line"></span></div>
       <div class="venue-location" lang="en">${pin}<span>HYDERABAD · TELANGANA</span></div>
       <h2 id="venue-heading" data-reveal>Join us at</h2>
       <h3 lang="en" translate="no" data-reveal><span>CBS</span> <span>Convention</span></h3>
       <address lang="en" translate="no">Narapally, Korremula Rd,<br />Sai Ram Nagar Colony, Venkatadri Twp,<br />Chowdhariguda, Majarguda,<br />Hyderabad, Telangana 500088</address>
       <a class="button button-dark action-card directions-button" href="https://maps.app.goo.gl/dKanwQshRjnfzxzs5" target="_blank" rel="noopener noreferrer" aria-label="Get directions" aria-describedby="directions-note"><span class="action-icon" aria-hidden="true">${pin}</span><span class="action-copy"><span class="action-title">Get directions</span><span class="action-caption" id="directions-note">Open in Google Maps</span></span><span class="action-arrow" aria-hidden="true">${arrow}</span></a>
       <div class="venue-art" aria-hidden="true"><img class="section-illustration" src="${venueArtwork}" alt="" width="768" height="512" loading="lazy" decoding="async" /><span lang="en">WHERE OUR FOREVER BEGINS</span></div>
-    </section>
-
-    <section class="closing section" id="closing" aria-label="With love">
-      <div class="closing-ornament" aria-hidden="true"><img class="section-illustration" src="${closingArtwork}" alt="" width="768" height="384" loading="lazy" decoding="async" /></div>
-      <div class="closing-rule"><span></span>${heart}<span></span></div>
-      ${seal}
-      <p class="closing-date" lang="en">15 NOVEMBER 2026 · HYDERABAD</p>
+      <footer class="venue-signoff" aria-label="With love">
+        <div class="closing-rule" aria-hidden="true"><span></span>${heart}<span></span></div>
+        ${seal}
+        <p>With love, always.</p>
+      </footer>
     </section>
   </main>
-  <footer><span class="footer-monogram" lang="en" translate="no">N & S</span><p>With love, always.</p><span lang="en">2026</span></footer>
   <nav class="invitation-dock" aria-label="Invitation navigation"><a href="#invitation">${heart}<span>Invitation</span></a><a href="#muhurtham">${calendar}<span>Ceremony</span></a><a href="#venue">${pin}<span>Venue</span></a></nav>
   </div>
 `;

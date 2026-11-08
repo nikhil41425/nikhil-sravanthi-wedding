@@ -10,8 +10,13 @@ async function openInvitation(page) {
 test("portrait has a quiet background and invitation sections retain readable ceremony text", async ({ page }) => {
   await openInvitation(page);
   expect(await page.locator(".hero").evaluate(element => getComputedStyle(element).backgroundImage)).not.toContain("url(");
-  const sections = page.locator("main > .section, footer");
-  expect(await sections.count()).toBe(5);
+  const sections = page.locator("main > section");
+  await expect(sections).toHaveCount(3);
+  expect(await sections.evaluateAll(elements => elements.map(element => element.id))).toEqual(["invitation", "muhurtham", "venue"]);
+  await expect(page.locator("#invitation .hero-photo")).toBeVisible();
+  await expect(page.locator("#invitation .invitation-copy")).toContainText("Together with our families");
+  await expect(page.locator("#venue footer .seal")).toHaveCount(1);
+  await expect(page.locator("main section section, #closing")).toHaveCount(0);
   for (const section of await sections.all()) {
     expect(await section.evaluate(element => getComputedStyle(element).backgroundImage)).toContain("invitation-background");
   }
@@ -55,8 +60,7 @@ test("invitation renders the approved details without page errors or horizontal 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Nikhil&Sravanthi",
   );
-  await expect(page.locator(".family h3")).toHaveText(["Nikhil", "Sravanthi"]);
-  expect(await page.locator(".families").innerText()).not.toMatch(/Son of|Daughter of/);
+  expect(await page.locator("#invitation").innerText()).not.toMatch(/Son of|Daughter of/);
   await expect(page.locator(".date-card")).toContainText("2026 · SUNDAY");
   await expect(page.locator(".date-card")).toContainText("9:57 AM");
   await expect(
@@ -68,9 +72,6 @@ test("invitation renders the approved details without page errors or horizontal 
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize().width);
   const invitation = await page.locator("#app").boundingBox();
   expect(invitation.width).toBeLessThanOrEqual(480);
-  const groom = await page.locator(".family h3").first().boundingBox();
-  const bride = await page.locator(".family h3").last().boundingBox();
-  expect(bride.y).toBeGreaterThan(groom.y + groom.height);
   expect(
     await page.evaluate(() => document.fonts.check('16px "Manrope"')),
   ).toBe(true);

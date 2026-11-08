@@ -119,7 +119,8 @@ test("refreshing any invitation section returns to tap-only entry", async ({ pag
   for (const [label, hash] of [["Invitation", "invitation"], ["Ceremony", "muhurtham"], ["Venue", "venue"]]) {
     await page.getByRole("navigation").getByRole("link", { name: label, exact: true }).click();
     await expect(page).toHaveURL(new RegExp(`#${hash}$`));
-    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(100);
+    if (hash === "invitation") expect(await page.evaluate(() => scrollY)).toBe(0);
+    else await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(100);
     await page.reload();
     await expect(page).toHaveURL(/\/$/);
     await expect(page.locator("#opening")).toBeVisible();

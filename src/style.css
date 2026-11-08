@@ -490,8 +490,7 @@ a:focus-visible {
 .hero {
   position: relative;
   isolation: isolate;
-  padding: calc(22px + env(safe-area-inset-top)) 0 calc(94px + env(safe-area-inset-bottom));
-  min-height: 100svh;
+  padding: calc(24px + env(safe-area-inset-top)) 0 0;
   background-color: var(--paper);
   background-image:
     radial-gradient(ellipse at 50% 12%, #f2deb870, transparent 55%),
@@ -530,7 +529,6 @@ a:focus-visible {
   font-family: var(--sans);
   font-size: 11px;
   letter-spacing: 1.8px;
-  order: -1;
   font-weight: 500;
   margin: 0 0 14px;
   color: var(--kumkum);
@@ -553,16 +551,16 @@ a:focus-visible {
 .hero h1 {
   position: relative;
   font-family: var(--serif);
-  font-size: clamp(44px, 14cqw, 62px);
+  font-size: clamp(34px, 10.5cqw, 48px);
   font-weight: 600;
   letter-spacing: 0;
   line-height: 1.05;
   margin: 0;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  gap: 4px;
+  gap: 8px;
 }
 .hero h1 > span {
   display: inline;
@@ -610,11 +608,12 @@ a:focus-visible {
   width: 25px;
   height: 25px;
 }
+.hero .section-marker { margin: 0 28px 20px; }
 .section {
   --section-wash: linear-gradient(90deg, #fff4dc55, #fff4dcf2 20%, #fff4dcf2 80%, #fff4dc55);
   --seam-top: #fbf1e2;
   --seam-bottom: #fbf1e2;
-  padding: 64px clamp(26px, 9cqw, 42px) 72px;
+  padding: 44px clamp(26px, 9cqw, 42px) 48px;
   position: relative;
   background-color: #f9e7c4;
   background-image:
@@ -651,7 +650,7 @@ a:focus-visible {
 .section-marker::before {
   content: "";
   height: 1px;
-  flex: 1;
+  width: 24px;
   background: linear-gradient(90deg, transparent, var(--gold));
 }
 .section-marker {
@@ -666,7 +665,13 @@ a:focus-visible {
   font-size: 10px;
   letter-spacing: 1px;
   color: var(--copper);
-  display: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--gold-line);
+  border-radius: 50%;
+  flex: 0 0 auto;
 }
 .section-marker p {
   font-size: 11px;
@@ -698,8 +703,16 @@ p { text-wrap: pretty; }
   --copper: var(--saffron);
   --section-wash: linear-gradient(90deg, #fff0e5bb, #fff4eafa 16%, #fff4eafa 84%, #fff0e5bb);
   background-color: #fff0e5;
-  padding-top: 56px;
+  padding: 0;
 }
+.invitation::before, .invitation::after { content: none; }
+.invitation-note {
+  padding: 24px clamp(26px, 9cqw, 42px) 42px;
+  background: linear-gradient(#fff4dc, #fff4dce6 65%, #fbf1e2);
+}
+.invitation-note .auspicious { gap: 8px; margin: 0; }
+.invitation-note .ganesha { width: 32px; height: 36px; }
+.invitation-note .auspicious p { font-size: 17px; }
 .seal {
   width: 76px;
   height: 76px;
@@ -756,51 +769,10 @@ p { text-wrap: pretty; }
   color: var(--ink);
   font-size: 19px;
   line-height: 1.75;
-  margin: 24px auto 38px;
+  margin: 16px auto 22px;
   max-width: 32ch;
   font-family: var(--serif);
   font-weight: 500;
-}
-.families {
-  display: flex;
-  flex-direction: column;
-}
-.family-role {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  color: var(--copper);
-  font-size: 11px;
-  margin: 0;
-  justify-content: center;
-}
-.family-role > span {
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 1.8px;
-  font-weight: 500;
-}
-.family h3 {
-  font-family: var(--serif);
-  font-size: clamp(42px, 13cqw, 56px);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: 0;
-  margin: 8px 0 0;
-  color: var(--plum);
-}
-.family-symbol {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin: 30px auto;
-  color: var(--copper);
-  width: 100%;
-}
-.union-line {
-  flex: 1;
-  height: 1px;
-  background: var(--gold-line);
 }
 .section-illustration {
   display: block;
@@ -808,20 +780,9 @@ p { text-wrap: pretty; }
   height: auto;
   object-fit: contain;
 }
-.family-art {
-  flex: 0 0 clamp(120px, 38cqw, 165px);
-  width: clamp(120px, 38cqw, 165px);
-}
 .ceremony-art {
   width: min(100%, 248px);
   margin: 28px auto 0;
-}
-.closing-ornament {
-  width: min(100%, 210px);
-  margin: 0 auto;
-}
-.family:last-child {
-  padding-left: 0;
 }
 .lotus {
   width: 44px;
@@ -1052,7 +1013,7 @@ p { text-wrap: pretty; }
   background-color: #edf2ff;
   background-size: 100% 100%, 100% 100%, 100% 100%, 100% auto;
   background-position: center, center, center, center bottom;
-  padding-bottom: 64px;
+  padding-bottom: calc(108px + env(safe-area-inset-bottom));
 }
 .venue .section-marker {
   margin-bottom: 28px;
@@ -1176,8 +1137,8 @@ p { text-wrap: pretty; }
   .action-card:hover .action-arrow { transform: translateX(3px); }
 }
 .venue-art {
-  margin: 32px auto 0;
-  max-width: 280px;
+  margin: 24px auto 0;
+  max-width: 230px;
   text-align: center;
   color: var(--copper);
 }
@@ -1188,28 +1149,12 @@ p { text-wrap: pretty; }
   letter-spacing: 1.8px;
   margin-top: 13px;
 }
-.closing {
-  --plum: var(--lotus-pink);
-  --ink: #603346;
-  --copper: var(--saffron);
-  --paper: #fff0f3;
-  --section-wash: linear-gradient(#fff0f5f5, #ffedf2f2 45%, #ffe7ebd9);
-  --seam-bottom: #ffe9ee;
-  background-color: #fff0f5;
-  text-align: center;
-  padding: 64px clamp(26px, 9cqw, 42px) 60px;
-}
-.closing .lotus {
-  width: 44px;
-  height: 30px;
-  margin: 0 auto;
-}
 .closing-rule {
   display: flex;
   gap: 13px;
   align-items: center;
   justify-content: center;
-  margin: 31px 0 24px;
+  margin: 26px 0 20px;
 }
 .closing-rule > span {
   width: 37px;
@@ -1221,41 +1166,13 @@ p { text-wrap: pretty; }
   height: 16px;
   color: var(--copper);
 }
-.closing-date {
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 1.8px;
-  color: var(--ink);
-  margin: 0;
+.venue-signoff { color: var(--plum); }
+.venue-signoff .seal {
+  --plum: var(--kumkum);
+  margin-bottom: 14px;
 }
-footer {
-  --ink: var(--lotus-pink);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 28px 24px calc(96px + env(safe-area-inset-bottom));
-  border-top: 1px solid #ae843e60;
-  color: var(--ink);
-  text-align: center;
-  background-color: #ffe9ee;
-  background-image: linear-gradient(#ffe9eef2, #ffe7ebeb), var(--invitation-background);
-  background-size: 100% auto;
-  background-position: center bottom;
-}
-footer > span {
-  font-family: var(--sans);
-  font-size: 10px;
-}
-footer > span:last-child { color: var(--saffron); letter-spacing: 2px; }
-footer .footer-monogram {
-  font-family: var(--serif);
-  font-size: 23px;
-  color: var(--ink);
-}
-footer p {
-  font-size: 16px;
+.venue-signoff p {
+  font-size: 19px;
   margin: 0;
   font-family: var(--serif);
   font-weight: 500;
@@ -1343,14 +1260,12 @@ footer p {
 }
 .motion-ready [data-reveal="marker"]::before,
 .motion-ready [data-reveal="marker"] .marker-line,
-.motion-ready [data-reveal="ornament"] .union-line,
 .motion-ready [data-reveal="ornament"] > span:not(.scroll-ornament) {
   transform: scaleX(0);
   transition: transform 1s cubic-bezier(.2, .7, .2, 1) .15s;
 }
 .motion-ready [data-reveal="marker"].is-revealed::before,
 .motion-ready [data-reveal="marker"].is-revealed .marker-line,
-.motion-ready [data-reveal="ornament"].is-revealed .union-line,
 .motion-ready [data-reveal="ornament"].is-revealed > span:not(.scroll-ornament) { transform: scaleX(1); }
 .motion-ready [data-reveal] .draw-path {
   stroke-dasharray: 1;
@@ -1367,18 +1282,14 @@ footer p {
   transition: none !important;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .motion-ready [data-reveal="family"].is-revealed > *,
   .motion-ready [data-reveal="card"].is-revealed > .date-card-day,
   .motion-ready [data-reveal="card"].is-revealed > .date-card-time,
   .motion-ready [data-reveal="countdown"].is-revealed .countdown > div,
   .motion-ready .venue h3.is-revealed > span {
     animation: detail-unfold .65s cubic-bezier(.2, .7, .2, 1) both;
   }
-  .motion-ready [data-reveal="family"].is-revealed > :nth-child(2),
   .motion-ready [data-reveal="countdown"].is-revealed .countdown > :nth-child(2) { animation-delay: .08s; }
-  .motion-ready [data-reveal="family"].is-revealed > :nth-child(3),
   .motion-ready [data-reveal="countdown"].is-revealed .countdown > :nth-child(3) { animation-delay: .16s; }
-  .motion-ready [data-reveal="family"].is-revealed > :nth-child(4),
   .motion-ready [data-reveal="countdown"].is-revealed .countdown > :nth-child(4) { animation-delay: .24s; }
   .motion-ready [data-reveal="card"].is-revealed > .date-card-day { animation-delay: .12s; }
   .motion-ready [data-reveal="card"].is-revealed > .date-card-time,

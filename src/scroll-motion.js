@@ -5,12 +5,11 @@ export function initializeScrollMotion() {
   const treatments = {
     ".section-marker": "marker",
     ".section h2, .venue h3": "heading",
-    ".auspicious, .family-symbol, .ceremony-art, .venue-art, .closing-ornament, .closing-rule": "ornament",
-    ".family": "family",
+    ".auspicious, .ceremony-art, .venue-art, .closing-rule": "ornament",
     ".date-card": "card",
     ".countdown-block": "countdown",
     ".seal": "seal",
-    ".venue-location, .venue address, .closing-date": "copy",
+    ".venue-location, .venue address": "copy",
     ".section .button": "action",
   };
   Object.entries(treatments).forEach(([selector, treatment]) => {
