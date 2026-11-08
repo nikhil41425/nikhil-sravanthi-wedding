@@ -8,7 +8,7 @@ After the envelope, the invitation has exactly three main sections:
 
 1. **The invitation** (`#invitation`): the edge-to-edge couple portrait, equal-sized names on one line, wedding date, Ganesha blessing, family invitation message, and a link to the celebration. The portrait and invitation message share a continuous cream background, without a separate cover or repeated family-name panel.
 2. **The celebration** (`#muhurtham`): the ceremony date and time, iCalendar download, live countdown, and lamp illustration, in a soft green and gold palette.
-3. **The venue** (`#venue`): the complete venue address, Google Maps directions, mandap illustration, and a compact wedding seal and sign-off. The closing is part of the venue rather than a separate section.
+3. **The venue** (`#venue`): the complete venue address, Google Maps directions, an embedded Google Map, and a compact wedding seal and sign-off. The responsive map sits below the directions button, searches the full venue address, and loads lazily without an API key. Google serves the interactive map externally. The closing is part of the venue rather than a separate section.
 
 The three-link navigation follows these same sections, with no numbered section headings above the content. The supplied banana-leaf and temple artwork remains bundled locally as `src/assets/invitation-background.jpg`, with soft washes and cream transitions between sections. The first section keeps the portrait background quiet, and the final section has enough bottom space for the fixed navigation. Names, the venue, date, time, and all guest actions remain available.
 
@@ -47,5 +47,7 @@ The invitation stays in a single column, filling phone screens and remaining pho
 
 The 15 browser checks, each run at three screen sizes, cover phone layouts and the width constraint on larger screens, edge-to-edge artwork, the opening transition, keyboard entry, scrolling disabled before entry and restored afterward, landing visibility after refresh, direct links, the three-section structure, section backgrounds, invitation details, navigation, directions, calendar date/time, the countdown, the share banner, and reduced-motion support. Navigation checks include a fixed viewport position during real touch or wheel scrolling, keyboard access, visibility at the end of the page, and section-link jumps.
 The cloud environment uses its preinstalled `/usr/bin/chromium`, so the browser install step can be skipped there. Set `BROWSER_EXECUTABLE_PATH` to use another installed Chromium browser.
+
+Invitation checks stub the external Google Maps iframe response and verify its venue address, placement, and rendering. Live Google map tiles require network access to Google and are not covered by those checks.
 
 Edit invitation content in `src/main.js` and styling in `src/style.css`. The ceremony time is explicitly stored with the `+05:30` India timezone; the calendar export uses the equivalent `04:27 UTC`.

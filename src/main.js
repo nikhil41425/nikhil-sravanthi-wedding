@@ -6,7 +6,6 @@ import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-500.css";
 import couplePhoto from "./assets/nikhil-sravanthi.jpg";
 import ceremonyArtwork from "./assets/ceremony-lamps.webp";
-import venueArtwork from "./assets/wedding-mandap.webp";
 import { initializeOpening } from "./opening.js";
 import { initializeScrollMotion } from "./scroll-motion.js";
 import "./style.css";
@@ -19,6 +18,7 @@ const ganesha = `<svg class="ganesha" viewBox="0 0 100 110" fill="none" stroke="
 
 const heart = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 20S3 14 3 8.5a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1C21 14 12 20 12 20Z"/></svg>`;
 const seal = `<div class="seal" aria-hidden="true"><span class="seal-top" lang="en">WITH LOVE</span><span class="seal-monogram" lang="en" translate="no">N<i>&</i>S</span><span class="seal-bottom" lang="en">15 · 11 · 2026</span></div>`;
+const venueMapQuery = encodeURIComponent("CBS Convention, Narapally, Korremula Rd, Sai Ram Nagar Colony, Venkatadri Twp, Chowdhariguda, Majarguda, Hyderabad, Telangana 500088");
 
 document.querySelector("#app").innerHTML = `
   <a class="skip-link" href="#invitation">Skip to invitation</a>
@@ -93,7 +93,10 @@ document.querySelector("#app").innerHTML = `
       <h3 lang="en" translate="no" data-reveal><span>CBS</span> <span>Convention</span></h3>
       <address lang="en" translate="no">Narapally, Korremula Rd,<br />Sai Ram Nagar Colony, Venkatadri Twp,<br />Chowdhariguda, Majarguda,<br />Hyderabad, Telangana 500088</address>
       <a class="button button-dark action-card directions-button" href="https://maps.app.goo.gl/dKanwQshRjnfzxzs5" target="_blank" rel="noopener noreferrer" aria-label="Get directions" aria-describedby="directions-note"><span class="action-icon" aria-hidden="true">${pin}</span><span class="action-copy"><span class="action-title">Get directions</span><span class="action-caption" id="directions-note">Open in Google Maps</span></span><span class="action-arrow" aria-hidden="true">${arrow}</span></a>
-      <div class="venue-art" aria-hidden="true"><img class="section-illustration" src="${venueArtwork}" alt="" width="768" height="512" loading="lazy" decoding="async" /><span lang="en">WHERE OUR FOREVER BEGINS</span></div>
+      <figure class="venue-map">
+        <iframe title="Google Maps location of CBS Convention, Hyderabad" src="https://www.google.com/maps?q=${venueMapQuery}&amp;z=16&amp;output=embed" width="400" height="300" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <figcaption lang="en">WHERE OUR FOREVER BEGINS</figcaption>
+      </figure>
       <footer class="venue-signoff" aria-label="With love">
         <div class="closing-rule" aria-hidden="true"><span></span>${heart}<span></span></div>
         ${seal}

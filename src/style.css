@@ -1087,13 +1087,26 @@ p { text-wrap: pretty; }
   .directions-button:hover { background: linear-gradient(120deg, #218077, #16665d 65%, #105650); }
   .action-card:hover .action-arrow { transform: translateX(3px); }
 }
-.venue-art {
+.venue-map {
   margin: 24px auto 0;
-  max-width: 230px;
+  width: 100%;
   text-align: center;
   color: var(--copper);
 }
-.venue-art > span {
+.venue-map iframe {
+  display: block;
+  width: 100%;
+  height: clamp(240px, 72cqw, 320px);
+  border: 1px solid var(--gold-line);
+  border-radius: 12px;
+  background: #f2f3ff;
+  box-shadow: 0 6px 20px #343d5910;
+}
+.venue-map iframe:focus-visible {
+  outline: 2px solid var(--plum);
+  outline-offset: 4px;
+}
+.venue-map figcaption {
   display: block;
   font-family: var(--sans);
   font-size: 11px;

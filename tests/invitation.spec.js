@@ -1,6 +1,14 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
+// Keep layout checks independent of Google's network access and map UI.
+test.beforeEach(async ({ page }) => {
+  await page.route(/^https:\/\/www\.google\.com\/maps\?/, route => route.fulfill({
+    contentType: "text/html",
+    body: '<!doctype html><html lang="en"><title>Map response fixture</title><body>Map provider response fixture</body></html>',
+  }));
+});
+
 async function openInvitation(page) {
   await page.goto("/");
   await page.getByRole("link", { name: "Tap to open" }).click();
@@ -79,7 +87,7 @@ test("invitation renders the approved details without page errors or horizontal 
   expect(failedRequests).toEqual([]);
 });
 
-test("navigation reaches the venue and directions use the supplied map", async ({
+test("navigation reaches the venue with directions and an embedded Google Map", async ({
   page,
 }) => {
   await openInvitation(page);
@@ -101,6 +109,25 @@ test("navigation reaches the venue and directions use the supplied map", async (
       .getByRole("navigation")
       .getByRole("link", { name: "Venue", exact: true }),
   ).toHaveAttribute("aria-current", "location");
+  const map = page.getByTitle("Google Maps location of CBS Convention, Hyderabad", { exact: true });
+  const source = new URL(await map.getAttribute("src"));
+  expect(source.origin).toBe("https://www.google.com");
+  expect(source.pathname).toBe("/maps");
+  expect(source.searchParams.get("output")).toBe("embed");
+  expect(source.searchParams.get("q")).toContain("CBS Convention, Narapally, Korremula Rd");
+  expect(source.searchParams.get("q")).toContain("Hyderabad, Telangana 500088");
+  // Measure together so smooth scrolling cannot move the page between reads.
+  const placement = await map.evaluate(element => {
+    const mapBounds = element.getBoundingClientRect();
+    const directionsBounds = document.querySelector(".directions-button").getBoundingClientRect();
+    return { gap: mapBounds.top - directionsBounds.bottom, width: mapBounds.width, viewport: innerWidth };
+  });
+  expect(placement.gap).toBeGreaterThan(0);
+  expect(placement.width).toBeLessThanOrEqual(placement.viewport);
+  await expect(page.locator(".venue-art")).toHaveCount(0);
+  await map.scrollIntoViewIfNeeded();
+  await expect(map).toBeInViewport();
+  await expect(map.contentFrame().getByText("Map provider response fixture")).toBeVisible();
 });
 
 test("bottom navigation stays fixed during scrolling, keyboard use, and section jumps", async ({ page, isMobile }) => {

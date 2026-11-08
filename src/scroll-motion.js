@@ -4,7 +4,7 @@ export function initializeScrollMotion() {
   const preference = matchMedia("(prefers-reduced-motion: reduce)");
   const treatments = {
     ".section h2, .venue h3": "heading",
-    ".auspicious, .ceremony-art, .venue-art, .closing-rule": "ornament",
+    ".auspicious, .ceremony-art, .closing-rule": "ornament",
     ".date-card": "card",
     ".countdown-block": "countdown",
     ".seal": "seal",
