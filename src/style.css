@@ -608,7 +608,6 @@ a:focus-visible {
   width: 25px;
   height: 25px;
 }
-.hero .section-marker { margin: 0 28px 20px; }
 .section {
   --section-wash: linear-gradient(90deg, #fff4dc55, #fff4dcf2 20%, #fff4dcf2 80%, #fff4dc55);
   --seam-top: #fbf1e2;
@@ -646,45 +645,6 @@ a:focus-visible {
   transform: rotate(45deg);
   background: var(--gold);
   pointer-events: none;
-}
-.section-marker::before {
-  content: "";
-  height: 1px;
-  width: 24px;
-  background: linear-gradient(90deg, transparent, var(--gold));
-}
-.section-marker {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 32px;
-  justify-content: center;
-}
-.section-marker > span:first-child {
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 1px;
-  color: var(--copper);
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  border: 1px solid var(--gold-line);
-  border-radius: 50%;
-  flex: 0 0 auto;
-}
-.section-marker p {
-  font-size: 11px;
-  line-height: 1.6;
-  letter-spacing: 1.8px;
-  margin: 0;
-  font-weight: 500;
-  color: var(--plum);
-}
-.marker-line {
-  height: 1px;
-  background: linear-gradient(90deg, var(--gold), transparent);
-  flex: 1;
 }
 h1, h2, h3 { text-wrap: balance; }
 p { text-wrap: pretty; }
@@ -797,12 +757,6 @@ p { text-wrap: pretty; }
   --section-wash: linear-gradient(#e6f4eef2, #f0f7ecfa 58%, #e4f0d9cc);
   background-color: #e6f4ee;
   overflow: hidden;
-}
-.muhurtham .section-marker > span:first-child {
-  color: #85613a;
-}
-.muhurtham .marker-line {
-  background: linear-gradient(90deg, var(--gold), transparent);
 }
 .muhurtham h2 {
   font-size: clamp(28px, 8.2cqw, 38px);
@@ -1014,9 +968,6 @@ p { text-wrap: pretty; }
   background-size: 100% 100%, 100% 100%, 100% 100%, 100% auto;
   background-position: center, center, center, center bottom;
   padding-bottom: calc(108px + env(safe-area-inset-bottom));
-}
-.venue .section-marker {
-  margin-bottom: 28px;
 }
 .venue-location {
   display: flex;
@@ -1253,14 +1204,10 @@ p { text-wrap: pretty; }
 @media (hover: hover) {
   .motion-ready [data-reveal="action"].is-revealed:hover { transform: translateY(-2px); }
 }
-.motion-ready [data-reveal="marker"]::before,
-.motion-ready [data-reveal="marker"] .marker-line,
 .motion-ready [data-reveal="ornament"] > span:not(.scroll-ornament) {
   transform: scaleX(0);
   transition: transform 1s cubic-bezier(.2, .7, .2, 1) .15s;
 }
-.motion-ready [data-reveal="marker"].is-revealed::before,
-.motion-ready [data-reveal="marker"].is-revealed .marker-line,
 .motion-ready [data-reveal="ornament"].is-revealed > span:not(.scroll-ornament) { transform: scaleX(1); }
 .motion-ready [data-reveal] .draw-path {
   stroke-dasharray: 1;

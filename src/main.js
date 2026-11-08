@@ -54,7 +54,6 @@ document.querySelector("#app").innerHTML = `
   <main>
     <section class="invitation section" id="invitation" aria-labelledby="couple-name">
     <header class="hero" id="home">
-      <div class="section-marker"><span lang="en">01</span><p>THE INVITATION</p><span class="marker-line"></span></div>
       <span class="hero-edition" lang="en">THE WEDDING OF</span>
       <div class="hero-portrait">
         <div class="portrait-aura" aria-hidden="true"></div>
@@ -75,7 +74,6 @@ document.querySelector("#app").innerHTML = `
     </section>
 
     <section class="muhurtham section" id="muhurtham" aria-labelledby="date-heading">
-      <div class="section-marker"><span lang="en">02</span><p>THE CELEBRATION</p><span class="marker-line"></span></div>
       <h2 id="date-heading" data-reveal>Our wedding day</h2>
       <div class="date-card" data-reveal>
         <div class="date-card-crest" aria-hidden="true">${lotus}</div>
@@ -90,7 +88,6 @@ document.querySelector("#app").innerHTML = `
     </section>
 
     <section class="venue section" id="venue" aria-labelledby="venue-heading">
-      <div class="section-marker"><span lang="en">03</span><p>THE VENUE</p><span class="marker-line"></span></div>
       <div class="venue-location" lang="en">${pin}<span>HYDERABAD · TELANGANA</span></div>
       <h2 id="venue-heading" data-reveal>Join us at</h2>
       <h3 lang="en" translate="no" data-reveal><span>CBS</span> <span>Convention</span></h3>

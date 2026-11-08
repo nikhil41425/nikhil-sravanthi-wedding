@@ -3,7 +3,6 @@ export function initializeScrollMotion() {
   const root = document.documentElement;
   const preference = matchMedia("(prefers-reduced-motion: reduce)");
   const treatments = {
-    ".section-marker": "marker",
     ".section h2, .venue h3": "heading",
     ".auspicious, .ceremony-art, .venue-art, .closing-rule": "ornament",
     ".date-card": "card",
