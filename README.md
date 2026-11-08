@@ -14,7 +14,7 @@ Numbered markers and the three-link navigation follow these same sections. The s
 
 The portrait uses CSS masks to soften its edges without cropping either face or changing the original image. Continuous portrait effects pause when it is offscreen. Rose petals drift beneath the navigation and never intercept taps. Scroll reveals unfold content once; headings, dividers, ornaments, countdown numbers, and the closing seal animate with CSS and browser observers. Keyboard focus reveals controls immediately, and reduced motion removes decorative movement.
 
-The navigation tucks away on deliberate downward scrolling and returns on upward scrolling, keyboard focus, or reaching the end of the page. Section-link jumps keep it visible. Hidden navigation is inert and excluded from assistive navigation. Direct links to all three sections work, while refresh returns to the envelope.
+The bottom navigation stays fixed and visible throughout the invitation, including touch scrolling, keyboard navigation, section-link jumps, and the end of the page. It respects the phone's safe area and stays hidden and inert until the envelope is opened. Direct links to all three sections work, while refresh returns to the envelope.
 
 Wedding: **15 November 2026, Sunday, 9:57 AM IST**, at **CBS Convention, Hyderabad**.
 
@@ -45,7 +45,7 @@ npm test
 
 The invitation stays in a single column, filling phone screens and remaining phone-sized on larger displays.
 
-The 15 browser checks, each run at three screen sizes, cover phone layouts and the width constraint on larger screens, edge-to-edge artwork, the opening transition, keyboard entry, scrolling disabled before entry and restored afterward, landing visibility after refresh, direct links, the three-section structure, section backgrounds, invitation details, navigation, directions, calendar date/time, the countdown, the share banner, and reduced-motion support. Navigation checks include real touch scrolling, hiding and returning on scroll direction, keyboard recovery, and visibility during section-link jumps.
+The 15 browser checks, each run at three screen sizes, cover phone layouts and the width constraint on larger screens, edge-to-edge artwork, the opening transition, keyboard entry, scrolling disabled before entry and restored afterward, landing visibility after refresh, direct links, the three-section structure, section backgrounds, invitation details, navigation, directions, calendar date/time, the countdown, the share banner, and reduced-motion support. Navigation checks include a fixed viewport position during real touch or wheel scrolling, keyboard access, visibility at the end of the page, and section-link jumps.
 The cloud environment uses its preinstalled `/usr/bin/chromium`, so the browser install step can be skipped there. Set `BROWSER_EXECUTABLE_PATH` to use another installed Chromium browser.
 
 Edit invitation content in `src/main.js` and styling in `src/style.css`. The ceremony time is explicitly stored with the `+05:30` India timezone; the calendar export uses the equivalent `04:27 UTC`.

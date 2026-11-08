@@ -103,9 +103,11 @@ test("navigation reaches the venue and directions use the supplied map", async (
   ).toHaveAttribute("aria-current", "location");
 });
 
-test("navigation returns for keyboard use and stays visible during section jumps", async ({ page, isMobile }) => {
+test("bottom navigation stays fixed during scrolling, keyboard use, and section jumps", async ({ page, isMobile }) => {
   await openInvitation(page);
   const dock = page.locator(".invitation-dock");
+  await expect(dock).toHaveCSS("opacity", "1");
+  const initialBounds = await dock.boundingBox();
   if (isMobile) {
     const client = await page.context().newCDPSession(page);
     const { width, height } = page.viewportSize();
@@ -118,14 +120,26 @@ test("navigation returns for keyboard use and stays visible during section jumps
   } else {
     await page.mouse.wheel(0, 500);
   }
-  await expect(dock).toHaveAttribute("aria-hidden", "true");
-  expect(await dock.evaluate(element => element.inert)).toBe(true);
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(100);
+  await expect(dock).toBeInViewport({ ratio: 1 });
+  await expect(dock).toHaveCSS("opacity", "1");
+  await expect(dock).toHaveAttribute("aria-hidden", "false");
+  expect(await dock.evaluate(element => element.inert)).toBe(false);
+  expect((await dock.boundingBox()).y).toBeCloseTo(initialBounds.y, 0);
   await page.keyboard.press("Tab");
   await expect(dock).toHaveAttribute("aria-hidden", "false");
   expect(await dock.evaluate(element => element.inert)).toBe(false);
   await dock.getByRole("link", { name: "Venue", exact: true }).click();
   await expect(page.getByRole("link", { name: "Get directions" })).toBeInViewport();
   await expect(dock).toHaveAttribute("aria-hidden", "false");
+  await expect(dock).toBeInViewport({ ratio: 1 });
+  await page.keyboard.press("End");
+  await expect.poll(() => page.evaluate(() => scrollY + innerHeight >= document.documentElement.scrollHeight - 2)).toBe(true);
+  await expect(dock).toBeInViewport({ ratio: 1 });
+  await expect(dock).toHaveCSS("opacity", "1");
+  await dock.getByRole("link", { name: "Invitation", exact: true }).click();
+  await expect(page.locator("#couple-name")).toBeInViewport();
+  await expect(dock).toBeInViewport({ ratio: 1 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   expect(await dock.evaluate(element => getComputedStyle(element).transitionDuration)).toBe("0s");
 });

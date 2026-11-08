@@ -8,7 +8,6 @@ import couplePhoto from "./assets/nikhil-sravanthi.jpg";
 import ceremonyArtwork from "./assets/ceremony-lamps.webp";
 import venueArtwork from "./assets/wedding-mandap.webp";
 import { initializeOpening } from "./opening.js";
-import { initializeDockNavigation } from "./navigation.js";
 import { initializeScrollMotion } from "./scroll-motion.js";
 import "./style.css";
 
@@ -110,7 +109,6 @@ document.querySelector("#app").innerHTML = `
 `;
 
 initializeOpening();
-initializeDockNavigation();
 initializeScrollMotion();
 
 const heroMotionObserver = new IntersectionObserver(([entry]) => {

@@ -1195,11 +1195,6 @@ p { text-wrap: pretty; }
   box-shadow: 0 4px 18px #4d34271c;
   transition: opacity .3s, transform .3s;
 }
-.invitation-dock.is-scroll-hidden {
-  opacity: 0;
-  transform: translate(-50%, calc(100% + 24px + env(safe-area-inset-bottom)));
-  pointer-events: none;
-}
 .invitation-dock a {
   --dock-accent: var(--kumkum);
   flex: 1;
